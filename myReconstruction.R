@@ -1,23 +1,15 @@
 # Load required libraries
-if (!requireNamespace("Rcpp", quietly = TRUE)) install.packages("Rcpp")
-if (!requireNamespace("RcppParallel", quietly = TRUE)) install.packages("RcppParallel")
-if (!requireNamespace("data.table", quietly = TRUE)) install.packages("data.table")
-if (!requireNamespace("spatstat", quietly = TRUE)) install.packages("spatstat")
-if (!requireNamespace("ggplot2", quietly = TRUE)) install.packages("ggplot2")
-if (!requireNamespace("gridExtra", quietly = TRUE)) install.packages("gridExtra")
-
 library(Rcpp)
-library(RcppParallel)
 library(data.table)
 library(spatstat)
 library(ggplot2)
 library(gridExtra)
 
-# Source the C++ utility functions using Rcpp
-Rcpp::sourceCpp("C:/Users/ajsm/Downloads/NumericUtilities.cpp")
+# Source the C++ utility functions
+sourceCpp("numericUtilities.cpp")
 
 # Reconstruction function
-reconstruct_pattern <- function(CEtarget, SPPtarget, HtAttrs, Density, xmax = 100, ymax = 100, maxSimSteps = 200000, coolingFactor = 0.9, energyAim = 5E-15, plotUpdateInterval = 100, batchSize = 10, stagnationLimit = 500) {
+reconstruct_pattern <- function(CEtarget, SPPtarget, HtAttrs, Density, xmax = 100, ymax = 100, maxSimSteps = 200000, coolingFactor = 0.9, energyAim = 5E-15, plotUpdateInterval = 100) {
   # Initialize parameters
   nPoints <- rpois(1, Density * xmax * ymax)
   species <- names(SPPtarget)
@@ -51,33 +43,31 @@ reconstruct_pattern <- function(CEtarget, SPPtarget, HtAttrs, Density, xmax = 10
   # Simulated annealing
   Te <- 0.00005
   j <- 1
-  stagnationCounter <- 0
-  
-  while (E0 > energyAim && j <= maxSimSteps && stagnationCounter < stagnationLimit) {
-    # Randomly select a batch of points to modify
-    rowsToModify <- sample(nrow(simData), batchSize)
+  while (E0 > energyAim && j <= maxSimSteps) {
+    # Randomly select a row index and modify it
+    rowIndex <- sample(nrow(simData), 1)
     tz <- sample(1:3, 1)
     
     # Backup current state
-    backup <- copy(simData[rowsToModify])
+    backup <- copy(simData[rowIndex])
     
-    if (tz == 1) { # Remove points
-      simData <- simData[-rowsToModify]
-    } else if (tz == 2) { # Add new points
-      newPoints <- data.table(
-        Number = seq(max(simData$Number, na.rm = TRUE) + 1, length.out = batchSize),
-        x = runif(batchSize, min = 0, max = xmax),
-        y = runif(batchSize, min = 0, max = ymax),
-        Species = sample(species, batchSize, replace = TRUE, prob = sppProbs),
-        Height = rnorm(batchSize, mean = HtAttrs$mean, sd = HtAttrs$sd)
+    if (tz == 1) { # Remove a point
+      simData <- simData[-rowIndex]
+    } else if (tz == 2) { # Add a new point
+      newPoint <- data.table(
+        Number = max(simData$Number, na.rm = TRUE) + 1,
+        x = runif(1, min = 0, max = xmax),
+        y = runif(1, min = 0, max = ymax),
+        Species = sample(species, 1, prob = sppProbs),
+        Height = rnorm(1, mean = HtAttrs$mean, sd = HtAttrs$sd)
       )
-      simData <- rbind(simData, newPoints)
-    } else { # Modify existing points
-      simData[rowsToModify, `:=`(
-        x = runif(batchSize, min = 0, max = xmax),
-        y = runif(batchSize, min = 0, max = ymax),
-        Species = sample(species, batchSize, replace = TRUE, prob = sppProbs),
-        Height = rnorm(batchSize, mean = HtAttrs$mean, sd = HtAttrs$sd)
+      simData <- rbind(simData, newPoint)
+    } else { # Modify an existing point
+      simData[rowIndex, `:=`(
+        x = runif(1, min = 0, max = xmax),
+        y = runif(1, min = 0, max = ymax),
+        Species = sample(species, 1, prob = sppProbs),
+        Height = rnorm(1, mean = HtAttrs$mean, sd = HtAttrs$sd)
       )]
     }
     
@@ -100,23 +90,20 @@ reconstruct_pattern <- function(CEtarget, SPPtarget, HtAttrs, Density, xmax = 10
         p <- exp((E0 - E1) / Te)
         if (u >= p) {
           Accepted <- FALSE
-          simData[rowsToModify] <- backup
+          simData[rowIndex] <- backup
         } else {
           E0 <- E1
-          stagnationCounter <- 0
         }
       } else {
         Accepted <- FALSE
-        simData[rowsToModify] <- backup
+        simData[rowIndex] <- backup
       }
     } else {
       E0 <- E1
-      stagnationCounter <- 0
     }
     
     # Update temperature and iteration
     Te <- Te * coolingFactor
-    stagnationCounter <- stagnationCounter + 1
     
     # Update plot data
     plotData <- rbind(plotData, data.table(
@@ -174,4 +161,4 @@ SPPtarget <- c(Species1 = 0.4, Species2 = 0.3, Species3 = 0.3)
 HtAttrs <- list(mean = 15, sd = 5)
 Density <- 0.025
 
-result <- reconstruct_pattern(CEtarget, SPPtarget, HtAttrs, Density, plotUpdateInterval = 100, batchSize = 10, stagnationLimit = 500)
+result <- reconstruct_pattern(CEtarget, SPPtarget, HtAttrs, Density, plotUpdateInterval = 100)
