@@ -1,4 +1,11 @@
 # Load required libraries
+if (!requireNamespace("Rcpp", quietly = TRUE)) install.packages("Rcpp")
+if (!requireNamespace("RcppParallel", quietly = TRUE)) install.packages("RcppParallel")
+if (!requireNamespace("data.table", quietly = TRUE)) install.packages("data.table")
+if (!requireNamespace("spatstat", quietly = TRUE)) install.packages("spatstat")
+if (!requireNamespace("ggplot2", quietly = TRUE)) install.packages("ggplot2")
+if (!requireNamespace("gridExtra", quietly = TRUE)) install.packages("gridExtra")
+
 library(Rcpp)
 library(RcppParallel)
 library(data.table)
@@ -6,8 +13,8 @@ library(spatstat)
 library(ggplot2)
 library(gridExtra)
 
-# Source the C++ utility functions
-source("C:/Users/ajsm/Downloads/NumericUtilities.cpp")
+# Source the C++ utility functions using Rcpp
+Rcpp::sourceCpp("C:/Users/ajsm/Downloads/NumericUtilities.cpp")
 
 # Reconstruction function
 reconstruct_pattern <- function(CEtarget, SPPtarget, HtAttrs, Density, xmax = 100, ymax = 100, maxSimSteps = 200000, coolingFactor = 0.9, energyAim = 5E-15, plotUpdateInterval = 100, batchSize = 10, stagnationLimit = 500) {
