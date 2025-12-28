@@ -22,7 +22,8 @@ reconstruct_pattern <- function(CEtarget,
                                energyAim = 5E-15, 
                                plotUpdateInterval = 100,
                                densityWeight = 1.0,
-                               dbhWeight = 1.0) {
+                               dbhWeight = 1.0,
+                               minPoints = 10) {  # Minimum number of points to maintain
   # Initialize parameters
   # Calculate area in hectares
   areaHectares <- (xmax * ymax) / 10000
@@ -36,10 +37,14 @@ reconstruct_pattern <- function(CEtarget,
   species <- names(SPPtarget)
   sppProbs <- SPPtarget / sum(SPPtarget)
   
+  # Default DBH parameters if not using Weibull
+  DEFAULT_DBH_MEAN <- 30
+  DEFAULT_DBH_SD <- 10
+  
   # Helper function to generate diameter from Weibull
   generate_diameter <- function(n = 1) {
     if (is.null(DBHWeibull)) {
-      return(rnorm(n, mean = 30, sd = 10))  # Default if not specified
+      return(rnorm(n, mean = DEFAULT_DBH_MEAN, sd = DEFAULT_DBH_SD))  # Default if not specified
     }
     # Generate from 3-parameter Weibull: location + scale * (-log(U))^(1/shape)
     u <- runif(n)
@@ -97,7 +102,7 @@ reconstruct_pattern <- function(CEtarget,
     backup <- copy(simData[rowIndex])
     backupNrow <- nrow(simData)
     
-    if (tz == 1 && nrow(simData) > 10) { # Remove a point (don't go below 10 points)
+    if (tz == 1 && nrow(simData) > minPoints) { # Remove a point (don't go below minimum)
       simData <- simData[-rowIndex]
     } else if (tz == 2) { # Add a new point
       newPoint <- data.table(

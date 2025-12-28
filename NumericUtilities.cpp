@@ -20,6 +20,9 @@ double getEuclideanDistance(double xmax, double ymax, double x1, double y1, doub
 double findNeighbours(double xmax, double ymax, NumericVector x, NumericVector y, int mi) {
     int na = x.size();
     
+    // Large dummy value for initialization (larger than any expected distance in plot)
+    const double DUMMY_LARGE_DISTANCE = 1000.0;
+    
     // Use vectors instead of VLA for better memory management
     // We need mi+1 slots to track the mi nearest neighbors (excluding self at distance 0)
     vector<priority_queue<double, vector<double>, less<double>>> distances(na);
@@ -28,7 +31,7 @@ double findNeighbours(double xmax, double ymax, NumericVector x, NumericVector y
     for(int i = 0; i < na; i++) {
         // Add dummy large values to ensure we always have something to compare
         for(int j = 0; j <= mi; j++) {
-            distances[i].push(1000.0);
+            distances[i].push(DUMMY_LARGE_DISTANCE);
         }
     }
     

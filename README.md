@@ -115,6 +115,7 @@ result <- reconstruct_pattern(
 - **plotUpdateInterval**: Iterations between plot updates (default: 100)
 - **densityWeight**: Weight for density matching in energy function (default: 1.0)
 - **dbhWeight**: Weight for DBH distribution matching (default: 1.0)
+- **minPoints**: Minimum number of points to maintain during optimization (default: 10)
 
 ## Output
 
