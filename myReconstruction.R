@@ -150,11 +150,17 @@ reconstruct_pattern <- function(CEtarget,
         if (u >= p) {
           Accepted <- FALSE
           # Restore the backup
-          if (tz == 1) { # Was a removal
-            simData <- rbind(simData[1:(rowIndex-1)], backup, simData[rowIndex:nrow(simData)])
-          } else if (tz == 2) { # Was an addition
+          if (tz == 1) { # Was a removal - restore the removed row
+            if (rowIndex == 1) {
+              simData <- rbind(backup, simData)
+            } else if (rowIndex > nrow(simData)) {
+              simData <- rbind(simData, backup)
+            } else {
+              simData <- rbind(simData[1:(rowIndex-1)], backup, simData[rowIndex:nrow(simData)])
+            }
+          } else if (tz == 2) { # Was an addition - remove the added row
             simData <- simData[-nrow(simData)]
-          } else { # Was a modification
+          } else { # Was a modification - restore the original values
             simData[rowIndex] <- backup
           }
         } else {
@@ -163,11 +169,17 @@ reconstruct_pattern <- function(CEtarget,
       } else {
         Accepted <- FALSE
         # Restore the backup
-        if (tz == 1) { # Was a removal
-          simData <- rbind(simData[1:(rowIndex-1)], backup, simData[rowIndex:nrow(simData)])
-        } else if (tz == 2) { # Was an addition
+        if (tz == 1) { # Was a removal - restore the removed row
+          if (rowIndex == 1) {
+            simData <- rbind(backup, simData)
+          } else if (rowIndex > nrow(simData)) {
+            simData <- rbind(simData, backup)
+          } else {
+            simData <- rbind(simData[1:(rowIndex-1)], backup, simData[rowIndex:nrow(simData)])
+          }
+        } else if (tz == 2) { # Was an addition - remove the added row
           simData <- simData[-nrow(simData)]
-        } else { # Was a modification
+        } else { # Was a modification - restore the original values
           simData[rowIndex] <- backup
         }
       }
