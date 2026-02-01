@@ -1,0 +1,142 @@
+url: https://bi0m3trics.github.io/EmpericalPatternR
+template:
+  bootstrap: 5
+  bootswatch: flatly
+
+home:
+  title: "EmpericalPatternR: Pattern-Based Forest Stand Simulation"
+  description: >
+    Simulates realistic forest stand patterns using simulated annealing
+    optimization to match empirical targets for spatial patterns, canopy structure,
+    species composition, and fire behavior metrics. Designed for pinyon-juniper
+    woodlands with support for canopy fuel load (CFL) optimization and nurse tree
+    effects. Includes OpenMP-parallelized C++ functions for high-performance
+    computation.
+
+logo: man/figures/logo.png
+
+navbar:
+  structure:
+    left:  [home, reference, articles, news]
+    right: [search, github]
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    articles:
+      text: Articles
+      menu:
+      - text: Getting Started
+        href: articles/getting-started.html
+      - text: Pinyon-Juniper Woodland
+        href: articles/pinyon-juniper.html
+      - text: Ponderosa Pine Forest
+        href: articles/ponderosa-pine.html
+    news:
+      text: Changelog
+      href: news/index.html
+
+reference:
+  - title: "Quick Start"
+    desc: >
+      Main functions for running simulations and analyzing results.
+    contents:
+      - simulate_stand
+      - analyze_simulation_results
+      - pj_huffman_2009
+
+  - title: "Configuration System"
+    desc: >
+      Functions for creating, validating, and managing simulation configurations.
+    contents:
+      - create_config
+      - validate_config
+      - print_config
+      - save_config
+      - generate_config_template
+
+  - title: "Allometric Equations"
+    desc: >
+      Functions for calculating tree attributes from DBH and species.
+    contents:
+      - calc_height
+      - calc_crown_radius
+      - calc_crown_base_height
+      - calc_canopy_fuel_mass
+      - get_default_allometric_params
+      - get_ponderosa_allometric_params
+      - allometric_equations
+
+  - title: "Stand Metrics"
+    desc: >
+      Functions for calculating stand-level characteristics.
+    contents:
+      - calc_canopy_cover
+      - calc_canopy_cover_fast
+      - calc_stand_metrics
+      - calc_stand_metrics_parallel
+      - calc_clark_evans_fast
+      - calc_tree_attributes
+      - calc_tree_attributes_fast
+
+  - title: "Energy Calculation"
+    desc: >
+      Functions for evaluating how well a stand matches target patterns.
+    contents:
+      - calc_energy
+      - calc_energy_cached
+      - calc_mortality_probability
+      - calc_nurse_tree_energy
+      - should_full_update
+
+  - title: "Perturbation Functions"
+    desc: >
+      Functions for modifying stand structure during optimization.
+    contents:
+      - perturb_add
+      - perturb_remove
+      - perturb_move
+      - perturb_dbh
+      - perturb_species
+      - perturb_add_with_nurse
+
+  - title: "Mortality and History"
+    desc: >
+      Functions for simulating disturbance and tracking optimization.
+    contents:
+      - simulate_mortality
+      - update_history_efficient
+      - adaptive_temperature
+
+  - title: "Visualization"
+    desc: >
+      Functions for plotting simulation results and progress.
+    contents:
+      - plot_simulation_results
+      - plot_progress
+      - print_simulation_summary
+
+  - title: "Performance Utilities"
+    desc: >
+      Optimized versions of calculation functions.
+    contents:
+      - precompute_ce_table
+
+  - title: "Package Documentation"
+    contents:
+      - EmpericalPatternR-package
+
+articles:
+  - title: "Tutorials"
+    navbar: ~
+    contents:
+    - getting-started
+    - pinyon-juniper
+    - ponderosa-pine
+
+authors:
+  Andrew Sánchez Meador:
+    href: https://github.com/bi0m3trics

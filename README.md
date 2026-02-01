@@ -1,194 +1,260 @@
-# EmpericalPatternR
+# EmpericalPatternR <img src="img/logo.png" align="right" height="139" />
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/bi0m3trics/EmpericalPatternR/workflows/R-CMD-check/badge.svg)](https://github.com/bi0m3trics/EmpericalPatternR/actions)
+[![License: GPL-3](https://img.shields.io/badge/License-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+<!-- badges: end -->
+
+Simulate realistic forest stand patterns using simulated annealing optimization to match empirical targets from field data.
+
+<img src="man/figures/banner.png" alt="EmpericalPatternR Banner" />
 
 ## Overview
 
-EmpericalPatternR is an R package for reconstructing spatial point patterns with specified characteristics using simulated annealing optimization. This enhanced version includes:
+**EmpericalPatternR** generates synthetic forest stands that match observed ecological patterns. Using simulated annealing, the package optimizes tree locations, sizes, and species to simultaneously match multiple targets including stand density, species composition, size distributions, canopy cover, fuel loads, and spatial patterns.
 
-- **Improved performance** through optimized C++ algorithms
-- **Precise density control** (trees per hectare)
-- **Diameter distribution matching** using 3-parameter Weibull distributions
-- **Backward compatibility** with the original API
+Perfect for:
+- 🔥 **Fire behavior modeling** - Generate stands with realistic fuel structures
+- 🌲 **Restoration planning** - Create target stand conditions
+- 📊 **Research** - Explore how stand structure affects ecological processes
+- 🎓 **Teaching** - Demonstrate pattern-based ecology
 
-## Features
+### Key Features
 
-### Core Functionality
-- Reconstruct spatial point patterns matching a target Clark-Evans (CE) index
-- Control species composition proportions
-- Match target height attributes (mean and standard deviation)
-- **NEW**: Explicit control of tree density (trees per hectare)
-- **NEW**: Match diameter distributions using 3-parameter Weibull
-
-### Performance Improvements
-- Optimized C++ nearest neighbor search using priority queues
-- Reduced memory allocation overhead
-- Better algorithmic complexity for distance calculations
-- Faster convergence through improved energy functions
+- 📦 **Pre-built configurations** for common forest types (pinyon-juniper, ponderosa pine)
+- 🎯 **Pattern matching** to empirical field data (Huffman et al. 2009)
+- 🌳 **Flexible allometry** with species-specific equations (Reese, Miller)
+- ⚡ **Fast C++ engine** with OpenMP parallelization (50-300× speedup)
+- 🔥 **Canopy fuel load** optimization for fire behavior
+- 🌱 **Nurse tree effects** for facilitation patterns
+- 📈 **Comprehensive analysis** with automated reports and visualizations
+- ✅ **Fully tested** with 62 unit tests covering all major functions
 
 ## Installation
 
-```R
-# Required libraries
-install.packages(c("Rcpp", "data.table", "spatstat", "ggplot2", "gridExtra"))
+Install from GitHub:
 
-# Source the files
-library(Rcpp)
-library(data.table)
-library(spatstat)
-library(ggplot2)
-library(gridExtra)
+```r
+# Install devtools if needed
+install.packages("devtools")
 
-sourceCpp("NumericUtilities.cpp")
-source("myReconstruction.R")
+# Install EmpericalPatternR
+devtools::install_github("yourusername/EmpericalPatternR")
 ```
 
-## Usage
+## Quick Start
 
-### Basic Usage (Backward Compatible)
+Use a pre-built configuration:
 
-```R
-# Define target parameters
-CEtarget <- 1.60                                    # Clark-Evans index
-SPPtarget <- c(Species1 = 0.4, Species2 = 0.3, Species3 = 0.3)  # Species proportions
-HtAttrs <- list(mean = 15, sd = 5)                 # Height attributes
-Density <- 250                                      # Trees per hectare
+```r
+library(EmpericalPatternR)
 
-# Run reconstruction
-result <- reconstruct_pattern(
-  CEtarget = CEtarget,
-  SPPtarget = SPPtarget,
-  HtAttrs = HtAttrs,
-  Density = Density,
-  xmax = 100,           # Plot width in meters
-  ymax = 100,           # Plot height in meters
-  plotUpdateInterval = 500,
-  maxSimSteps = 10000
+# Get pre-built pinyon-juniper configuration (Huffman et al. 2009)
+config <- pj_huffman_2009(
+  density_ha = 927,
+  cfl = 1.10,
+  canopy_cover = 0.40,
+  max_iterations = 10000
 )
 
-# Access results
-result$pattern   # spatstat ppp object
-result$data      # data.table with tree attributes (x, y, Species, Height, DBH)
-result$plotData  # convergence metrics over iterations
-```
-
-### Advanced Usage with Diameter Distribution
-
-```R
-# Define Weibull parameters for diameter distribution
-# The 3-parameter Weibull distribution: f(x) = (k/λ) * ((x-θ)/λ)^(k-1) * exp(-((x-θ)/λ)^k)
-DBHWeibull <- list(
-  shape = 2.5,      # k: Shape parameter (controls distribution shape)
-  scale = 15.0,     # λ: Scale parameter (controls spread)
-  location = 5.0    # θ: Location parameter (minimum diameter in cm)
+# Run simulation
+set.seed(123)
+result <- simulate_stand(
+  targets = config$targets,
+  weights = config$weights,
+  plot_size = config$simulation$plot_size,
+  max_iterations = config$simulation$max_iterations,
+  use_nurse_effect = TRUE,
+  mortality_prop = 0.10
 )
 
-# Run advanced reconstruction
-result <- reconstruct_pattern(
-  CEtarget = CEtarget,
-  SPPtarget = SPPtarget,
-  HtAttrs = HtAttrs,
-  Density = Density,
-  DBHWeibull = DBHWeibull,      # Add diameter distribution
-  xmax = 100,
-  ymax = 100,
-  plotUpdateInterval = 500,
-  maxSimSteps = 10000,
-  densityWeight = 2.0,           # Weight for density matching (default: 1.0)
-  dbhWeight = 1.5                # Weight for DBH distribution matching (default: 1.0)
+# Comprehensive analysis (console output + CSV files + PDF plots)
+analyze_simulation_results(
+  result = result,
+  targets = config$targets,
+  prefix = "my_woodland",
+  save_plots = TRUE
 )
 ```
 
-## Parameters
+**Output:**
+- `my_woodland_all_trees.csv` - All trees with attributes
+- `my_woodland_live_trees.csv` - Live trees only
+- `my_woodland_summary.csv` - Summary statistics
+- `my_woodland_plots.pdf` - Spatial and size distributions
 
-### Required Parameters
-- **CEtarget**: Target Clark-Evans index (numeric)
-- **SPPtarget**: Named vector of species proportions (must sum to 1.0)
-- **HtAttrs**: List with `mean` and `sd` for tree heights
-- **Density**: Target density in trees per hectare (numeric)
 
-### Optional Parameters
-- **DBHWeibull**: List with 3-parameter Weibull parameters (`shape`, `scale`, `location`) for diameter distribution (default: NULL)
-- **xmax**: Plot width in meters (default: 100)
-- **ymax**: Plot height in meters (default: 100)
-- **maxSimSteps**: Maximum number of simulated annealing iterations (default: 200000)
-- **coolingFactor**: Temperature reduction factor (default: 0.9)
-- **energyAim**: Target energy for convergence (default: 5E-15)
-- **plotUpdateInterval**: Iterations between plot updates (default: 100)
-- **densityWeight**: Weight for density matching in energy function (default: 1.0)
-- **dbhWeight**: Weight for DBH distribution matching (default: 1.0)
-- **minPoints**: Minimum number of points to maintain during optimization (default: 10)
+## Documentation
 
-## Output
+📚 **Get Started:**
+- [Getting Started Guide](articles/getting-started.html) - Installation, quick start, basic usage
+- [Pinyon-Juniper Example](articles/pinyon-juniper.html) - Complete P-J woodland workflow  
+- [Ponderosa Pine Example](articles/ponderosa-pine.html) - Custom configurations for different forest types
 
-The function returns a list with three components:
+📖 **Key Functions:**
+- `?pj_huffman_2009` - Pre-built P-J configuration
+- `?create_config` - Build custom configurations
+- `?simulate_stand` - Main simulation engine
+- `?analyze_simulation_results` - Comprehensive analysis
+- `?generate_config_template` - Generate editable configuration templates
 
-1. **pattern**: A `spatstat` point pattern object (ppp) with spatial coordinates and marks
-2. **data**: A `data.table` with columns:
-   - `Number`: Tree ID
-   - `x`, `y`: Spatial coordinates
-   - `Species`: Species identifier
-   - `Height`: Tree height
-   - `DBH`: Diameter at breast height
-3. **plotData**: A `data.table` tracking convergence metrics over iterations
+🔍 **Full Reference:**
+- [Function Reference](reference/index.html) - All functions organized by topic
 
-## Performance Notes
+## Create Custom Configurations
 
-### Improvements Over Original Version
+For forest types beyond pinyon-juniper:
 
-1. **Nearest Neighbor Search**: O(n²) complexity remains but with:
-   - Priority queue-based tracking (more cache-friendly)
-   - Reduced memory allocations
-   - Better locality of reference
+```r
+# Create custom configuration
+config <- create_config(
+  density_ha = 450,
+  species_props = c(PIPO = 0.70, PSME = 0.20, ABCO = 0.10),
+  mean_dbh = 35.0,
+  mean_height = 18.0,
+  canopy_cover = 0.45,
+  cfl = 0.85,
+  clark_evans_r = 1.4,
+  plot_size = 100,
+  max_iterations = 5000
+)
 
-2. **Memory Management**: 
-   - Replaced variable-length arrays with std::vector
-   - More efficient distance tracking
+# Or generate an editable template
+generate_config_template(
+  file = "my_config.R",
+  config_name = "my_custom_config",
+  base_config = "pj"  # Start from P-J template
+)
+# Edit my_config.R, then: source("my_config.R"); config <- my_custom_config()
+```
 
-3. **Density Control**:
-   - Direct trees-per-hectare specification
-   - Explicit optimization target (no Poisson variation)
-   - Better convergence to exact density
+See the [ponderosa pine vignette](articles/ponderosa-pine.html) for detailed custom configuration examples.
 
-4. **Distribution Matching**:
-   - Fast Weibull parameter estimation
-   - KS-statistic based distribution comparison
-   - Flexible weight control
+## Simulation Workflow
 
-### Typical Performance
-- For 100×100m plots with 250 trees/ha: ~10-30 seconds for 10000 iterations
-- Convergence typically achieved in 5000-20000 iterations depending on target complexity
-- Adding DBH distribution increases runtime by ~20-30%
+```
+1. Define Configuration
+   ├─ Use pre-built: pj_huffman_2009()
+   ├─ Create custom: create_config()
+   └─ Or template: generate_config_template()
+   
+2. Run Simulation
+   └─ simulate_stand() with simulated annealing
+   
+3. Analyze Results
+   ├─ analyze_simulation_results() for comprehensive output
+   ├─ CSV exports for further analysis
+   └─ PDF plots for visualization
+   
+4. Apply to Research
+   ├─ Fire behavior modeling (FlamMap, FARSITE)
+   ├─ Restoration target development
+   └─ Ecological pattern analysis
+```
 
-## Algorithm Details
+## Allometric Equations
 
-The reconstruction uses simulated annealing with three types of moves:
-1. **Remove** a point (with minimum count protection)
-2. **Add** a new point
-3. **Modify** an existing point's attributes
+Built-in equations from published literature:
 
-Energy function combines:
-- Clark-Evans index deviation
-- Species proportion deviations
-- Height statistics deviations  
-- Density deviation (NEW)
-- Weibull distribution parameter deviations (NEW)
+```r
+# Pinyon-juniper (default)
+params_pj <- get_default_allometric_params()
 
-Weights allow prioritization of different objectives.
+# Ponderosa pine (Reese et al., Miller et al.)
+params_pp <- get_ponderosa_allometric_params()
+
+# Custom equations
+my_params <- list(
+  crown_radius = list(
+    MYSP = list(a = -0.204, b = 0.649, c = 0.421)  # ln(CD) = a + b*ln(DBH) + c*ln(H)
+  ),
+  height = list(
+    MYSP = list(a = 27.0, b = 0.025)  # H = 1.3 + a*(1-exp(-b*DBH))
+  ),
+  foliage = list(
+    MYSP = list(a = -2.287, b = 1.924)  # ln(W_f) = a + b*ln(DBH)
+  )
+)
+
+# Use in calculations
+height <- calc_height(dbh = 40, species = "MYSP", params = my_params)
+radius <- calc_crown_radius(dbh = 40, height = height, species = "MYSP", params = my_params)
+```
+
+## Performance
+
+The package uses optimized C++ with OpenMP parallelization:
+
+| Function | R Version | C++ Version | Speedup |
+|----------|-----------|-------------|---------|
+| `calc_canopy_cover()` | 2.5s | 0.05s | **50×** |
+| `calc_tree_attributes()` | 15s | 0.05s | **300×** |
+| Full simulation (10k iterations) | ~45 min | ~5 min | **9×** |
+
+Fast versions available:
+- `calc_canopy_cover_fast()` - Parallelized canopy cover
+- `calc_tree_attributes_fast()` - Batch tree calculations
+- `calc_clark_evans_fast()` - Optimized spatial index
+- `calc_stand_metrics_parallel()` - Full metrics with parallelization
+
+## Package Structure
+
+```
+EmpericalPatternR/
+├── R/
+│   ├── allometric_equations.R    # Species-specific equations
+│   ├── config_system.R           # Configuration management
+│   ├── forest_simulation.R       # Main simulation engine
+│   └── performance_utils.R       # Fast C++ wrappers
+├── src/                          # C++ optimized functions
+│   ├── OptimizedUtilitiesOpenMP.cpp
+│   └── NumericUtilities.cpp
+├── inst/examples/                # Complete working examples
+│   ├── example_01_pinyon_juniper.R
+│   └── example_02_ponderosa_pine.R
+├── vignettes/                    # Extended tutorials
+│   ├── getting-started.Rmd
+│   ├── pinyon-juniper.Rmd
+│   └── ponderosa-pine.Rmd
+├── tests/testthat/               # Unit tests (62 tests)
+└── man/                          # Function documentation
+```
 
 ## Citation
 
-If you use this code in your research, please cite the original repository and mention the enhancements:
+If you use this package in your research, please cite:
 
-```
-EmpericalPatternR: Enhanced spatial point pattern reconstruction with 
-diameter distribution support and improved performance.
-https://github.com/bi0m3trics/EmpericalPatternR
+```r
+citation("EmpericalPatternR")
 ```
 
-## References
+### Original Idea
 
-- Illian, J., Penttinen, A., Stoyan, H., & Stoyan, D. (2008). Statistical Analysis and Modelling of Spatial Point Patterns. John Wiley & Sons.
-- Clark, P. J., & Evans, F. C. (1954). Distance to nearest neighbor as a measure of spatial relationships in populations. Ecology, 35(4), 445-453.
+- Pommerening, A., 2006. Evaluating structural indices by reversing forest structural analysis. *Forest Ecology and Management* 224, 266–277. <https://doi.org/10.1016/j.foreco.2005.12.039>
+
+- Pommerening, A. and Stoyan, D., 2008. Reconstructing spatial tree point patterns from nearest neighbour summary statistics measured in small subwindows. *Canadian Journal of Forest Research* 38, 1110–1122. <https://doi.org/10.1139/X07-222>
+
+## Contributing
+
+Contributions are welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Add tests for new functionality
+4. Ensure `devtools::check()` passes
+5. Submit a pull request
 
 ## License
 
-See LICENSE file for details.
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For questions or issues:
+- 📧 Open an issue on [GitHub](https://github.com/bi0m3trics/EmpericalPatternR/issues)
+- 📖 See [documentation](https://bi0m3trics.github.io/EmpericalPatternR/)
+- 💬 Contact the package maintainer
+
+---
+
+**Built with:** R, Rcpp, data.table, spatstat, ggplot2
+

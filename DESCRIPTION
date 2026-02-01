@@ -1,0 +1,36 @@
+Package: EmpericalPatternR
+Type: Package
+Title: Forest Stand Pattern Simulation with Simulated Annealing
+Version: 0.1.0
+Authors@R: c(
+    person("Andrew", "Sánchez Meador", email = "andrew.sanchezmeador@nau.edu", role = c("aut", "cre"))
+    )
+Description: Simulates realistic forest stand patterns using simulated annealing 
+    optimization to match empirical targets for spatial patterns, canopy structure, 
+    species composition, and fire behavior metrics. Designed for pinyon-juniper 
+    woodlands with support for canopy fuel load (CFL) optimization and nurse tree 
+    effects. Includes OpenMP-parallelized C++ functions for high-performance 
+    computation.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.3
+Depends: 
+    R (>= 4.0.0)
+Imports:
+    Rcpp (>= 1.0.0),
+    data.table,
+    spatstat,
+    spatstat.geom,
+    spatstat.random,
+    ggplot2,
+    gridExtra
+LinkingTo: Rcpp
+Suggests:
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+URL: https://bi0m3trics.github.io/EmpericalPatternR, https://github.com/bi0m3trics/EmpericalPatternR
+BugReports: https://github.com/bi0m3trics/EmpericalPatternR/issues
+Config/testthat/edition: 3
