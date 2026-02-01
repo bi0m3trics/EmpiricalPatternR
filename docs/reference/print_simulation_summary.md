@@ -10,6 +10,6 @@ print_simulation_summary(result)
 
 ## Arguments
 
-  - result:
-    
-    Result object from simulate\_stand()
+- result:
+
+  Result object from simulate_stand()

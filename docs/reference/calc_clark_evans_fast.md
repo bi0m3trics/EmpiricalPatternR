@@ -11,17 +11,17 @@ calc_clark_evans_fast(x, y, plot_size)
 
 ## Arguments
 
-  - x:
-    
-    Vector of x coordinates
+- x:
 
-  - y:
-    
-    Vector of y coordinates
+  Vector of x coordinates
 
-  - plot\_size:
-    
-    Plot size (m)
+- y:
+
+  Vector of y coordinates
+
+- plot_size:
+
+  Plot size (m)
 
 ## Value
 

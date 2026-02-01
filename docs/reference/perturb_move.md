@@ -10,13 +10,13 @@ perturb_move(trees, plot_size = 100)
 
 ## Arguments
 
-  - trees:
-    
-    data.table. Tree data
+- trees:
 
-  - plot\_size:
-    
-    Numeric. Plot dimension (m)
+  data.table. Tree data
+
+- plot_size:
+
+  Numeric. Plot dimension (m)
 
 ## Value
 

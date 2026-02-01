@@ -12,13 +12,13 @@ calc_tree_attributes_fast(trees, allometric_params = NULL)
 
 ## Arguments
 
-  - trees:
-    
-    Data.table with DBH and Species columns
+- trees:
 
-  - allometric\_params:
-    
-    Allometric parameters (optional)
+  Data.table with DBH and Species columns
+
+- allometric_params:
+
+  Allometric parameters (optional)
 
 ## Value
 

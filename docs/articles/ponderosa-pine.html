@@ -58,10 +58,14 @@
   </div>
 </nav><div class="container template-article">
 
+
+
+
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Ponderosa Pine Forest with Custom Configurations</h1>
-                        <h4 data-toc-skip class="author">EmpericalPatternR Package</h4>
+                        <h4 data-toc-skip class="author">EmpericalPatternR
+Package</h4>
             
             <h4 data-toc-skip class="date">2026-02-01</h4>
       
@@ -74,7 +78,10 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>This vignette demonstrates how to create <strong>custom configurations</strong> for different forest types using <code><a href="../reference/create_config.html">create_config()</a></code>. We’ll simulate a ponderosa pine forest with:</p>
+<p>This vignette demonstrates how to create <strong>custom
+configurations</strong> for different forest types using
+<code><a href="../reference/create_config.html">create_config()</a></code>. We’ll simulate a ponderosa pine forest
+with:</p>
 <ul>
 <li>Custom target values (different from pinyon-juniper)</li>
 <li>Multiple species (PIPO, PSME, ABCO)</li>
@@ -86,7 +93,9 @@
 <div class="section level2">
 <h2 id="why-custom-configurations">Why Custom Configurations?<a class="anchor" aria-label="anchor" href="#why-custom-configurations"></a>
 </h2>
-<p>The pre-built <code><a href="../reference/pj_huffman_2009.html">pj_huffman_2009()</a></code> configuration is great for pinyon-juniper woodlands, but other forest types have different characteristics:</p>
+<p>The pre-built <code><a href="../reference/pj_huffman_2009.html">pj_huffman_2009()</a></code> configuration is great
+for pinyon-juniper woodlands, but other forest types have different
+characteristics:</p>
 <table class="table">
 <thead><tr class="header">
 <th>Characteristic</th>
@@ -155,7 +164,10 @@
 <span><span class="va">ponderosa_params</span><span class="op">$</span><span class="va">foliage</span><span class="op">$</span><span class="va">PIPO</span></span>
 <span><span class="co"># $a: -2.287  (intercept)</span></span>
 <span><span class="co"># $b:  1.924  (DBH coefficient)</span></span></code></pre></div>
-<p>These parameters come from published equations: - <strong>Crown</strong>: Reese et al. (log-log with height) - <strong>Height</strong>: Chapman-Richards growth model - <strong>Foliage</strong>: Miller et al. (log-log)</p>
+<p>These parameters come from published equations: -
+<strong>Crown</strong>: Reese et al. (log-log with height) -
+<strong>Height</strong>: Chapman-Richards growth model -
+<strong>Foliage</strong>: Miller et al. (log-log)</p>
 </div>
 <div class="section level2">
 <h2 id="step-3-create-custom-configuration">Step 3: Create Custom Configuration<a class="anchor" aria-label="anchor" href="#step-3-create-custom-configuration"></a>
@@ -202,9 +214,21 @@
 <div class="section level3">
 <h3 id="configuration-explanation">Configuration Explanation<a class="anchor" aria-label="anchor" href="#configuration-explanation"></a>
 </h3>
-<p><strong>Target Structure</strong>: - <code>density_ha = 450</code>: Lower density than P-J (managed stand) - <code>species_props</code>: 70% ponderosa, 20% Douglas-fir, 10% white fir - <code>mean_dbh = 35</code>: Much larger trees (mature forest) - <code>clark_evans_r = 1.4</code>: Regular spacing (managed/natural fire regime)</p>
-<p><strong>Optimization Weights</strong>: - <code>weight_density = 80</code>: Critical to match tree count - <code>weight_species = 60</code>: Important for composition - <code>weight_canopy_cover = 60</code>: Important for structure - <code>weight_nurse = 0</code>: Disabled (no nurse effect in ponderosa)</p>
-<p><strong>Simulation Parameters</strong>: - <code>max_iterations = 5000</code>: Fewer needed (lower density) - <code>cooling_rate = 0.9999</code>: Slower cooling (more exploration)</p>
+<p><strong>Target Structure</strong>: - <code>density_ha = 450</code>:
+Lower density than P-J (managed stand) - <code>species_props</code>: 70%
+ponderosa, 20% Douglas-fir, 10% white fir - <code>mean_dbh = 35</code>:
+Much larger trees (mature forest) - <code>clark_evans_r = 1.4</code>:
+Regular spacing (managed/natural fire regime)</p>
+<p><strong>Optimization Weights</strong>: -
+<code>weight_density = 80</code>: Critical to match tree count -
+<code>weight_species = 60</code>: Important for composition -
+<code>weight_canopy_cover = 60</code>: Important for structure -
+<code>weight_nurse = 0</code>: Disabled (no nurse effect in
+ponderosa)</p>
+<p><strong>Simulation Parameters</strong>: -
+<code>max_iterations = 5000</code>: Fewer needed (lower density) -
+<code>cooling_rate = 0.9999</code>: Slower cooling (more
+exploration)</p>
 </div>
 </div>
 <div class="section level2">
@@ -269,7 +293,8 @@ MORTALITY SIMULATION:
 <div class="section level2">
 <h2 id="step-6-compare-allometric-equations">Step 6: Compare Allometric Equations<a class="anchor" aria-label="anchor" href="#step-6-compare-allometric-equations"></a>
 </h2>
-<p>One key difference between forest types is allometric relationships:</p>
+<p>One key difference between forest types is allometric
+relationships:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compare crown radius for 40cm DBH tree</span></span>
 <span><span class="va">test_dbh</span> <span class="op">&lt;-</span> <span class="fl">40</span></span>
@@ -294,7 +319,10 @@ MORTALITY SIMULATION:
 <span>            <span class="op">(</span><span class="va">ponderosa_radius</span><span class="op">/</span><span class="va">default_radius</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>,</span>
 <span>            <span class="va">ponderosa_height</span> <span class="op">-</span> <span class="va">default_height</span>,</span>
 <span>            <span class="op">(</span><span class="va">ponderosa_height</span><span class="op">/</span><span class="va">default_height</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Ponderosa pines typically have: - <strong>Larger crowns</strong> for given DBH (more open grown) - <strong>Taller heights</strong> (montane environment) - <strong>More foliage mass</strong> (higher photosynthetic capacity)</p>
+<p>Ponderosa pines typically have: - <strong>Larger crowns</strong> for
+given DBH (more open grown) - <strong>Taller heights</strong> (montane
+environment) - <strong>More foliage mass</strong> (higher photosynthetic
+capacity)</p>
 </div>
 <div class="section level2">
 <h2 id="custom-configuration-scenarios">Custom Configuration Scenarios<a class="anchor" aria-label="anchor" href="#custom-configuration-scenarios"></a>
@@ -361,26 +389,41 @@ MORTALITY SIMULATION:
 <div class="section level3">
 <h3 id="issue-energy-not-converging">Issue: Energy Not Converging<a class="anchor" aria-label="anchor" href="#issue-energy-not-converging"></a>
 </h3>
-<p><strong>Symptoms</strong>: Final energy &gt; 5000, metrics don’t match targets</p>
-<p><strong>Solutions</strong>: 1. Increase <code>max_iterations</code> (try 10000, 20000) 2. Decrease <code>cooling_rate</code> (try 0.99995 for slower cooling) 3. Check for conflicting targets (e.g., high density + high canopy) 4. Adjust weights to prioritize most important metrics</p>
+<p><strong>Symptoms</strong>: Final energy &gt; 5000, metrics don’t
+match targets</p>
+<p><strong>Solutions</strong>: 1. Increase <code>max_iterations</code>
+(try 10000, 20000) 2. Decrease <code>cooling_rate</code> (try 0.99995
+for slower cooling) 3. Check for conflicting targets (e.g., high density
++ high canopy) 4. Adjust weights to prioritize most important
+metrics</p>
 </div>
 <div class="section level3">
 <h3 id="issue-species-proportions-off">Issue: Species Proportions Off<a class="anchor" aria-label="anchor" href="#issue-species-proportions-off"></a>
 </h3>
 <p><strong>Symptoms</strong>: One species dominates or is missing</p>
-<p><strong>Solutions</strong>: 1. Increase <code>weight_species</code> (try 80-100) 2. Check that <code>species_props</code> sums to 1.0 3. Ensure all species have allometric parameters defined</p>
+<p><strong>Solutions</strong>: 1. Increase <code>weight_species</code>
+(try 80-100) 2. Check that <code>species_props</code> sums to 1.0 3.
+Ensure all species have allometric parameters defined</p>
 </div>
 <div class="section level3">
 <h3 id="issue-canopy-cover-mismatch">Issue: Canopy Cover Mismatch<a class="anchor" aria-label="anchor" href="#issue-canopy-cover-mismatch"></a>
 </h3>
-<p><strong>Symptoms</strong>: Achieved cover much higher/lower than target</p>
-<p><strong>Solutions</strong>: 1. Adjust both <code>canopy_cover</code> target AND <code>weight_canopy_cover</code> 2. Check allometric equations (larger crowns = more cover) 3. Consider interaction with density and mean DBH</p>
+<p><strong>Symptoms</strong>: Achieved cover much higher/lower than
+target</p>
+<p><strong>Solutions</strong>: 1. Adjust both <code>canopy_cover</code>
+target AND <code>weight_canopy_cover</code> 2. Check allometric
+equations (larger crowns = more cover) 3. Consider interaction with
+density and mean DBH</p>
 </div>
 <div class="section level3">
 <h3 id="issue-spatial-pattern-wrong">Issue: Spatial Pattern Wrong<a class="anchor" aria-label="anchor" href="#issue-spatial-pattern-wrong"></a>
 </h3>
-<p><strong>Symptoms</strong>: Trees clumped when should be regular (or vice versa)</p>
-<p><strong>Solutions</strong>: 1. Increase <code>weight_ce</code> to prioritize spatial pattern 2. Adjust <code>clark_evans_r</code> target (1.0 = random, &gt;1.0 = regular, &lt;1.0 = clumped) 3. Increase iterations for spatial optimization</p>
+<p><strong>Symptoms</strong>: Trees clumped when should be regular (or
+vice versa)</p>
+<p><strong>Solutions</strong>: 1. Increase <code>weight_ce</code> to
+prioritize spatial pattern 2. Adjust <code>clark_evans_r</code> target
+(1.0 = random, &gt;1.0 = regular, &lt;1.0 = clumped) 3. Increase
+iterations for spatial optimization</p>
 </div>
 </div>
 <div class="section level2">
@@ -403,27 +446,36 @@ MORTALITY SIMULATION:
 <div class="section level2">
 <h2 id="advanced-integrating-custom-allometry">Advanced: Integrating Custom Allometry<a class="anchor" aria-label="anchor" href="#advanced-integrating-custom-allometry"></a>
 </h2>
-<p><strong>Note</strong>: Current version uses built-in allometric equations during simulation. To fully integrate custom equations, you would:</p>
+<p><strong>Note</strong>: Current version uses built-in allometric
+equations during simulation. To fully integrate custom equations, you
+would:</p>
 <ol style="list-style-type: decimal">
-<li>Modify <code><a href="../reference/calc_tree_attributes.html">calc_tree_attributes()</a></code> to accept <code>allometric_params</code> argument</li>
+<li>Modify <code><a href="../reference/calc_tree_attributes.html">calc_tree_attributes()</a></code> to accept
+<code>allometric_params</code> argument</li>
 <li>Pass custom parameters through <code><a href="../reference/simulate_stand.html">simulate_stand()</a></code>
 </li>
 <li>Apply custom equations to all attribute calculations</li>
 </ol>
-<p>This is a planned enhancement. For now, custom allometry can be: - Applied post-hoc to results - Used in custom analysis scripts - Incorporated in derived metrics</p>
+<p>This is a planned enhancement. For now, custom allometry can be: -
+Applied post-hoc to results - Used in custom analysis scripts -
+Incorporated in derived metrics</p>
 </div>
 <div class="section level2">
 <h2 id="next-steps">Next Steps<a class="anchor" aria-label="anchor" href="#next-steps"></a>
 </h2>
 <ul>
 <li>
-<strong>Template System</strong>: Use <code><a href="../reference/generate_config_template.html">generate_config_template()</a></code> for easier customization</li>
+<strong>Template System</strong>: Use
+<code><a href="../reference/generate_config_template.html">generate_config_template()</a></code> for easier customization</li>
 <li>
-<strong>Multiple Runs</strong>: Compare different configurations/scenarios</li>
+<strong>Multiple Runs</strong>: Compare different
+configurations/scenarios</li>
 <li>
-<strong>Sensitivity Analysis</strong>: Test how results change with parameter variations</li>
+<strong>Sensitivity Analysis</strong>: Test how results change with
+parameter variations</li>
 <li>
-<strong>Field Validation</strong>: Compare simulated stands to field measurements</li>
+<strong>Field Validation</strong>: Compare simulated stands to field
+measurements</li>
 </ul>
 </div>
 <div class="section level2">
@@ -433,13 +485,16 @@ MORTALITY SIMULATION:
 <li>
 <code><a href="../reference/create_config.html">?create_config</a></code> - Full parameter documentation</li>
 <li>
-<code><a href="../reference/get_ponderosa_allometric_params.html">?get_ponderosa_allometric_params</a></code> - Allometric equation details</li>
+<code><a href="../reference/get_ponderosa_allometric_params.html">?get_ponderosa_allometric_params</a></code> - Allometric equation
+details</li>
 <li>
-<code><a href="../reference/generate_config_template.html">?generate_config_template</a></code> - Create editable templates</li>
+<code><a href="../reference/generate_config_template.html">?generate_config_template</a></code> - Create editable
+templates</li>
 <li>
 <code><a href="../articles/getting-started.html">vignette("getting-started")</a></code> - Package introduction</li>
 <li>
-<code><a href="../articles/pinyon-juniper.html">vignette("pinyon-juniper")</a></code> - Pre-built configuration example</li>
+<code><a href="../articles/pinyon-juniper.html">vignette("pinyon-juniper")</a></code> - Pre-built configuration
+example</li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

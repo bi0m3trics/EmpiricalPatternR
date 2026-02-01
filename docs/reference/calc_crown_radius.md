@@ -16,22 +16,23 @@ calc_crown_radius(
 
 ## Arguments
 
-  - dbh:
-    
-    Numeric vector. Tree diameter at breast height (cm)
+- dbh:
 
-  - height:
-    
-    Numeric vector. Tree total height (m)
+  Numeric vector. Tree diameter at breast height (cm)
 
-  - species:
-    
-    Character vector. Species codes (e.g., "PIED", "JUMO", "JUOS")
+- height:
 
-  - allometric\_params:
-    
-    List. Allometric parameters from `get_default_allometric_params()`
-    or custom parameters
+  Numeric vector. Tree total height (m)
+
+- species:
+
+  Character vector. Species codes (e.g., "PIED", "JUMO", "JUOS")
+
+- allometric_params:
+
+  List. Allometric parameters from
+  [`get_default_allometric_params()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/get_default_allometric_params.md)
+  or custom parameters
 
 ## Value
 

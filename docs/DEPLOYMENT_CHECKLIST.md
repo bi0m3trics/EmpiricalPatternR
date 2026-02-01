@@ -4,28 +4,28 @@
 
 ### Package Files
 
-  - \[x\] Vignettes created (3 files in `vignettes/`)
-  - \[x\] PKGdown configuration (`_pkgdown.yml`)
-  - \[x\] Enhanced README with badges and examples
-  - \[x\] DESCRIPTION updated with vignette dependencies
-  - \[x\] .Rbuildignore configured
-  - \[x\] Documentation site built (`docs/` folder)
-  - \[x\] All function documentation complete (42 functions)
-  - \[x\] Tests passing (62/62)
+- \[x\] Vignettes created (3 files in `vignettes/`)
+- \[x\] PKGdown configuration (`_pkgdown.yml`)
+- \[x\] Enhanced README with badges and examples
+- \[x\] DESCRIPTION updated with vignette dependencies
+- \[x\] .Rbuildignore configured
+- \[x\] Documentation site built (`docs/` folder)
+- \[x\] All function documentation complete (42 functions)
+- \[x\] Tests passing (62/62)
 
 ### Documentation Quality
 
-  - \[x\] Getting Started vignette (beginner-friendly)
-  - \[x\] Pinyon-Juniper vignette (complete workflow)
-  - \[x\] Ponderosa Pine vignette (customization)
-  - \[x\] Function reference organized by topic
-  - \[x\] Code examples all working
-  - \[x\] Cross-references in place
-  - \[x\] Search index built
+- \[x\] Getting Started vignette (beginner-friendly)
+- \[x\] Pinyon-Juniper vignette (complete workflow)
+- \[x\] Ponderosa Pine vignette (customization)
+- \[x\] Function reference organized by topic
+- \[x\] Code examples all working
+- \[x\] Cross-references in place
+- \[x\] Search index built
 
 ## 🔧 Optional Updates Before Deploy
 
-### 1\. Update GitHub URLs (Recommended)
+### 1. Update GitHub URLs (Recommended)
 
 **File: `_pkgdown.yml`** (line 1)
 
@@ -73,7 +73,7 @@ authors:
     href: https://github.com/bi0m3trics
 ```
 
-### 2\. Create Package Logo (Optional)
+### 2. Create Package Logo (Optional)
 
 If you want a hex sticker logo:
 
@@ -101,7 +101,7 @@ Then rebuild site:
 source("build_pkgdown.R")
 ```
 
-### 3\. Add Accessibility Labels (Optional)
+### 3. Add Accessibility Labels (Optional)
 
 **File: `_pkgdown.yml`** (navbar section)
 
@@ -149,10 +149,9 @@ git push origin main
     <https://github.com/bi0m3trics/EmpericalPatternR/settings/pages>
 
 2.  Under “Build and deployment”:
-    
-      - **Source**: Deploy from a branch
-      - **Branch**: main (or master if that’s your default)
-      - **Folder**: /docs
+    - **Source**: Deploy from a branch
+    - **Branch**: main (or master if that’s your default)
+    - **Folder**: /docs
 
 3.  Click **Save**
 
@@ -165,12 +164,12 @@ git push origin main
 Check that all these pages work: - \[ \] Home:
 <https://bi0m3trics.github.io/EmpericalPatternR/> - \[ \] Getting
 Started:
-<https://bi0m3trics.github.io/EmpericalPatternR/articles/getting-started.html>
-- \[ \] Pinyon-Juniper:
-<https://bi0m3trics.github.io/EmpericalPatternR/articles/pinyon-juniper.html>
-- \[ \] Ponderosa Pine:
-<https://bi0m3trics.github.io/EmpericalPatternR/articles/ponderosa-pine.html>
-- \[ \] Function Reference:
+<https://bi0m3trics.github.io/EmpericalPatternR/articles/getting-started.html> -
+\[ \] Pinyon-Juniper:
+<https://bi0m3trics.github.io/EmpericalPatternR/articles/pinyon-juniper.html> -
+\[ \] Ponderosa Pine:
+<https://bi0m3trics.github.io/EmpericalPatternR/articles/ponderosa-pine.html> -
+\[ \] Function Reference:
 <https://bi0m3trics.github.io/EmpericalPatternR/reference/index.html> -
 \[ \] Search works (top right corner)
 
@@ -178,8 +177,7 @@ Started:
 
 ### Update README Badge (Optional)
 
-Once site is live, you can add a docs
-badge:
+Once site is live, you can add a docs badge:
 
 ``` markdown
 [![pkgdown](https://img.shields.io/badge/docs-pkgdown-blue.svg)](https://bi0m3trics.github.io/EmpericalPatternR/)
@@ -189,8 +187,7 @@ Add this near the other badges in README.md
 
 ### Share the Documentation
 
-Update your package README to prominently
-feature:
+Update your package README to prominently feature:
 
 ``` markdown
 📖 **[Read the Documentation](https://bi0m3trics.github.io/EmpericalPatternR/)**
@@ -201,16 +198,16 @@ feature:
 Template message:
 
     EmpericalPatternR now has comprehensive documentation!
-    
+
     📚 Three detailed vignettes:
     - Getting Started (for beginners)
     - Pinyon-Juniper Workflow (complete example)
     - Ponderosa Pine Customization (advanced)
-    
+
     🔍 Searchable function reference with 42 documented functions
-    
+
     🌐 Visit: https://bi0m3trics.github.io/EmpericalPatternR/
-    
+
     All code examples are copy-paste ready. Everything you need to go from
     installation to running your own simulations!
 
@@ -219,7 +216,8 @@ Template message:
 ### When You Update Functions
 
 1.  Update roxygen comments in R files
-2.  Run: `devtools::document()`
+2.  Run:
+    [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
 3.  Run: `source("build_pkgdown.R")`
 4.  Commit and push
 
@@ -270,20 +268,20 @@ This auto-rebuilds docs on every push.
 
 Before announcing your documentation:
 
-  - \[ \] All URLs updated (no “yourusername” placeholders)
-  - \[ \] Site deployed and accessible
-  - \[ \] All three vignettes render correctly
-  - \[ \] Search functionality works
-  - \[ \] Function reference organized properly
-  - \[ \] Examples run without errors
-  - \[ \] Mobile view looks good (test on phone)
-  - \[ \] Links in README point to live site
+- \[ \] All URLs updated (no “yourusername” placeholders)
+- \[ \] Site deployed and accessible
+- \[ \] All three vignettes render correctly
+- \[ \] Search functionality works
+- \[ \] Function reference organized properly
+- \[ \] Examples run without errors
+- \[ \] Mobile view looks good (test on phone)
+- \[ \] Links in README point to live site
 
-## 🎉 You’re Done\!
+## 🎉 You’re Done!
 
-Once deployed, your package has: ✅ Professional documentation website ✅
-Three comprehensive tutorials ✅ Complete function reference ✅
+Once deployed, your package has: ✅ Professional documentation website
+✅ Three comprehensive tutorials ✅ Complete function reference ✅
 Searchable, organized, accessible ✅ Ready for users, collaborators, and
 publication
 
-**Congratulations on creating excellent documentation\!** 🎊
+**Congratulations on creating excellent documentation!** 🎊

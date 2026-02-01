@@ -11,17 +11,17 @@ calc_stand_metrics_parallel(trees, plot_size = 100, n_cores = NULL)
 
 ## Arguments
 
-  - trees:
-    
-    Tree data.table
+- trees:
 
-  - plot\_size:
-    
-    Plot size (m)
+  Tree data.table
 
-  - n\_cores:
-    
-    Number of cores to use (NULL = auto-detect)
+- plot_size:
+
+  Plot size (m)
+
+- n_cores:
+
+  Number of cores to use (NULL = auto-detect)
 
 ## Value
 

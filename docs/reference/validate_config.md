@@ -10,9 +10,9 @@ validate_config(config)
 
 ## Arguments
 
-  - config:
-    
-    Configuration list
+- config:
+
+  Configuration list
 
 ## Value
 

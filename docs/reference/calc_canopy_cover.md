@@ -10,21 +10,21 @@ calc_canopy_cover(x, y, crown_radius, plot_size = 100)
 
 ## Arguments
 
-  - x:
-    
-    Vector of x coordinates (m)
+- x:
 
-  - y:
-    
-    Vector of y coordinates (m)
+  Vector of x coordinates (m)
 
-  - crown\_radius:
-    
-    Vector of crown radii (m)
+- y:
 
-  - plot\_size:
-    
-    Size of plot (assumes square, m)
+  Vector of y coordinates (m)
+
+- crown_radius:
+
+  Vector of crown radii (m)
+
+- plot_size:
+
+  Size of plot (assumes square, m)
 
 ## Value
 

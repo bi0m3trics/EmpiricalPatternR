@@ -1,6 +1,6 @@
 # Energy Calculation with Caching
 
-Wrapper around calc\_energy that caches metric calculations to avoid
+Wrapper around calc_energy that caches metric calculations to avoid
 redundant computation when only spatial properties change.
 
 ## Usage
@@ -19,33 +19,33 @@ calc_energy_cached(
 
 ## Arguments
 
-  - metrics:
-    
-    Current stand metrics
+- metrics:
 
-  - targets:
-    
-    Target stand metrics
+  Current stand metrics
 
-  - weights:
-    
-    Optimization weights
+- targets:
 
-  - trees:
-    
-    Tree data.table (optional, for nurse effect)
+  Target stand metrics
 
-  - nurse\_distance:
-    
-    Target nurse distance (optional)
+- weights:
 
-  - use\_nurse\_effect:
-    
-    Include nurse effect (optional)
+  Optimization weights
 
-  - cache:
-    
-    Environment for caching (auto-managed)
+- trees:
+
+  Tree data.table (optional, for nurse effect)
+
+- nurse_distance:
+
+  Target nurse distance (optional)
+
+- use_nurse_effect:
+
+  Include nurse effect (optional)
+
+- cache:
+
+  Environment for caching (auto-managed)
 
 ## Value
 

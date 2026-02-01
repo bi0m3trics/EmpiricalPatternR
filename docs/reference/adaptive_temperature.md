@@ -11,21 +11,21 @@ adaptive_temperature(iteration, energy, history, base_rate = 0.9999)
 
 ## Arguments
 
-  - iteration:
-    
-    Current iteration
+- iteration:
 
-  - energy:
-    
-    Current energy
+  Current iteration
 
-  - history:
-    
-    Energy history data.table
+- energy:
 
-  - base\_rate:
-    
-    Base cooling rate
+  Current energy
+
+- history:
+
+  Energy history data.table
+
+- base_rate:
+
+  Base cooling rate
 
 ## Value
 

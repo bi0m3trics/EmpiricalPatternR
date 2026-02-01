@@ -11,18 +11,17 @@ calc_mortality_probability(trees, mort_params = NULL)
 
 ## Arguments
 
-  - trees:
-    
-    Data.table with columns: DBH (cm), Species
+- trees:
 
-  - mort\_params:
-    
-    List. Species-specific mortality parameters with structure:
-    list(SPECIES = list(base = ..., size\_effect = ..., dbh\_coef =
-    ...)) Default parameters favor mortality of small trees: - PIED:
-    base=0.05, size\_effect=0.45, dbh\_coef=0.08 - JUMO: base=0.04,
-    size\_effect=0.40, dbh\_coef=0.07 - JUSO: base=0.04,
-    size\_effect=0.40, dbh\_coef=0.07
+  Data.table with columns: DBH (cm), Species
+
+- mort_params:
+
+  List. Species-specific mortality parameters with structure:
+  list(SPECIES = list(base = ..., size_effect = ..., dbh_coef = ...))
+  Default parameters favor mortality of small trees: - PIED: base=0.05,
+  size_effect=0.45, dbh_coef=0.08 - JUMO: base=0.04, size_effect=0.40,
+  dbh_coef=0.07 - JUSO: base=0.04, size_effect=0.40, dbh_coef=0.07
 
 ## Value
 
@@ -30,8 +29,8 @@ Numeric vector. Mortality probability for each tree (0-1)
 
 ## Details
 
-Mortality probability calculated as: P(mortality) = base + size\_effect
-\* exp(-dbh\_coef \* DBH)
+Mortality probability calculated as: P(mortality) = base + size_effect
+\* exp(-dbh_coef \* DBH)
 
 This creates decreasing mortality with increasing DBH: - Small trees
 (DBH \< 10cm): High probability (0.3-0.5) - Medium trees (DBH 10-30cm):

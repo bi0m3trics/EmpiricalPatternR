@@ -14,17 +14,17 @@ calc_canopy_fuel_mass(
 
 ## Arguments
 
-  - dbh:
-    
-    Numeric vector. Tree diameter at breast height (cm)
+- dbh:
 
-  - species:
-    
-    Character vector. Species codes
+  Numeric vector. Tree diameter at breast height (cm)
 
-  - allometric\_params:
-    
-    List. Allometric parameters (from get\_default\_allometric\_params)
+- species:
+
+  Character vector. Species codes
+
+- allometric_params:
+
+  List. Allometric parameters (from get_default_allometric_params)
 
 ## Value
 
@@ -33,12 +33,12 @@ Numeric vector. Canopy fuel mass (kg, ovendry weight)
 ## Details
 
 \*\*Miller (1981) method\*\* (default, published equations):
-ln(W\_foliage) = a + b \* ln(DBH) Based on destructive sampling of
+ln(W_foliage) = a + b \* ln(DBH) Based on destructive sampling of
 pinyon-juniper trees.
 
 \*\*Crown volume method\*\* (generic): mass (kg) = a \* DBH^b
 
-Method is determined by allometric\_params$foliage\_method.
+Method is determined by allometric_params\$foliage_method.
 
 ## References
 

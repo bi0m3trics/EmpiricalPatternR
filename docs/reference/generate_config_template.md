@@ -17,20 +17,19 @@ generate_config_template(
 
 ## Arguments
 
-  - file:
-    
-    Character, path to save the template file (default:
-    "my\_simulation\_config.R")
+- file:
 
-  - config\_name:
-    
-    Character, name for the config function (default:
-    "my\_custom\_config")
+  Character, path to save the template file (default:
+  "my_simulation_config.R")
 
-  - base\_config:
-    
-    Character, which config to use as starting point: "pj" for
-    pinyon-juniper (default), or "custom" for blank template
+- config_name:
+
+  Character, name for the config function (default: "my_custom_config")
+
+- base_config:
+
+  Character, which config to use as starting point: "pj" for
+  pinyon-juniper (default), or "custom" for blank template
 
 ## Value
 

@@ -3,8 +3,7 @@
 Simulates a mortality event (fire, drought, insects, disease) by
 assigning mortality status to trees based on size-dependent
 probabilities. Achieves a target proportion of dead trees by
-preferentially killing trees with higher mortality
-risk.
+preferentially killing trees with higher mortality risk.
 
 ## Usage
 
@@ -14,40 +13,41 @@ simulate_mortality(trees, target_mortality_prop = 0.15, mort_params = NULL)
 
 ## Arguments
 
-  - trees:
-    
-    Data.table. Tree data with all attributes
+- trees:
 
-  - target\_mortality\_prop:
-    
-    Numeric. Proportion of trees to kill (0-1). Default 0.15 (15 -
-    0.05-0.15: Low intensity disturbance - 0.15-0.30: Moderate intensity
-    disturbance - 0.30-0.60: High intensity disturbance - 0.60-0.90:
-    Stand-replacing disturbance
+  Data.table. Tree data with all attributes
 
-  - mort\_params:
-    
-    List. Species-specific mortality parameters passed to
-    `calc_mortality_probability`. NULL uses defaults.
+- target_mortality_prop:
+
+  Numeric. Proportion of trees to kill (0-1). Default 0.15 (15 -
+  0.05-0.15: Low intensity disturbance - 0.15-0.30: Moderate intensity
+  disturbance - 0.30-0.60: High intensity disturbance - 0.60-0.90:
+  Stand-replacing disturbance
+
+- mort_params:
+
+  List. Species-specific mortality parameters passed to
+  [`calc_mortality_probability`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_mortality_probability.md).
+  NULL uses defaults.
 
 ## Value
 
 Data.table. Input trees with added columns:
 
-  - MortalityProbability:
-    
-    Numeric. Calculated probability (0-1)
+- MortalityProbability:
 
-  - Status:
-    
-    Character. "live" or "dead"
+  Numeric. Calculated probability (0-1)
+
+- Status:
+
+  Character. "live" or "dead"
 
 ## Details
 
 Process: 1. Calculate mortality probability for each tree using
 size-dependent model 2. Sort trees by probability (highest risk first)
-3. Mark top N trees as dead where N = target\_mortality\_prop \*
-total\_trees 4. Mark remaining trees as live
+3. Mark top N trees as dead where N = target_mortality_prop \*
+total_trees 4. Mark remaining trees as live
 
 This approach ensures: - Exact target mortality proportion is achieved -
 Smaller trees preferentially killed (realistic) - Deterministic given
@@ -55,7 +55,7 @@ the same input (reproducible)
 
 ## See also
 
-`calc_mortality_probability`
+[`calc_mortality_probability`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_mortality_probability.md)
 
 ## Examples
 

@@ -27,61 +27,61 @@ simulate_stand(
 
 ## Arguments
 
-  - targets:
-    
-    List of target values (density\_ha, species\_props, mean\_dbh, etc.)
+- targets:
 
-  - weights:
-    
-    List of optimization weights (0-100 scale)
+  List of target values (density_ha, species_props, mean_dbh, etc.)
 
-  - plot\_size:
-    
-    Plot dimension (m), creates plot\_size x plot\_size area
+- weights:
 
-  - max\_iterations:
-    
-    Maximum annealing iterations
+  List of optimization weights (0-100 scale)
 
-  - initial\_temp:
-    
-    Initial temperature for annealing
+- plot_size:
 
-  - cooling\_rate:
-    
-    Temperature cooling rate per iteration
+  Plot dimension (m), creates plot_size x plot_size area
 
-  - energy\_threshold:
-    
-    Stop if energy below this threshold
+- max_iterations:
 
-  - verbose:
-    
-    Print progress messages
+  Maximum annealing iterations
 
-  - print\_every:
-    
-    Print status every N iterations
+- initial_temp:
 
-  - plot\_interval:
-    
-    Update plots every N iterations (NULL = no plotting)
+  Initial temperature for annealing
 
-  - save\_plots:
-    
-    Save intermediate plot images to files
+- cooling_rate:
 
-  - nurse\_distance:
-    
-    Target distance for PIED trees to nearest juniper (m)
+  Temperature cooling rate per iteration
 
-  - use\_nurse\_effect:
-    
-    Include nurse tree effect in optimization
+- energy_threshold:
 
-  - mortality\_prop:
-    
-    Simulate this proportion of dead trees after optimization (0-1)
+  Stop if energy below this threshold
+
+- verbose:
+
+  Print progress messages
+
+- print_every:
+
+  Print status every N iterations
+
+- plot_interval:
+
+  Update plots every N iterations (NULL = no plotting)
+
+- save_plots:
+
+  Save intermediate plot images to files
+
+- nurse_distance:
+
+  Target distance for PIED trees to nearest juniper (m)
+
+- use_nurse_effect:
+
+  Include nurse tree effect in optimization
+
+- mortality_prop:
+
+  Simulate this proportion of dead trees after optimization (0-1)
 
 ## Value
 
