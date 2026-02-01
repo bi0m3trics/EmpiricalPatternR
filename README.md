@@ -1,8 +1,8 @@
 # EmpericalPatternR <img src="img/logo.png" align="right" height="139" />
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/bi0m3trics/EmpericalPatternR/workflows/R-CMD-check/badge.svg)](https://github.com/bi0m3trics/EmpericalPatternR/actions)
-[![License: GPL-3](https://img.shields.io/badge/License-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![license](https://img.shields.io/badge/Licence-GPL--3-blue.svg) 
+[![](https://www.r-pkg.org/badges/version/spanner)](https://cran.r-project.org/package=spanner)
 <!-- badges: end -->
 
 Simulate realistic forest stand patterns using simulated annealing optimization to match empirical targets from field data.
@@ -14,21 +14,21 @@ Simulate realistic forest stand patterns using simulated annealing optimization 
 **EmpericalPatternR** generates synthetic forest stands that match observed ecological patterns. Using simulated annealing, the package optimizes tree locations, sizes, and species to simultaneously match multiple targets including stand density, species composition, size distributions, canopy cover, fuel loads, and spatial patterns.
 
 Perfect for:
-- 🔥 **Fire behavior modeling** - Generate stands with realistic fuel structures
-- 🌲 **Restoration planning** - Create target stand conditions
-- 📊 **Research** - Explore how stand structure affects ecological processes
-- 🎓 **Teaching** - Demonstrate pattern-based ecology
+- **Fire behavior modeling** - Generate stands with realistic fuel structures
+- **Restoration planning** - Create target stand conditions
+- **Research** - Explore how stand structure affects ecological processes
+- **Teaching** - Demonstrate pattern-based ecology
 
 ### Key Features
 
-- 📦 **Pre-built configurations** for common forest types (pinyon-juniper, ponderosa pine)
-- 🎯 **Pattern matching** to empirical field data (Huffman et al. 2009)
-- 🌳 **Flexible allometry** with species-specific equations (Reese, Miller)
-- ⚡ **Fast C++ engine** with OpenMP parallelization (50-300× speedup)
-- 🔥 **Canopy fuel load** optimization for fire behavior
-- 🌱 **Nurse tree effects** for facilitation patterns
-- 📈 **Comprehensive analysis** with automated reports and visualizations
-- ✅ **Fully tested** with 62 unit tests covering all major functions
+- **Pre-built configurations** for common forest types (pinyon-juniper, ponderosa pine)
+- **Pattern matching** to empirical field data (Huffman et al. 2009)
+- **Flexible allometry** with species-specific equations (Reese, Miller)
+- **Fast C++ engine** with OpenMP parallelization (50-300× speedup)
+- **Canopy fuel load** optimization for fire behavior
+- **Nurse tree effects** for facilitation patterns
+- **Comprehensive analysis** with automated reports and visualizations
+- **Fully tested** with 62 unit tests covering all major functions
 
 ## Installation
 
@@ -86,19 +86,19 @@ analyze_simulation_results(
 
 ## Documentation
 
-📚 **Get Started:**
+**Get Started:**
 - [Getting Started Guide](articles/getting-started.html) - Installation, quick start, basic usage
 - [Pinyon-Juniper Example](articles/pinyon-juniper.html) - Complete P-J woodland workflow  
 - [Ponderosa Pine Example](articles/ponderosa-pine.html) - Custom configurations for different forest types
 
-📖 **Key Functions:**
+**Key Functions:**
 - `?pj_huffman_2009` - Pre-built P-J configuration
 - `?create_config` - Build custom configurations
 - `?simulate_stand` - Main simulation engine
 - `?analyze_simulation_results` - Comprehensive analysis
 - `?generate_config_template` - Generate editable configuration templates
 
-🔍 **Full Reference:**
+**Full Reference:**
 - [Function Reference](reference/index.html) - All functions organized by topic
 
 ## Create Custom Configurations
@@ -151,6 +151,9 @@ See the [ponderosa pine vignette](articles/ponderosa-pine.html) for detailed cus
    ├─ Restoration target development
    └─ Ecological pattern analysis
 ```
+## Realtime Simulation Graphics
+
+<img src="img/Output.png" alt="Output form the Simulations" />
 
 ## Allometric Equations
 
@@ -245,14 +248,14 @@ Contributions are welcome! Please:
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+GPL-3 License.
 
 ## Contact
 
 For questions or issues:
-- 📧 Open an issue on [GitHub](https://github.com/bi0m3trics/EmpericalPatternR/issues)
-- 📖 See [documentation](https://bi0m3trics.github.io/EmpericalPatternR/)
-- 💬 Contact the package maintainer
+- Open an issue on [GitHub](https://github.com/bi0m3trics/EmpericalPatternR/issues)
+- See [documentation](https://bi0m3trics.github.io/EmpericalPatternR/)
+- Contact the package maintainer
 
 ---
 
