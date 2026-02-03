@@ -1,13 +1,13 @@
-# EmpericalPatternR
+# EmpiricalPatternR
 
 Simulate realistic forest stand patterns using simulated annealing
 optimization to match empirical targets from field data.
 
-![EmpericalPatternR Banner](reference/figures/banner.png)
+![EmpiricalPatternR Banner](reference/figures/banner.png)
 
 ## Overview
 
-**EmpericalPatternR** generates synthetic forest stands that match
+**EmpiricalPatternR** generates synthetic forest stands that match
 observed ecological patterns. Using simulated annealing, the package
 optimizes tree locations, sizes, and species to simultaneously match
 multiple targets including stand density, species composition, size
@@ -38,8 +38,8 @@ Install from GitHub:
 # Install devtools if needed
 install.packages("devtools")
 
-# Install EmpericalPatternR
-devtools::install_github("yourusername/EmpericalPatternR")
+# Install EmpiricalPatternR
+devtools::install_github("yourusername/EmpiricalPatternR")
 ```
 
 ## Quick Start
@@ -47,7 +47,7 @@ devtools::install_github("yourusername/EmpericalPatternR")
 Use a pre-built configuration:
 
 ``` r
-library(EmpericalPatternR)
+library(EmpiricalPatternR)
 
 # Get pre-built pinyon-juniper configuration (Huffman et al. 2009)
 config <- pj_huffman_2009(
@@ -85,28 +85,28 @@ analyze_simulation_results(
 ## Documentation
 
 **Get Started:** - [Getting Started
-Guide](https://bi0m3trics.github.io/EmpericalPatternR/articles/getting-started.md) -
+Guide](https://bi0m3trics.github.io/EmpiricalPatternR/articles/getting-started.md) -
 Installation, quick start, basic usage - [Pinyon-Juniper
-Example](https://bi0m3trics.github.io/EmpericalPatternR/articles/pinyon-juniper.md) -
+Example](https://bi0m3trics.github.io/EmpiricalPatternR/articles/pinyon-juniper.md) -
 Complete P-J woodland workflow  
 - [Ponderosa Pine
-Example](https://bi0m3trics.github.io/EmpericalPatternR/articles/ponderosa-pine.md) -
+Example](https://bi0m3trics.github.io/EmpiricalPatternR/articles/ponderosa-pine.md) -
 Custom configurations for different forest types
 
 **Key Functions:** -
-[`?pj_huffman_2009`](https://bi0m3trics.github.io/EmpericalPatternR/reference/pj_huffman_2009.md) -
+[`?pj_huffman_2009`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md) -
 Pre-built P-J configuration -
-[`?create_config`](https://bi0m3trics.github.io/EmpericalPatternR/reference/create_config.md) -
+[`?create_config`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/create_config.md) -
 Build custom configurations -
-[`?simulate_stand`](https://bi0m3trics.github.io/EmpericalPatternR/reference/simulate_stand.md) -
+[`?simulate_stand`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/simulate_stand.md) -
 Main simulation engine -
-[`?analyze_simulation_results`](https://bi0m3trics.github.io/EmpericalPatternR/reference/analyze_simulation_results.md) -
+[`?analyze_simulation_results`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/analyze_simulation_results.md) -
 Comprehensive analysis -
-[`?generate_config_template`](https://bi0m3trics.github.io/EmpericalPatternR/reference/generate_config_template.md) -
+[`?generate_config_template`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/generate_config_template.md) -
 Generate editable configuration templates
 
 **Full Reference:** - [Function
-Reference](https://bi0m3trics.github.io/EmpericalPatternR/reference/index.md) -
+Reference](https://bi0m3trics.github.io/EmpiricalPatternR/reference/index.md) -
 All functions organized by topic
 
 ## Create Custom Configurations
@@ -137,7 +137,7 @@ generate_config_template(
 ```
 
 See the [ponderosa pine
-vignette](https://bi0m3trics.github.io/EmpericalPatternR/articles/ponderosa-pine.md)
+vignette](https://bi0m3trics.github.io/EmpiricalPatternR/articles/ponderosa-pine.md)
 for detailed custom configuration examples.
 
 ## Simulation Workflow
@@ -199,23 +199,23 @@ The package uses optimized C++ with OpenMP parallelization:
 
 | Function | R Version | C++ Version | Speedup |
 |----|----|----|----|
-| [`calc_canopy_cover()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_canopy_cover.md) | 2.5s | 0.05s | **50×** |
-| [`calc_tree_attributes()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_tree_attributes.md) | 15s | 0.05s | **300×** |
+| [`calc_canopy_cover()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_canopy_cover.md) | 2.5s | 0.05s | **50×** |
+| [`calc_tree_attributes()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_tree_attributes.md) | 15s | 0.05s | **300×** |
 | Full simulation (10k iterations) | ~45 min | ~5 min | **9×** |
 
 Fast versions available: -
-[`calc_canopy_cover_fast()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_canopy_cover_fast.md) -
+[`calc_canopy_cover_fast()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_canopy_cover_fast.md) -
 Parallelized canopy cover -
-[`calc_tree_attributes_fast()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_tree_attributes_fast.md) -
+[`calc_tree_attributes_fast()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_tree_attributes_fast.md) -
 Batch tree calculations -
-[`calc_clark_evans_fast()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_clark_evans_fast.md) -
+[`calc_clark_evans_fast()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_clark_evans_fast.md) -
 Optimized spatial index -
-[`calc_stand_metrics_parallel()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_stand_metrics_parallel.md) -
+[`calc_stand_metrics_parallel()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_stand_metrics_parallel.md) -
 Full metrics with parallelization
 
 ## Package Structure
 
-    EmpericalPatternR/
+    EmpiricalPatternR/
     ├── R/
     │   ├── allometric_equations.R    # Species-specific equations
     │   ├── config_system.R           # Configuration management
@@ -239,7 +239,7 @@ Full metrics with parallelization
 If you use this package in your research, please cite:
 
 ``` r
-citation("EmpericalPatternR")
+citation("EmpiricalPatternR")
 ```
 
 ### Original Idea
@@ -267,8 +267,8 @@ GPL-3 License.
 ## Contact
 
 For questions or issues: - Open an issue on
-[GitHub](https://github.com/bi0m3trics/EmpericalPatternR/issues) - See
-[documentation](https://bi0m3trics.github.io/EmpericalPatternR/) -
+[GitHub](https://github.com/bi0m3trics/EmpiricalPatternR/issues) - See
+[documentation](https://bi0m3trics.github.io/EmpiricalPatternR/) -
 Contact the package maintainer
 
 ------------------------------------------------------------------------

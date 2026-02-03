@@ -4,7 +4,7 @@
 
 This vignette demonstrates how to create **custom configurations** for
 different forest types using
-[`create_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/create_config.md).
+[`create_config()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/create_config.md).
 We’ll simulate a ponderosa pine forest with:
 
 - Custom target values (different from pinyon-juniper)
@@ -16,7 +16,7 @@ We’ll simulate a ponderosa pine forest with:
 ## Why Custom Configurations?
 
 The pre-built
-[`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/pj_huffman_2009.md)
+[`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md)
 configuration is great for pinyon-juniper woodlands, but other forest
 types have different characteristics:
 
@@ -32,7 +32,7 @@ types have different characteristics:
 ## Step 1: Load Package
 
 ``` r
-library(EmpericalPatternR)
+library(EmpiricalPatternR)
 ```
 
 ## Step 2: Get Ponderosa Allometric Parameters
@@ -328,10 +328,10 @@ generate_config_template(
 simulation. To fully integrate custom equations, you would:
 
 1.  Modify
-    [`calc_tree_attributes()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_tree_attributes.md)
+    [`calc_tree_attributes()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_tree_attributes.md)
     to accept `allometric_params` argument
 2.  Pass custom parameters through
-    [`simulate_stand()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/simulate_stand.md)
+    [`simulate_stand()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/simulate_stand.md)
 3.  Apply custom equations to all attribute calculations
 
 This is a planned enhancement. For now, custom allometry can be: -
@@ -341,7 +341,7 @@ Incorporated in derived metrics
 ## Next Steps
 
 - **Template System**: Use
-  [`generate_config_template()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/generate_config_template.md)
+  [`generate_config_template()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/generate_config_template.md)
   for easier customization
 - **Multiple Runs**: Compare different configurations/scenarios
 - **Sensitivity Analysis**: Test how results change with parameter
@@ -350,13 +350,13 @@ Incorporated in derived metrics
 
 ## See Also
 
-- [`?create_config`](https://bi0m3trics.github.io/EmpericalPatternR/reference/create_config.md) -
+- [`?create_config`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/create_config.md) -
   Full parameter documentation
-- [`?get_ponderosa_allometric_params`](https://bi0m3trics.github.io/EmpericalPatternR/reference/get_ponderosa_allometric_params.md) -
+- [`?get_ponderosa_allometric_params`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/get_ponderosa_allometric_params.md) -
   Allometric equation details
-- [`?generate_config_template`](https://bi0m3trics.github.io/EmpericalPatternR/reference/generate_config_template.md) -
+- [`?generate_config_template`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/generate_config_template.md) -
   Create editable templates
-- [`vignette("getting-started")`](https://bi0m3trics.github.io/EmpericalPatternR/articles/getting-started.md) -
+- [`vignette("getting-started")`](https://bi0m3trics.github.io/EmpiricalPatternR/articles/getting-started.md) -
   Package introduction
-- [`vignette("pinyon-juniper")`](https://bi0m3trics.github.io/EmpericalPatternR/articles/pinyon-juniper.md) -
+- [`vignette("pinyon-juniper")`](https://bi0m3trics.github.io/EmpiricalPatternR/articles/pinyon-juniper.md) -
   Pre-built configuration example

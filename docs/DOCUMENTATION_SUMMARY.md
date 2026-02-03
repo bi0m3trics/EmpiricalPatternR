@@ -1,4 +1,4 @@
-# EmpericalPatternR Documentation Site - Build Summary
+# EmpiricalPatternR Documentation Site - Build Summary
 
 ## ✅ SUCCESSFULLY CREATED!
 
@@ -19,7 +19,7 @@ folder.
     - Tips for success
 2.  **Pinyon-Juniper Woodland** (`vignettes/pinyon-juniper.Rmd`)
     - Complete P-J workflow using
-      [`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/pj_huffman_2009.md)
+      [`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md)
     - Understanding nurse tree effects
     - Simulating mortality
     - Comprehensive results analysis
@@ -28,7 +28,7 @@ folder.
     - Published data references
 3.  **Ponderosa Pine Forest** (`vignettes/ponderosa-pine.Rmd`)
     - Custom configurations with
-      [`create_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/create_config.md)
+      [`create_config()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/create_config.md)
     - Multiple species (PIPO, PSME, ABCO)
     - Custom allometric equations
     - Comparing allometry (P-J vs Ponderosa)
@@ -83,7 +83,7 @@ documentation - Responsive design - Organized reference sections
 ### View Locally
 
 1.  Navigate to:
-    `d:\OneDrive - Northern Arizona University\GitHubRepos\EmpericalPatternR\docs\`
+    `d:\OneDrive - Northern Arizona University\GitHubRepos\EmpiricalPatternR\docs\`
 2.  Open `index.html` in your web browser
 3.  Browse the complete documentation site
 
@@ -105,7 +105,7 @@ documentation - Responsive design - Organized reference sections
     - Click Save
 
 3.  Site will be live at:
-    `https://yourusername.github.io/EmpericalPatternR/`
+    `https://yourusername.github.io/EmpiricalPatternR/`
 
 ### Rebuild After Changes
 
@@ -144,18 +144,18 @@ build_site()
 ## 🔍 What Users Can Learn
 
 **Beginners:** 1. Install package 2. Run pre-built P-J simulation with
-[`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/pj_huffman_2009.md)
+[`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md)
 3. Analyze results with
-[`analyze_simulation_results()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/analyze_simulation_results.md)
+[`analyze_simulation_results()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/analyze_simulation_results.md)
 4. Understand output files
 
 **Intermediate:** 1. Create custom configs with
-[`create_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/create_config.md)
+[`create_config()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/create_config.md)
 2. Adjust targets for different forest types 3. Tune optimization
 weights 4. Interpret convergence
 
 **Advanced:** 1. Generate config templates with
-[`generate_config_template()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/generate_config_template.md)
+[`generate_config_template()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/generate_config_template.md)
 2. Use custom allometric equations 3. Troubleshoot optimization issues
 4. Integrate into fire behavior workflows
 
@@ -176,7 +176,7 @@ weights 4. Interpret convergence
     - Non-blocking: Site works without it
 2.  **URL placeholder**: “yourusername” in \_pkgdown.yml
     - Solution: Update with actual GitHub username
-    - Example: `url: https://bi0m3trics.github.io/EmpericalPatternR`
+    - Example: `url: https://bi0m3trics.github.io/EmpiricalPatternR`
 3.  **Icon aria-label**: fa-home icon lacks accessibility label
     - Minor accessibility issue
     - Can add aria-label to navbar in \_pkgdown.yml
@@ -215,7 +215,7 @@ weights 4. Interpret convergence
 ## 🎉 Summary
 
 You now have a **complete, professional documentation website** for
-EmpericalPatternR:
+EmpiricalPatternR:
 
 - 📖 3 comprehensive vignettes covering all use cases
 - 🔍 42 fully documented functions organized by topic

@@ -27,7 +27,7 @@ simulate_mortality(trees, target_mortality_prop = 0.15, mort_params = NULL)
 - mort_params:
 
   List. Species-specific mortality parameters passed to
-  [`calc_mortality_probability`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_mortality_probability.md).
+  [`calc_mortality_probability`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_mortality_probability.md).
   NULL uses defaults.
 
 ## Value
@@ -55,7 +55,7 @@ the same input (reproducible)
 
 ## See also
 
-[`calc_mortality_probability`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_mortality_probability.md)
+[`calc_mortality_probability`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_mortality_probability.md)
 
 ## Examples
 

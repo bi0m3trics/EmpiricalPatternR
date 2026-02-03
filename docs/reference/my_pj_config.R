@@ -7,7 +7,7 @@
 # Generated: %Y-%m-%d %H:%M:%S
 # ==============================================================================
 
-library(EmpericalPatternR)
+library(EmpiricalPatternR)
 
 # Custom Simulation Configuration
 # @param density_ha Target tree density (trees per hectare)
