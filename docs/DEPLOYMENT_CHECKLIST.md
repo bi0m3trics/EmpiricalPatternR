@@ -1,4 +1,4 @@
-# 📋 Deployment Checklist - EmpiricalPatternR Documentation
+# 📋 Deployment Checklist - EmpericalPatternR Documentation
 
 ## ✅ Pre-Deployment Checklist
 
@@ -31,32 +31,32 @@
 
 ``` yaml
 # CURRENT:
-url: https://github.com/yourusername/EmpiricalPatternR
+url: https://github.com/yourusername/EmpericalPatternR
 
 # UPDATE TO:
-url: https://bi0m3trics.github.io/EmpiricalPatternR
+url: https://bi0m3trics.github.io/EmpericalPatternR
 ```
 
 **File: `README.md`** (lines 3-5)
 
 ``` markdown
 <!-- CURRENT: -->
-[![R-CMD-check](https://github.com/yourusername/EmpiricalPatternR/workflows/R-CMD-check/badge.svg)](https://github.com/yourusername/EmpiricalPatternR/actions)
+[![R-CMD-check](https://github.com/yourusername/EmpericalPatternR/workflows/R-CMD-check/badge.svg)](https://github.com/yourusername/EmpericalPatternR/actions)
 
 <!-- UPDATE TO: -->
-[![R-CMD-check](https://github.com/bi0m3trics/EmpiricalPatternR/workflows/R-CMD-check/badge.svg)](https://github.com/bi0m3trics/EmpiricalPatternR/actions)
+[![R-CMD-check](https://github.com/bi0m3trics/EmpericalPatternR/workflows/R-CMD-check/badge.svg)](https://github.com/bi0m3trics/EmpericalPatternR/actions)
 ```
 
 **File: `README.md`** (bottom section)
 
 ``` markdown
 <!-- CURRENT: -->
-- 📧 Open an issue on [GitHub](https://github.com/yourusername/EmpiricalPatternR/issues)
-- 📖 See [documentation](https://yourusername.github.io/EmpiricalPatternR/)
+- 📧 Open an issue on [GitHub](https://github.com/yourusername/EmpericalPatternR/issues)
+- 📖 See [documentation](https://yourusername.github.io/EmpericalPatternR/)
 
 <!-- UPDATE TO: -->
-- 📧 Open an issue on [GitHub](https://github.com/bi0m3trics/EmpiricalPatternR/issues)
-- 📖 See [documentation](https://bi0m3trics.github.io/EmpiricalPatternR/)
+- 📧 Open an issue on [GitHub](https://github.com/bi0m3trics/EmpericalPatternR/issues)
+- 📖 See [documentation](https://bi0m3trics.github.io/EmpericalPatternR/)
 ```
 
 **File: `_pkgdown.yml`** (bottom section)
@@ -85,7 +85,7 @@ install.packages("hexSticker")
 library(hexSticker)
 sticker(
   subplot = "path/to/image.png",  # Or use ggplot
-  package = "EmpiricalPatternR",
+  package = "EmpericalPatternR",
   p_size = 8,
   s_width = 1.2,
   s_height = 1,
@@ -123,7 +123,7 @@ source("build_pkgdown.R")
 ### Step 1: Commit All Changes
 
 ``` bash
-cd "d:\OneDrive - Northern Arizona University\GitHubRepos\EmpiricalPatternR"
+cd "d:\OneDrive - Northern Arizona University\GitHubRepos\EmpericalPatternR"
 git add .
 git commit -m "Add comprehensive pkgdown documentation with three vignettes
 
@@ -146,7 +146,7 @@ git push origin main
 ### Step 3: Enable GitHub Pages
 
 1.  Go to:
-    <https://github.com/bi0m3trics/EmpiricalPatternR/settings/pages>
+    <https://github.com/bi0m3trics/EmpericalPatternR/settings/pages>
 
 2.  Under “Build and deployment”:
     - **Source**: Deploy from a branch
@@ -157,20 +157,20 @@ git push origin main
 
 4.  Wait 2-3 minutes for deployment
 
-5.  Visit: <https://bi0m3trics.github.io/EmpiricalPatternR/>
+5.  Visit: <https://bi0m3trics.github.io/EmpericalPatternR/>
 
 ### Step 4: Verify Deployment
 
 Check that all these pages work: - \[ \] Home:
-<https://bi0m3trics.github.io/EmpiricalPatternR/> - \[ \] Getting
+<https://bi0m3trics.github.io/EmpericalPatternR/> - \[ \] Getting
 Started:
-<https://bi0m3trics.github.io/EmpiricalPatternR/articles/getting-started.html> -
+<https://bi0m3trics.github.io/EmpericalPatternR/articles/getting-started.html> -
 \[ \] Pinyon-Juniper:
-<https://bi0m3trics.github.io/EmpiricalPatternR/articles/pinyon-juniper.html> -
+<https://bi0m3trics.github.io/EmpericalPatternR/articles/pinyon-juniper.html> -
 \[ \] Ponderosa Pine:
-<https://bi0m3trics.github.io/EmpiricalPatternR/articles/ponderosa-pine.html> -
+<https://bi0m3trics.github.io/EmpericalPatternR/articles/ponderosa-pine.html> -
 \[ \] Function Reference:
-<https://bi0m3trics.github.io/EmpiricalPatternR/reference/index.html> -
+<https://bi0m3trics.github.io/EmpericalPatternR/reference/index.html> -
 \[ \] Search works (top right corner)
 
 ## 📊 Post-Deployment
@@ -180,7 +180,7 @@ Started:
 Once site is live, you can add a docs badge:
 
 ``` markdown
-[![pkgdown](https://img.shields.io/badge/docs-pkgdown-blue.svg)](https://bi0m3trics.github.io/EmpiricalPatternR/)
+[![pkgdown](https://img.shields.io/badge/docs-pkgdown-blue.svg)](https://bi0m3trics.github.io/EmpericalPatternR/)
 ```
 
 Add this near the other badges in README.md
@@ -190,14 +190,14 @@ Add this near the other badges in README.md
 Update your package README to prominently feature:
 
 ``` markdown
-📖 **[Read the Documentation](https://bi0m3trics.github.io/EmpiricalPatternR/)**
+📖 **[Read the Documentation](https://bi0m3trics.github.io/EmpericalPatternR/)**
 ```
 
 ### Announce to Users
 
 Template message:
 
-    EmpiricalPatternR now has comprehensive documentation!
+    EmpericalPatternR now has comprehensive documentation!
 
     📚 Three detailed vignettes:
     - Getting Started (for beginners)
@@ -206,7 +206,7 @@ Template message:
 
     🔍 Searchable function reference with 42 documented functions
 
-    🌐 Visit: https://bi0m3trics.github.io/EmpiricalPatternR/
+    🌐 Visit: https://bi0m3trics.github.io/EmpericalPatternR/
 
     All code examples are copy-paste ready. Everything you need to go from
     installation to running your own simulations!

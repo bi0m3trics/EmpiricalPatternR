@@ -10,7 +10,7 @@
 #
 # ==============================================================================
 
-library(EmpiricalPatternR)
+library(EmpericalPatternR)
 
 message(
   sprintf(

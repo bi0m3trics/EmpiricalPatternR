@@ -1,6 +1,6 @@
 # Changelog
 
-## EmpiricalPatternR 0.1.0
+## EmpericalPatternR 0.1.0
 
 ### Major Changes
 
@@ -65,9 +65,9 @@
 
 - Simulated annealing optimization for forest stand pattern matching
 - Pre-built configuration for pinyon-juniper woodlands
-  ([`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md))
+  ([`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/pj_huffman_2009.md))
 - Flexible configuration system with
-  [`create_config()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/create_config.md)
+  [`create_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/create_config.md)
 - Species-specific allometric equations
 - OpenMP-parallelized C++ functions for performance
 - Canopy fuel load (CFL) optimization
@@ -78,38 +78,38 @@
 #### Functions
 
 - **Quick Start**:
-  [`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md),
-  [`simulate_stand()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/simulate_stand.md)
+  [`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/pj_huffman_2009.md),
+  [`simulate_stand()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/simulate_stand.md)
 - **Configuration**:
-  [`create_config()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/create_config.md),
-  [`validate_config()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/validate_config.md),
-  [`print_config()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/print_config.md),
-  [`save_config()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/save_config.md)
+  [`create_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/create_config.md),
+  [`validate_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/validate_config.md),
+  [`print_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/print_config.md),
+  [`save_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/save_config.md)
 - **Allometry**:
-  [`calc_height()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_height.md),
-  [`calc_crown_radius()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_crown_radius.md),
-  [`calc_crown_base_height()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_crown_base_height.md),
-  [`calc_canopy_fuel_mass()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_canopy_fuel_mass.md)
+  [`calc_height()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_height.md),
+  [`calc_crown_radius()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_crown_radius.md),
+  [`calc_crown_base_height()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_crown_base_height.md),
+  [`calc_canopy_fuel_mass()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_canopy_fuel_mass.md)
 - **Stand Metrics**:
-  [`calc_stand_metrics()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_stand_metrics.md),
-  [`calc_canopy_cover()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_canopy_cover.md),
-  [`calc_clark_evans_fast()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_clark_evans_fast.md)
+  [`calc_stand_metrics()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_stand_metrics.md),
+  [`calc_canopy_cover()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_canopy_cover.md),
+  [`calc_clark_evans_fast()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_clark_evans_fast.md)
 - **Energy Calculation**:
-  [`calc_energy()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_energy.md),
-  [`calc_energy_cached()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_energy_cached.md),
-  [`calc_nurse_tree_energy()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_nurse_tree_energy.md)
+  [`calc_energy()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_energy.md),
+  [`calc_energy_cached()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_energy_cached.md),
+  [`calc_nurse_tree_energy()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_nurse_tree_energy.md)
 - **Perturbations**:
-  [`perturb_add()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/perturb_add.md),
-  [`perturb_remove()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/perturb_remove.md),
-  [`perturb_move()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/perturb_move.md),
-  [`perturb_dbh()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/perturb_dbh.md),
-  [`perturb_species()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/perturb_species.md),
-  [`perturb_add_with_nurse()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/perturb_add_with_nurse.md)
+  [`perturb_add()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/perturb_add.md),
+  [`perturb_remove()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/perturb_remove.md),
+  [`perturb_move()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/perturb_move.md),
+  [`perturb_dbh()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/perturb_dbh.md),
+  [`perturb_species()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/perturb_species.md),
+  [`perturb_add_with_nurse()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/perturb_add_with_nurse.md)
 - **Analysis**:
-  [`analyze_simulation_results()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/analyze_simulation_results.md),
-  [`plot_simulation_results()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/plot_simulation_results.md),
-  [`plot_progress()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/plot_progress.md)
+  [`analyze_simulation_results()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/analyze_simulation_results.md),
+  [`plot_simulation_results()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/plot_simulation_results.md),
+  [`plot_progress()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/plot_progress.md)
 - **Utilities**:
-  [`adaptive_temperature()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/adaptive_temperature.md),
-  [`precompute_ce_table()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/precompute_ce_table.md),
+  [`adaptive_temperature()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/adaptive_temperature.md),
+  [`precompute_ce_table()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/precompute_ce_table.md),
   Performance optimization functions

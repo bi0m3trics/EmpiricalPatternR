@@ -1,4 +1,4 @@
-# EmpiricalPatternR <img src="img/logo.png" align="right" height="139" />
+# EmpericalPatternR <img src="img/logo.png" align="right" height="139" />
 
 <!-- badges: start -->
 ![license](https://img.shields.io/badge/Licence-GPL--3-blue.svg) 
@@ -7,11 +7,11 @@
 
 Simulate realistic forest stand patterns using simulated annealing optimization to match empirical targets from field data.
 
-<img src="man/figures/banner.png" alt="EmpiricalPatternR Banner" />
+<img src="man/figures/banner.png" alt="EmpericalPatternR Banner" />
 
 ## Overview
 
-**EmpiricalPatternR** generates synthetic forest stands that match observed ecological patterns. Using simulated annealing, the package optimizes tree locations, sizes, and species to simultaneously match multiple targets including stand density, species composition, size distributions, canopy cover, fuel loads, and spatial patterns.
+**EmpericalPatternR** generates synthetic forest stands that match observed ecological patterns. Using simulated annealing, the package optimizes tree locations, sizes, and species to simultaneously match multiple targets including stand density, species composition, size distributions, canopy cover, fuel loads, and spatial patterns.
 
 Perfect for:
 - **Fire behavior modeling** - Generate stands with realistic fuel structures
@@ -38,8 +38,8 @@ Install from GitHub:
 # Install devtools if needed
 install.packages("devtools")
 
-# Install EmpiricalPatternR
-devtools::install_github("yourusername/EmpiricalPatternR")
+# Install EmpericalPatternR
+devtools::install_github("yourusername/EmpericalPatternR")
 ```
 
 ## Quick Start
@@ -47,7 +47,7 @@ devtools::install_github("yourusername/EmpiricalPatternR")
 Use a pre-built configuration:
 
 ```r
-library(EmpiricalPatternR)
+library(EmpericalPatternR)
 
 # Get pre-built pinyon-juniper configuration (Huffman et al. 2009)
 config <- pj_huffman_2009(
@@ -203,7 +203,7 @@ Fast versions available:
 ## Package Structure
 
 ```
-EmpiricalPatternR/
+EmpericalPatternR/
 ├── R/
 │   ├── allometric_equations.R    # Species-specific equations
 │   ├── config_system.R           # Configuration management
@@ -228,7 +228,7 @@ EmpiricalPatternR/
 If you use this package in your research, please cite:
 
 ```r
-citation("EmpiricalPatternR")
+citation("EmpericalPatternR")
 ```
 
 ### Original Idea
@@ -253,8 +253,8 @@ GPL-3 License.
 ## Contact
 
 For questions or issues:
-- Open an issue on [GitHub](https://github.com/bi0m3trics/EmpiricalPatternR/issues)
-- See [documentation](https://bi0m3trics.github.io/EmpiricalPatternR/)
+- Open an issue on [GitHub](https://github.com/bi0m3trics/EmpericalPatternR/issues)
+- See [documentation](https://bi0m3trics.github.io/EmpericalPatternR/)
 - Contact the package maintainer
 
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Ponderosa Pine Forest with Custom Configurations"
-author: "EmpiricalPatternR Package"
+author: "EmpericalPatternR Package"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -44,7 +44,7 @@ The pre-built `pj_huffman_2009()` configuration is great for pinyon-juniper wood
 ## Step 1: Load Package
 
 ```{r load, eval=FALSE}
-library(EmpiricalPatternR)
+library(EmpericalPatternR)
 ```
 
 ## Step 2: Get Ponderosa Allometric Parameters

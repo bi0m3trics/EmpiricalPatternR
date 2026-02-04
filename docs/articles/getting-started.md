@@ -1,8 +1,8 @@
-# Getting Started with EmpiricalPatternR
+# Getting Started with EmpericalPatternR
 
 ## Introduction
 
-**EmpiricalPatternR** simulates realistic forest stand patterns using
+**EmpericalPatternR** simulates realistic forest stand patterns using
 simulated annealing optimization to match empirical targets for:
 
 - Spatial patterns (Clark-Evans R)
@@ -20,12 +20,12 @@ lines of code.
 
 ``` r
 # Install from GitHub (if not already installed)
-# devtools::install_github("bi0m3trics/EmpiricalPatternR")
-library(EmpiricalPatternR)
+# devtools::install_github("bi0m3trics/EmpericalPatternR")
+library(EmpericalPatternR)
 ```
 
 ``` r
-library(EmpiricalPatternR)
+library(EmpericalPatternR)
 ```
 
 ### Your First Simulation
@@ -124,7 +124,7 @@ print(metrics)
 ### Comprehensive Analysis
 
 Use
-[`analyze_simulation_results()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/analyze_simulation_results.md)
+[`analyze_simulation_results()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/analyze_simulation_results.md)
 for detailed output:
 
 ``` r
@@ -214,26 +214,26 @@ my_config <- create_config(
 
 | Function | Purpose |
 |----|----|
-| [`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md) | Pre-built P-J woodland config |
-| [`simulate_stand()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/simulate_stand.md) | Run the simulation |
-| [`calc_stand_metrics()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_stand_metrics.md) | Calculate stand-level metrics |
-| [`analyze_simulation_results()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/analyze_simulation_results.md) | Comprehensive analysis & output |
-| [`generate_config_template()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/generate_config_template.md) | Create editable config template |
-| [`create_config()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/create_config.md) | Build custom config programmatically |
+| [`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/pj_huffman_2009.md) | Pre-built P-J woodland config |
+| [`simulate_stand()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/simulate_stand.md) | Run the simulation |
+| [`calc_stand_metrics()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_stand_metrics.md) | Calculate stand-level metrics |
+| [`analyze_simulation_results()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/analyze_simulation_results.md) | Comprehensive analysis & output |
+| [`generate_config_template()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/generate_config_template.md) | Create editable config template |
+| [`create_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/create_config.md) | Build custom config programmatically |
 
 ## Next Steps
 
 - See
-  [`vignette("pinyon-juniper")`](https://bi0m3trics.github.io/EmpiricalPatternR/articles/pinyon-juniper.md)
+  [`vignette("pinyon-juniper")`](https://bi0m3trics.github.io/EmpericalPatternR/articles/pinyon-juniper.md)
   for a detailed P-J woodland example
 - See
-  [`vignette("ponderosa-pine")`](https://bi0m3trics.github.io/EmpiricalPatternR/articles/ponderosa-pine.md)
+  [`vignette("ponderosa-pine")`](https://bi0m3trics.github.io/EmpericalPatternR/articles/ponderosa-pine.md)
   for custom allometric equations
 - See
-  [`?simulate_stand`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/simulate_stand.md)
+  [`?simulate_stand`](https://bi0m3trics.github.io/EmpericalPatternR/reference/simulate_stand.md)
   for all simulation parameters
 - See
-  [`?analyze_simulation_results`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/analyze_simulation_results.md)
+  [`?analyze_simulation_results`](https://bi0m3trics.github.io/EmpericalPatternR/reference/analyze_simulation_results.md)
   for analysis options
 
 ## Tips for Success
@@ -246,5 +246,5 @@ my_config <- create_config(
 4.  **Enable plotting** (`plot_interval = 500`) to watch optimization
     progress
 5.  **Save your configs** with
-    [`save_config()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/save_config.md)
+    [`save_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/save_config.md)
     for reproducibility
