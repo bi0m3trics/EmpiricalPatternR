@@ -5,11 +5,11 @@
 **EmpericalPatternR** simulates realistic forest stand patterns using
 simulated annealing optimization to match empirical targets for:
 
-- Spatial patterns (Clark-Evans R)
-- Species composition
-- Tree size distributions (DBH and height)
-- Canopy structure (cover and fuel load)
-- Fire behavior metrics
+  - Spatial patterns (Clark-Evans R)
+  - Species composition
+  - Tree size distributions (DBH and height)
+  - Canopy structure (cover and fuel load)
+  - Fire behavior metrics
 
 This vignette shows you how to run your first simulation in just a few
 lines of code.
@@ -46,7 +46,7 @@ result <- simulate_stand(
 )
 ```
 
-That’s it! The simulation creates a 1-hectare stand with realistic tree
+That’s it\! The simulation creates a 1-hectare stand with realistic tree
 positions, species, and sizes.
 
 ## Understanding the Configuration
@@ -87,21 +87,21 @@ print_config(config)
 
 These define the forest characteristics you want to simulate:
 
-- **Density**: 927 trees/ha (total stand density)
-- **Species**: 75.5% Pinyon pine (PIED), 24.5% Utah juniper (JUSO)
-- **Size**: Mean DBH = 20.5 cm, Mean height = 6.5 m
-- **Canopy**: 40% cover, 1.10 kg/m² fuel load
-- **Pattern**: Clark-Evans R = 1.0 (random spatial distribution)
+  - **Density**: 927 trees/ha (total stand density)
+  - **Species**: 75.5% Pinyon pine (PIED), 24.5% Utah juniper (JUSO)
+  - **Size**: Mean DBH = 20.5 cm, Mean height = 6.5 m
+  - **Canopy**: 40% cover, 1.10 kg/m² fuel load
+  - **Pattern**: Clark-Evans R = 1.0 (random spatial distribution)
 
 ### Optimization Weights
 
 Weights (0-100) control how hard the algorithm tries to match each
 target:
 
-- **0-20**: Low priority (let it emerge naturally)
-- **20-50**: Moderate priority
-- **50-80**: High priority (actively optimize)
-- **80-100**: Critical priority (dominates optimization)
+  - **0-20**: Low priority (let it emerge naturally)
+  - **20-50**: Moderate priority
+  - **50-80**: High priority (actively optimize)
+  - **80-100**: Critical priority (dominates optimization)
 
 In the default config: - Species, density, canopy cover, and CFL are all
 HIGH (60-70) - Tree size metrics are LOW (1-5) - they emerge from
@@ -123,9 +123,7 @@ print(metrics)
 
 ### Comprehensive Analysis
 
-Use
-[`analyze_simulation_results()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/analyze_simulation_results.md)
-for detailed output:
+Use `analyze_simulation_results()` for detailed output:
 
 ``` r
 analyze_simulation_results(
@@ -136,9 +134,9 @@ analyze_simulation_results(
 )
 ```
 
-This generates: - Console summary comparing simulated vs. target
-values - CSV files (all trees, live trees, history, summary stats) - PDF
-plots (spatial patterns, diameter distributions)
+This generates: - Console summary comparing simulated vs. target values
+- CSV files (all trees, live trees, history, summary stats) - PDF plots
+(spatial patterns, diameter distributions)
 
 ### Simple Plots
 
@@ -184,7 +182,7 @@ my_config <- my_custom_sim(
 )
 ```
 
-### Method 2: Use create_config()
+### Method 2: Use create\_config()
 
 ``` r
 my_config <- create_config(
@@ -212,29 +210,21 @@ my_config <- create_config(
 
 ## Key Functions Reference
 
-| Function | Purpose |
-|----|----|
-| [`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/pj_huffman_2009.md) | Pre-built P-J woodland config |
-| [`simulate_stand()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/simulate_stand.md) | Run the simulation |
-| [`calc_stand_metrics()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_stand_metrics.md) | Calculate stand-level metrics |
-| [`analyze_simulation_results()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/analyze_simulation_results.md) | Comprehensive analysis & output |
-| [`generate_config_template()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/generate_config_template.md) | Create editable config template |
-| [`create_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/create_config.md) | Build custom config programmatically |
+| Function                       | Purpose                              |
+| ------------------------------ | ------------------------------------ |
+| `pj_huffman_2009()`            | Pre-built P-J woodland config        |
+| `simulate_stand()`             | Run the simulation                   |
+| `calc_stand_metrics()`         | Calculate stand-level metrics        |
+| `analyze_simulation_results()` | Comprehensive analysis & output      |
+| `generate_config_template()`   | Create editable config template      |
+| `create_config()`              | Build custom config programmatically |
 
 ## Next Steps
 
-- See
-  [`vignette("pinyon-juniper")`](https://bi0m3trics.github.io/EmpericalPatternR/articles/pinyon-juniper.md)
-  for a detailed P-J woodland example
-- See
-  [`vignette("ponderosa-pine")`](https://bi0m3trics.github.io/EmpericalPatternR/articles/ponderosa-pine.md)
-  for custom allometric equations
-- See
-  [`?simulate_stand`](https://bi0m3trics.github.io/EmpericalPatternR/reference/simulate_stand.md)
-  for all simulation parameters
-- See
-  [`?analyze_simulation_results`](https://bi0m3trics.github.io/EmpericalPatternR/reference/analyze_simulation_results.md)
-  for analysis options
+  - See `vignette("pinyon-juniper")` for a detailed P-J woodland example
+  - See `vignette("ponderosa-pine")` for custom allometric equations
+  - See `?simulate_stand` for all simulation parameters
+  - See `?analyze_simulation_results` for analysis options
 
 ## Tips for Success
 
@@ -245,6 +235,4 @@ my_config <- create_config(
     tree sizes)
 4.  **Enable plotting** (`plot_interval = 500`) to watch optimization
     progress
-5.  **Save your configs** with
-    [`save_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/save_config.md)
-    for reproducibility
+5.  **Save your configs** with `save_config()` for reproducibility

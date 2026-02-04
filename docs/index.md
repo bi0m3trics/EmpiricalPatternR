@@ -13,22 +13,25 @@ optimizes tree locations, sizes, and species to simultaneously match
 multiple targets including stand density, species composition, size
 distributions, canopy cover, fuel loads, and spatial patterns.
 
-Perfect for: - **Fire behavior modeling** - Generate stands with
-realistic fuel structures - **Restoration planning** - Create target
-stand conditions - **Research** - Explore how stand structure affects
-ecological processes - **Teaching** - Demonstrate pattern-based ecology
+Perfect for: - 🔥 **Fire behavior modeling** - Generate stands with
+realistic fuel structures - 🌲 **Restoration planning** - Create target
+stand conditions - 📊 **Research** - Explore how stand structure affects
+ecological processes - 🎓 **Teaching** - Demonstrate pattern-based
+ecology
 
 ### Key Features
 
-- **Pre-built configurations** for common forest types (pinyon-juniper,
-  ponderosa pine)
-- **Pattern matching** to empirical field data (Huffman et al. 2009)
-- **Flexible allometry** with species-specific equations (Reese, Miller)
-- **Fast C++ engine** with OpenMP parallelization (50-300× speedup)
-- **Canopy fuel load** optimization for fire behavior
-- **Nurse tree effects** for facilitation patterns
-- **Comprehensive analysis** with automated reports and visualizations
-- **Fully tested** with 62 unit tests covering all major functions
+  - 📦 **Pre-built configurations** for common forest types
+    (pinyon-juniper, ponderosa pine)
+  - 🎯 **Pattern matching** to empirical field data (Huffman et al. 2009)
+  - 🌳 **Flexible allometry** with species-specific equations (Reese,
+    Miller)
+  - ⚡ **Fast C++ engine** with OpenMP parallelization (50-300× speedup)
+  - 🔥 **Canopy fuel load** optimization for fire behavior
+  - 🌱 **Nurse tree effects** for facilitation patterns
+  - 📈 **Comprehensive analysis** with automated reports and
+    visualizations
+  - ✅ **Fully tested** with 62 unit tests covering all major functions
 
 ## Installation
 
@@ -79,35 +82,29 @@ analyze_simulation_results(
 
 **Output:** - `my_woodland_all_trees.csv` - All trees with attributes -
 `my_woodland_live_trees.csv` - Live trees only -
-`my_woodland_summary.csv` - Summary statistics -
-`my_woodland_plots.pdf` - Spatial and size distributions
+`my_woodland_summary.csv` - Summary statistics - `my_woodland_plots.pdf`
+- Spatial and size distributions
 
 ## Documentation
 
-**Get Started:** - [Getting Started
-Guide](https://bi0m3trics.github.io/EmpericalPatternR/articles/getting-started.md) -
-Installation, quick start, basic usage - [Pinyon-Juniper
-Example](https://bi0m3trics.github.io/EmpericalPatternR/articles/pinyon-juniper.md) -
-Complete P-J woodland workflow  
-- [Ponderosa Pine
-Example](https://bi0m3trics.github.io/EmpericalPatternR/articles/ponderosa-pine.md) -
-Custom configurations for different forest types
+📚 **Get Started:** - [Getting Started
+Guide](https://bi0m3trics.github.io/EmpericalPatternR/articles/getting-started.md)
+- Installation, quick start, basic usage - [Pinyon-Juniper
+Example](https://bi0m3trics.github.io/EmpericalPatternR/articles/pinyon-juniper.md)
+- Complete P-J woodland workflow  
+\- [Ponderosa Pine
+Example](https://bi0m3trics.github.io/EmpericalPatternR/articles/ponderosa-pine.md)
+- Custom configurations for different forest types
 
-**Key Functions:** -
-[`?pj_huffman_2009`](https://bi0m3trics.github.io/EmpericalPatternR/reference/pj_huffman_2009.md) -
-Pre-built P-J configuration -
-[`?create_config`](https://bi0m3trics.github.io/EmpericalPatternR/reference/create_config.md) -
-Build custom configurations -
-[`?simulate_stand`](https://bi0m3trics.github.io/EmpericalPatternR/reference/simulate_stand.md) -
-Main simulation engine -
-[`?analyze_simulation_results`](https://bi0m3trics.github.io/EmpericalPatternR/reference/analyze_simulation_results.md) -
-Comprehensive analysis -
-[`?generate_config_template`](https://bi0m3trics.github.io/EmpericalPatternR/reference/generate_config_template.md) -
-Generate editable configuration templates
+📖 **Key Functions:** - `?pj_huffman_2009` - Pre-built P-J configuration
+- `?create_config` - Build custom configurations - `?simulate_stand` -
+Main simulation engine - `?analyze_simulation_results` - Comprehensive
+analysis - `?generate_config_template` - Generate editable configuration
+templates
 
-**Full Reference:** - [Function
-Reference](https://bi0m3trics.github.io/EmpericalPatternR/reference/index.md) -
-All functions organized by topic
+🔍 **Full Reference:** - [Function
+Reference](https://bi0m3trics.github.io/EmpericalPatternR/reference/index.md)
+- All functions organized by topic
 
 ## Create Custom Configurations
 
@@ -146,23 +143,19 @@ for detailed custom configuration examples.
        ├─ Use pre-built: pj_huffman_2009()
        ├─ Create custom: create_config()
        └─ Or template: generate_config_template()
-
+    
     2. Run Simulation
        └─ simulate_stand() with simulated annealing
-
+    
     3. Analyze Results
        ├─ analyze_simulation_results() for comprehensive output
        ├─ CSV exports for further analysis
        └─ PDF plots for visualization
-
+    
     4. Apply to Research
        ├─ Fire behavior modeling (FlamMap, FARSITE)
        ├─ Restoration target development
        └─ Ecological pattern analysis
-
-## Realtime Simulation Graphics
-
-![Output form the Simulations](img/Output.png)
 
 ## Allometric Equations
 
@@ -195,23 +188,19 @@ radius <- calc_crown_radius(dbh = 40, height = height, species = "MYSP", params 
 
 ## Performance
 
-The package uses optimized C++ with OpenMP parallelization:
+The package uses optimized C++ with OpenMP
+parallelization:
 
-| Function | R Version | C++ Version | Speedup |
-|----|----|----|----|
-| [`calc_canopy_cover()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_canopy_cover.md) | 2.5s | 0.05s | **50×** |
-| [`calc_tree_attributes()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_tree_attributes.md) | 15s | 0.05s | **300×** |
-| Full simulation (10k iterations) | ~45 min | ~5 min | **9×** |
+| Function                         | R Version | C++ Version | Speedup  |
+| -------------------------------- | --------- | ----------- | -------- |
+| `calc_canopy_cover()`            | 2.5s      | 0.05s       | **50×**  |
+| `calc_tree_attributes()`         | 15s       | 0.05s       | **300×** |
+| Full simulation (10k iterations) | ~45 min   | ~5 min      | **9×**   |
 
-Fast versions available: -
-[`calc_canopy_cover_fast()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_canopy_cover_fast.md) -
-Parallelized canopy cover -
-[`calc_tree_attributes_fast()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_tree_attributes_fast.md) -
-Batch tree calculations -
-[`calc_clark_evans_fast()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_clark_evans_fast.md) -
-Optimized spatial index -
-[`calc_stand_metrics_parallel()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/calc_stand_metrics_parallel.md) -
-Full metrics with parallelization
+Fast versions available: - `calc_canopy_cover_fast()` - Parallelized
+canopy cover - `calc_tree_attributes_fast()` - Batch tree calculations -
+`calc_clark_evans_fast()` - Optimized spatial index -
+`calc_stand_metrics_parallel()` - Full metrics with parallelization
 
 ## Package Structure
 
@@ -244,33 +233,34 @@ citation("EmpericalPatternR")
 
 ### Original Idea
 
-- Pommerening, A., 2006. Evaluating structural indices by reversing
-  forest structural analysis. *Forest Ecology and Management* 224,
-  266–277. <https://doi.org/10.1016/j.foreco.2005.12.039>
+  - Pommerening, A., 2006. Evaluating structural indices by reversing
+    forest structural analysis. *Forest Ecology and Management* 224,
+    266–277. <https://doi.org/10.1016/j.foreco.2005.12.039>
 
-- Pommerening, A. and Stoyan, D., 2008. Reconstructing spatial tree
-  point patterns from nearest neighbour summary statistics measured in
-  small subwindows. *Canadian Journal of Forest Research* 38, 1110–1122.
-  <https://doi.org/10.1139/X07-222>
+  - Pommerening, A. and Stoyan, D., 2008. Reconstructing spatial tree
+    point patterns from nearest neighbour summary statistics measured in
+    small subwindows. *Canadian Journal of Forest Research* 38,
+    1110–1122. <https://doi.org/10.1139/X07-222>
 
 ## Contributing
 
-Contributions are welcome! Please: 1. Fork the repository 2. Create a
+Contributions are welcome\! Please: 1. Fork the repository 2. Create a
 feature branch 3. Add tests for new functionality 4. Ensure
-[`devtools::check()`](https://devtools.r-lib.org/reference/check.html)
-passes 5. Submit a pull request
+`devtools::check()` passes 5. Submit a pull request
 
 ## License
 
-GPL-3 License.
+MIT License - see
+[LICENSE](https://bi0m3trics.github.io/EmpericalPatternR/LICENSE) file
+for details.
 
 ## Contact
 
-For questions or issues: - Open an issue on
-[GitHub](https://github.com/bi0m3trics/EmpericalPatternR/issues) - See
-[documentation](https://bi0m3trics.github.io/EmpericalPatternR/) -
+For questions or issues: - 📧 Open an issue on
+[GitHub](https://github.com/bi0m3trics/EmpericalPatternR/issues) - 📖 See
+[documentation](https://bi0m3trics.github.io/EmpericalPatternR/) - 💬
 Contact the package maintainer
 
-------------------------------------------------------------------------
+-----
 
 **Built with:** R, Rcpp, data.table, spatstat, ggplot2

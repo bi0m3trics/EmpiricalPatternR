@@ -2,7 +2,8 @@
 
 Returns a list of allometric parameters for common pinyon-juniper
 species. Users can modify these parameters or create new parameter sets
-for different forest types.
+for different forest
+types.
 
 ## Usage
 
@@ -12,53 +13,53 @@ get_default_allometric_params(use_reese_cbh = TRUE, use_miller_foliage = TRUE)
 
 ## Arguments
 
-- use_reese_cbh:
+  - use\_reese\_cbh:
+    
+    Logical. If TRUE, uses Reese's quadratic CBH equations (more
+    realistic crown shapes). If FALSE, uses simple linear CBH = 0.4\*H.
+    Default is TRUE.
 
-  Logical. If TRUE, uses Reese's quadratic CBH equations (more realistic
-  crown shapes). If FALSE, uses simple linear CBH = 0.4\*H. Default is
-  TRUE.
-
-- use_miller_foliage:
-
-  Logical. If TRUE, uses Miller et al. (1981) published foliage biomass
-  equations. If FALSE, uses generic crown volume approach. Default is
-  TRUE.
+  - use\_miller\_foliage:
+    
+    Logical. If TRUE, uses Miller et al. (1981) published foliage
+    biomass equations. If FALSE, uses generic crown volume approach.
+    Default is TRUE.
 
 ## Value
 
 List containing species-specific parameters:
 
-- crown_radius:
+  - crown\_radius:
+    
+    Parameters for crown radius (m) = a + b \* DBH
 
-  Parameters for crown radius (m) = a + b \* DBH
+  - height:
+    
+    Parameters for height (m) = 1.3 + a \* (1 - exp(-b \* DBH))
 
-- height:
+  - crown\_ratio:
+    
+    Parameters for crown ratio = a - b \* log(DBH)
 
-  Parameters for height (m) = 1.3 + a \* (1 - exp(-b \* DBH))
+  - crown\_mass:
+    
+    Parameters for crown mass (kg) = a \* DBH^b
 
-- crown_ratio:
+  - cbh\_method:
+    
+    Method for crown base height calculation
 
-  Parameters for crown ratio = a - b \* log(DBH)
+  - cbh\_reese:
+    
+    Reese quadratic coefficients (if use\_reese\_cbh = TRUE)
 
-- crown_mass:
+  - foliage\_method:
+    
+    Method for foliage biomass calculation
 
-  Parameters for crown mass (kg) = a \* DBH^b
-
-- cbh_method:
-
-  Method for crown base height calculation
-
-- cbh_reese:
-
-  Reese quadratic coefficients (if use_reese_cbh = TRUE)
-
-- foliage_method:
-
-  Method for foliage biomass calculation
-
-- foliage_miller:
-
-  Miller et al. coefficients (if use_miller_foliage = TRUE)
+  - foliage\_miller:
+    
+    Miller et al. coefficients (if use\_miller\_foliage = TRUE)
 
 ## References
 

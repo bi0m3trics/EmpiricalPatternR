@@ -16,21 +16,21 @@ update_history_efficient(
 
 ## Arguments
 
-- history:
+  - history:
+    
+    Current history data.table
 
-  Current history data.table
+  - new\_row:
+    
+    New row to add
 
-- new_row:
+  - max\_rows:
+    
+    Maximum rows to keep
 
-  New row to add
-
-- max_rows:
-
-  Maximum rows to keep
-
-- thin_interval:
-
-  Keep every Nth row when thinning
+  - thin\_interval:
+    
+    Keep every Nth row when thinning
 
 ## Value
 

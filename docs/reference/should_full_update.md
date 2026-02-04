@@ -12,13 +12,13 @@ should_full_update(iteration, batch_size = 10)
 
 ## Arguments
 
-- iteration:
+  - iteration:
+    
+    Current iteration
 
-  Current iteration
-
-- batch_size:
-
-  Update full metrics every N iterations
+  - batch\_size:
+    
+    Update full metrics every N iterations
 
 ## Value
 

@@ -58,14 +58,10 @@
   </div>
 </nav><div class="container template-article">
 
-
-
-
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Pinyon-Juniper Woodland Simulation</h1>
-                        <h4 data-toc-skip class="author">EmpericalPatternR
-Package</h4>
+                        <h4 data-toc-skip class="author">EmpericalPatternR Package</h4>
             
             <h4 data-toc-skip class="date">2026-02-01</h4>
       
@@ -78,10 +74,7 @@ Package</h4>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>This vignette demonstrates a complete workflow for simulating
-pinyon-juniper woodland structure using the pre-built
-<code><a href="../reference/pj_huffman_2009.html">pj_huffman_2009()</a></code> configuration based on published field
-data. We’ll cover:</p>
+<p>This vignette demonstrates a complete workflow for simulating pinyon-juniper woodland structure using the pre-built <code><a href="../reference/pj_huffman_2009.html">pj_huffman_2009()</a></code> configuration based on published field data. We’ll cover:</p>
 <ul>
 <li>Using pre-built configurations</li>
 <li>Understanding nurse tree effects (pinyons near junipers)</li>
@@ -92,16 +85,11 @@ data. We’ll cover:</p>
 <div class="section level2">
 <h2 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
 </h2>
-<p>Pinyon-juniper woodlands are widespread throughout the southwestern
-United States. This example uses target values from <strong>Huffman et
-al. (2009)</strong> control treatment plots, representing typical
-woodland structure with:</p>
+<p>Pinyon-juniper woodlands are widespread throughout the southwestern United States. This example uses target values from <strong>Huffman et al. (2009)</strong> control treatment plots, representing typical woodland structure with:</p>
 <ul>
 <li>Moderate tree density (~900 trees/ha)</li>
-<li>Two-species composition (Pinus edulis and Juniperus
-osteosperma)</li>
-<li>Nurse tree associations (juvenile pinyons establish near
-junipers)</li>
+<li>Two-species composition (Pinus edulis and Juniperus osteosperma)</li>
+<li>Nurse tree associations (juvenile pinyons establish near junipers)</li>
 <li>Moderate canopy cover and fuel loads</li>
 </ul>
 </div>
@@ -124,17 +112,13 @@ junipers)</li>
 <p>The configuration includes:</p>
 <ul>
 <li>
-<strong>Targets</strong>: Density, species composition, size
-distributions, canopy metrics</li>
+<strong>Targets</strong>: Density, species composition, size distributions, canopy metrics</li>
 <li>
-<strong>Weights</strong>: How important each target is during
-optimization</li>
+<strong>Weights</strong>: How important each target is during optimization</li>
 <li>
-<strong>Simulation</strong>: Plot size, iterations, temperature
-schedule</li>
+<strong>Simulation</strong>: Plot size, iterations, temperature schedule</li>
 <li>
-<strong>Allometric</strong>: Species-specific equations for crown,
-height, foliage</li>
+<strong>Allometric</strong>: Species-specific equations for crown, height, foliage</li>
 </ul>
 </div>
 <div class="section level2">
@@ -148,8 +132,7 @@ height, foliage</li>
 <span><span class="va">config</span><span class="op">$</span><span class="va">targets</span><span class="op">$</span><span class="va">species_props</span></span>
 <span><span class="co">#   PIED   JUSO </span></span>
 <span><span class="co">#   0.48   0.52</span></span></code></pre></div>
-<p>This represents 48% pinyon pine (PIED) and 52% Utah juniper (JUSO),
-matching field observations.</p>
+<p>This represents 48% pinyon pine (PIED) and 52% Utah juniper (JUSO), matching field observations.</p>
 </div>
 <div class="section level3">
 <h3 id="nurse-tree-effect">Nurse Tree Effect<a class="anchor" aria-label="anchor" href="#nurse-tree-effect"></a>
@@ -157,9 +140,7 @@ matching field observations.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">config</span><span class="op">$</span><span class="va">simulation</span><span class="op">$</span><span class="va">use_nurse_effect</span>  <span class="co"># TRUE</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">simulation</span><span class="op">$</span><span class="va">nurse_distance</span>    <span class="co"># 3.0 meters</span></span></code></pre></div>
-<p>The nurse tree effect simulates the ecological pattern where pinyon
-pines establish near junipers. The simulation tracks the proportion of
-pinyons within 3 meters of a juniper, matching the target (32%).</p>
+<p>The nurse tree effect simulates the ecological pattern where pinyon pines establish near junipers. The simulation tracks the proportion of pinyons within 3 meters of a juniper, matching the target (32%).</p>
 </div>
 <div class="section level3">
 <h3 id="optimization-weights">Optimization Weights<a class="anchor" aria-label="anchor" href="#optimization-weights"></a>
@@ -193,8 +174,7 @@ pinyons within 3 meters of a juniper, matching the target (32%).</p>
 <span>  use_nurse_effect <span class="op">=</span> <span class="va">config</span><span class="op">$</span><span class="va">simulation</span><span class="op">$</span><span class="va">use_nurse_effect</span>,</span>
 <span>  mortality_prop <span class="op">=</span> <span class="va">config</span><span class="op">$</span><span class="va">simulation</span><span class="op">$</span><span class="va">mortality_prop</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>The simulation uses <strong>simulated annealing</strong> to optimize
-stand structure:</p>
+<p>The simulation uses <strong>simulated annealing</strong> to optimize stand structure:</p>
 <ol style="list-style-type: decimal">
 <li>Start with random trees</li>
 <li>Iteratively add, remove, move, or modify trees</li>
@@ -206,8 +186,7 @@ stand structure:</p>
 <div class="section level2">
 <h2 id="step-4-analyze-results">Step 4: Analyze Results<a class="anchor" aria-label="anchor" href="#step-4-analyze-results"></a>
 </h2>
-<p>The <code><a href="../reference/analyze_simulation_results.html">analyze_simulation_results()</a></code> function provides
-comprehensive analysis:</p>
+<p>The <code><a href="../reference/analyze_simulation_results.html">analyze_simulation_results()</a></code> function provides comprehensive analysis:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/analyze_simulation_results.html">analyze_simulation_results</a></span><span class="op">(</span></span>
 <span>  result <span class="op">=</span> <span class="va">result</span>,</span>
@@ -256,27 +235,23 @@ MORTALITY SIMULATION:
 <p>Four CSV files are saved:</p>
 <ol style="list-style-type: decimal">
 <li>
-<p><strong><code>pj_woodland_all_trees.csv</code></strong>: All
-trees (live + dead)</p>
+<strong><code>pj_woodland_all_trees.csv</code></strong>: All trees (live + dead)
 <ul>
 <li>Tree ID, species, DBH, height, x/y coordinates</li>
 <li>Crown radius, CBH, foliage mass, CFL</li>
 <li>Status (alive/dead), distance to nearest nurse</li>
 </ul>
 </li>
-<li><p><strong><code>pj_woodland_live_trees.csv</code></strong>: Live
-trees only</p></li>
+<li><p><strong><code>pj_woodland_live_trees.csv</code></strong>: Live trees only</p></li>
 <li>
-<p><strong><code>pj_woodland_history.csv</code></strong>:
-Optimization convergence</p>
+<strong><code>pj_woodland_history.csv</code></strong>: Optimization convergence
 <ul>
 <li>Iteration, energy value, temperature</li>
 <li>Track improvement over time</li>
 </ul>
 </li>
 <li>
-<p><strong><code>pj_woodland_summary.csv</code></strong>: Summary
-statistics</p>
+<strong><code>pj_woodland_summary.csv</code></strong>: Summary statistics
 <ul>
 <li>All achieved vs. target metrics</li>
 <li>Species composition</li>
@@ -288,26 +263,22 @@ statistics</p>
 <div class="section level3">
 <h3 id="pdf-plots">PDF Plots<a class="anchor" aria-label="anchor" href="#pdf-plots"></a>
 </h3>
-<p><strong><code>pj_woodland_plots.pdf</code></strong> contains 4
-pages:</p>
+<p><strong><code>pj_woodland_plots.pdf</code></strong> contains 4 pages:</p>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Spatial Distribution</strong>: Tree locations colored by
-species
+<strong>Spatial Distribution</strong>: Tree locations colored by species
 <ul>
 <li>Shows spatial patterns and spacing</li>
 </ul>
 </li>
 <li>
-<strong>DBH Distribution</strong>: Histogram comparing achieved
-vs. target
+<strong>DBH Distribution</strong>: Histogram comparing achieved vs. target
 <ul>
 <li>Demonstrates size structure match</li>
 </ul>
 </li>
 <li>
-<strong>Height Distribution</strong>: Histogram comparing achieved
-vs. target
+<strong>Height Distribution</strong>: Histogram comparing achieved vs. target
 <ul>
 <li>Shows vertical structure</li>
 </ul>
@@ -395,14 +366,10 @@ vs. target
 <div class="section level3">
 <h3 id="common-issues">Common Issues<a class="anchor" aria-label="anchor" href="#common-issues"></a>
 </h3>
-<p><strong>High Final Energy (&gt;5000)</strong> - Solution: Increase
-max_iterations or adjust conflicting targets</p>
-<p><strong>Species Proportions Off</strong> - Solution: Increase
-weight_species in configuration</p>
-<p><strong>Canopy Cover Mismatch</strong> - Solution: Adjust both
-canopy_cover target and weight_canopy_cover</p>
-<p><strong>Nurse Effect Not Matching</strong> - Solution: Check
-nurse_distance setting and weight_nurse</p>
+<p><strong>High Final Energy (&gt;5000)</strong> - Solution: Increase max_iterations or adjust conflicting targets</p>
+<p><strong>Species Proportions Off</strong> - Solution: Increase weight_species in configuration</p>
+<p><strong>Canopy Cover Mismatch</strong> - Solution: Adjust both canopy_cover target and weight_canopy_cover</p>
+<p><strong>Nurse Effect Not Matching</strong> - Solution: Check nurse_distance setting and weight_nurse</p>
 </div>
 </div>
 <div class="section level2">
@@ -410,27 +377,19 @@ nurse_distance setting and weight_nurse</p>
 </h2>
 <ul>
 <li>
-<strong>Custom Configurations</strong>: See
-<code><a href="../articles/getting-started.html">vignette("getting-started")</a></code> for creating custom
-configs</li>
+<strong>Custom Configurations</strong>: See <code><a href="../articles/getting-started.html">vignette("getting-started")</a></code> for creating custom configs</li>
 <li>
-<strong>Ponderosa Pine</strong>: See
-<code><a href="../articles/ponderosa-pine.html">vignette("ponderosa-pine")</a></code> for different forest types</li>
+<strong>Ponderosa Pine</strong>: See <code><a href="../articles/ponderosa-pine.html">vignette("ponderosa-pine")</a></code> for different forest types</li>
 <li>
-<strong>Advanced Analysis</strong>: Write custom R scripts to
-analyze output CSVs</li>
+<strong>Advanced Analysis</strong>: Write custom R scripts to analyze output CSVs</li>
 <li>
-<strong>Publication</strong>: Use results for fire behavior
-modeling, restoration planning, etc.</li>
+<strong>Publication</strong>: Use results for fire behavior modeling, restoration planning, etc.</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<p>Huffman, D.W., Stoddard, M.T., Springer, J.D., Crouse, J.E.,
-Chancellor, W.W., 2013. Stand dynamics and fuel loadings in an
-old-growth piñon-juniper woodland in northern Arizona. Canadian Journal
-of Forest Research 43, 605-619.</p>
+<p>Huffman, D.W., Stoddard, M.T., Springer, J.D., Crouse, J.E., Chancellor, W.W., 2013. Stand dynamics and fuel loadings in an old-growth piñon-juniper woodland in northern Arizona. Canadian Journal of Forest Research 43, 605-619.</p>
 </div>
 <div class="section level2">
 <h2 id="see-also">See Also<a class="anchor" aria-label="anchor" href="#see-also"></a>
@@ -443,8 +402,7 @@ of Forest Research 43, 605-619.</p>
 <li>
 <code><a href="../reference/analyze_simulation_results.html">?analyze_simulation_results</a></code> - Analysis options</li>
 <li>
-<code><a href="../reference/get_default_allometric_params.html">?get_default_allometric_params</a></code> - Allometric
-equations</li>
+<code><a href="../reference/get_default_allometric_params.html">?get_default_allometric_params</a></code> - Allometric equations</li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

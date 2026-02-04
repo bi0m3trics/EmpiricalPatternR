@@ -1,7 +1,8 @@
 # Calculate tree height from DBH using allometric equations
 
 Calculates tree height using asymptotic exponential growth curves:
-height (m) = 1.3 + a \* (1 - exp(-b \* DBH))
+height (m) = 1.3 + a \* (1 - exp(-b \*
+DBH))
 
 ## Usage
 
@@ -11,17 +12,17 @@ calc_height(dbh, species, allometric_params = get_default_allometric_params())
 
 ## Arguments
 
-- dbh:
+  - dbh:
+    
+    Numeric vector. Tree diameter at breast height (cm)
 
-  Numeric vector. Tree diameter at breast height (cm)
+  - species:
+    
+    Character vector. Species codes
 
-- species:
-
-  Character vector. Species codes
-
-- allometric_params:
-
-  List. Allometric parameters
+  - allometric\_params:
+    
+    List. Allometric parameters
 
 ## Value
 

@@ -10,13 +10,13 @@ calc_stand_metrics(trees, plot_size = 100)
 
 ## Arguments
 
-- trees:
+  - trees:
+    
+    Data table with all tree attributes
 
-  Data table with all tree attributes
-
-- plot_size:
-
-  Plot size (m)
+  - plot\_size:
+    
+    Plot size (m)
 
 ## Value
 

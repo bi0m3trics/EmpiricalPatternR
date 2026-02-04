@@ -14,14 +14,14 @@ calc_nurse_tree_energy(trees, nurse_distance = 3)
 
 ## Arguments
 
-- trees:
+  - trees:
+    
+    Data.table with columns: x, y, Species
 
-  Data.table with columns: x, y, Species
-
-- nurse_distance:
-
-  Numeric. Target mean distance from PIED to nearest juniper (m).
-  Default 3.0m based on field observations.
+  - nurse\_distance:
+    
+    Numeric. Target mean distance from PIED to nearest juniper (m).
+    Default 3.0m based on field observations.
 
 ## Value
 

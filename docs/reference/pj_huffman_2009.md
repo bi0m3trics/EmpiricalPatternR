@@ -20,53 +20,53 @@ pj_huffman_2009(
 
 ## Arguments
 
-- density_ha:
+  - density\_ha:
+    
+    Total tree density (trees/ha). Default: 927
 
-  Total tree density (trees/ha). Default: 927
+  - canopy\_cover:
+    
+    Target canopy cover proportion (0-1). Default: 0.40
 
-- canopy_cover:
+  - cfl:
+    
+    Target canopy fuel load (kg/m^2). Default: 1.10
 
-  Target canopy cover proportion (0-1). Default: 0.40
+  - mean\_dbh:
+    
+    Target mean DBH (cm). Default: 20.5
 
-- cfl:
+  - max\_iterations:
+    
+    Maximum optimization iterations. Default: 10000
 
-  Target canopy fuel load (kg/m^2). Default: 1.10
+  - plot\_interval:
+    
+    Status update interval. Default: 1000
 
-- mean_dbh:
-
-  Target mean DBH (cm). Default: 20.5
-
-- max_iterations:
-
-  Maximum optimization iterations. Default: 10000
-
-- plot_interval:
-
-  Status update interval. Default: 1000
-
-- enable_plotting:
-
-  Show progress plots. Default: TRUE
+  - enable\_plotting:
+    
+    Show progress plots. Default: TRUE
 
 ## Value
 
 List with components:
 
-- targets:
+  - targets:
+    
+    Stand structure targets
 
-  Stand structure targets
+  - weights:
+    
+    Optimization weights
 
-- weights:
+  - simulation:
+    
+    Simulation control parameters
 
-  Optimization weights
-
-- simulation:
-
-  Simulation control parameters
-
-- allometric_params:
-
-  Allometric equation parameters
+  - allometric\_params:
+    
+    Allometric equation parameters
 
 ## References
 

@@ -1,7 +1,8 @@
 # Fast Canopy Cover Calculation (Vectorized)
 
 Optimized canopy cover calculation using matrix operations instead of
-loops. Approximately 2-3x faster than original implementation.
+loops. Approximately 2-3x faster than original
+implementation.
 
 ## Usage
 
@@ -11,25 +12,25 @@ calc_canopy_cover_fast(x, y, crown_radius, plot_size = 100, grid_res = 0.5)
 
 ## Arguments
 
-- x:
+  - x:
+    
+    Vector of x coordinates (m)
 
-  Vector of x coordinates (m)
+  - y:
+    
+    Vector of y coordinates (m)
 
-- y:
+  - crown\_radius:
+    
+    Vector of crown radii (m)
 
-  Vector of y coordinates (m)
+  - plot\_size:
+    
+    Size of plot (m)
 
-- crown_radius:
-
-  Vector of crown radii (m)
-
-- plot_size:
-
-  Size of plot (m)
-
-- grid_res:
-
-  Grid resolution (m). Default 0.5m.
+  - grid\_res:
+    
+    Grid resolution (m). Default 0.5m.
 
 ## Value
 

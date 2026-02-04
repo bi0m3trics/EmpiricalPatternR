@@ -16,21 +16,21 @@ calc_crown_base_height(
 
 ## Arguments
 
-- dbh:
+  - dbh:
+    
+    Numeric vector. Tree diameter at breast height (cm)
 
-  Numeric vector. Tree diameter at breast height (cm)
+  - height:
+    
+    Numeric vector. Total tree height (m)
 
-- height:
+  - species:
+    
+    Character vector. Species codes
 
-  Numeric vector. Total tree height (m)
-
-- species:
-
-  Character vector. Species codes
-
-- allometric_params:
-
-  List. Allometric parameters (from get_default_allometric_params)
+  - allometric\_params:
+    
+    List. Allometric parameters (from get\_default\_allometric\_params)
 
 ## Value
 
@@ -41,10 +41,10 @@ Numeric vector. Crown base height (m)
 \*\*Reese quadratic method\*\* (default, more realistic): CBH = b0 +
 b1\*H + b2\*D + b3\*H^2 + b4\*D^2 + b5\*(H\*D)
 
-\*\*Simple ratio method\*\*: crown_ratio = a - b \* log(DBH)
-crown_base_height = height \* (1 - crown_ratio)
+\*\*Simple ratio method\*\*: crown\_ratio = a - b \* log(DBH)
+crown\_base\_height = height \* (1 - crown\_ratio)
 
-Method is determined by allometric_params\$cbh_method.
+Method is determined by allometric\_params$cbh\_method.
 
 ## References
 

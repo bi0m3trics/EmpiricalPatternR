@@ -15,7 +15,7 @@
 10. [Validation & Results](#validation--results)
 11. [References](#references)
 
-------------------------------------------------------------------------
+-----
 
 ## Introduction
 
@@ -32,9 +32,9 @@ control plots in northern Arizona.
 Unlike traditional forest simulators that grow stands forward in time,
 EmpericalPatternR uses **inverse optimization** to find spatial
 configurations that match observed patterns. This approach: - Ensures
-compatibility with empirical data - Allows testing of target
-feasibility - Provides explicit control over multiple objectives -
-Generates stands for immediate use in fire models
+compatibility with empirical data - Allows testing of target feasibility
+- Provides explicit control over multiple objectives - Generates stands
+for immediate use in fire models
 
 ### Package Structure
 
@@ -54,7 +54,7 @@ Generates stands for immediate use in fire models
     └── vignettes/
         └── getting-started.Rmd
 
-------------------------------------------------------------------------
+-----
 
 ## Conceptual Framework
 
@@ -98,7 +98,7 @@ competition
 
 **Empirical Grounding**: All metrics directly measurable in field plots
 
-------------------------------------------------------------------------
+-----
 
 ## Allometric Equations & Calibration
 
@@ -106,47 +106,47 @@ competition
 
 The package uses species-specific allometric relationships:
 
-#### 1. Crown Radius (m)
+#### 1\. Crown Radius (m)
 
 ``` r
 radius = a + b × DBH
 ```
 
 | Species | a   | b     | Source        |
-|---------|-----|-------|---------------|
+| ------- | --- | ----- | ------------- |
 | PIED    | 0.4 | 0.09  | Regional data |
 | JUSO    | 0.5 | 0.085 | Regional data |
 | JUMO    | 0.5 | 0.08  | Regional data |
 
 Minimum radius: 0.3 m
 
-#### 2. Height (m)
+#### 2\. Height (m)
 
 ``` r
 height = 1.3 + a × (1 - exp(-b × DBH))
 ```
 
-| Species | a   | b     | Max Height |
-|---------|-----|-------|------------|
-| PIED    | 12  | 0.045 | ~13 m      |
-| JUSO    | 10  | 0.05  | ~11 m      |
-| JUMO    | 14  | 0.04  | ~15 m      |
+| Species | a  | b     | Max Height |
+| ------- | -- | ----- | ---------- |
+| PIED    | 12 | 0.045 | ~13 m      |
+| JUSO    | 10 | 0.05  | ~11 m      |
+| JUMO    | 14 | 0.04  | ~15 m      |
 
-#### 3. Crown Base Height (m)
+#### 3\. Crown Base Height (m)
 
 ``` r
 CBH = height × ratio
 ```
 
 | Species | Ratio | Source             |
-|---------|-------|--------------------|
+| ------- | ----- | ------------------ |
 | PIED    | 0.15  | Field observations |
 | JUSO    | 0.20  | Field observations |
 | JUMO    | 0.18  | Field observations |
 
 Minimum CBH: 0.5 m
 
-#### 4. Canopy Fuel Mass (kg)
+#### 4\. Canopy Fuel Mass (kg)
 
 **PIED** (Grier et al. 1992):
 
@@ -181,7 +181,7 @@ fuel_mass <- base_equation × CALIBRATION_FACTOR
 kg/m² (0.09% error), with 72% falling within the empirical range
 (1.044-1.292 kg/m²).
 
-------------------------------------------------------------------------
+-----
 
 ## Simulated Annealing Algorithm
 
@@ -239,7 +239,7 @@ if (weights$density > 0 && |density_error| > 5%) {
 This ensures the algorithm actively corrects density deviations when
 density is weighted.
 
-------------------------------------------------------------------------
+-----
 
 ## Energy Function & Optimization
 
@@ -254,13 +254,13 @@ E_total = Σ weight_i × [(metric_i - target_i) / target_i]²
 
 ### Component Energies
 
-#### 1. Clark-Evans R
+#### 1\. Clark-Evans R
 
 ``` r
 E_ce = w_ce × [(CE_obs - CE_target) / CE_target]²
 ```
 
-#### 2. Species Composition
+#### 2\. Species Composition
 
 ``` r
 E_species = w_species × Σ[(prop_i - target_i)²]
@@ -268,14 +268,14 @@ E_species = w_species × Σ[(prop_i - target_i)²]
 
 Note: Already 0-1 scale, no normalization needed
 
-#### 3. Size Structure
+#### 3\. Size Structure
 
 ``` r
 E_dbh_mean = w_dbh_mean × [(mean_DBH - target) / target]²
 E_dbh_sd = w_dbh_sd × [(SD_DBH - target) / mean_DBH]²  # Normalize by mean
 ```
 
-#### 4. Canopy Cover
+#### 4\. Canopy Cover
 
 ``` r
 E_cover = w_cover × [(cover - target) / max(target, 0.1)]²
@@ -283,19 +283,19 @@ E_cover = w_cover × [(cover - target) / max(target, 0.1)]²
 
 Floor at 0.1 prevents division by zero
 
-#### 5. Canopy Fuel Load
+#### 5\. Canopy Fuel Load
 
 ``` r
 E_cfl = w_cfl × [(CFL - target) / target]²
 ```
 
-#### 6. Stand Density
+#### 6\. Stand Density
 
 ``` r
 E_density = w_density × [(density - target) / target]²
 ```
 
-#### 7. Nurse Tree Effect
+#### 7\. Nurse Tree Effect
 
 ``` r
 E_nurse = w_nurse × (1 - proportion_PIED_near_juniper)
@@ -306,7 +306,7 @@ Already normalized 0-1
 ### Weight Guidelines
 
 | Weight | Priority | Typical Use                       |
-|--------|----------|-----------------------------------|
+| ------ | -------- | --------------------------------- |
 | 0      | Ignore   | Unconstrained metric              |
 | 1-20   | Low      | Let emerge from other constraints |
 | 20-50  | Moderate | Secondary objectives              |
@@ -352,11 +352,11 @@ P(accept) = exp(-100) ≈ 0 (almost never accept large increases)
 At T = 0.01, ΔE = 0.01:  
 P(accept) = exp(-1) ≈ 0.37 (sometimes accept small increases)
 
-------------------------------------------------------------------------
+-----
 
 ## Perturbation Operations
 
-### 1. Move Tree
+### 1\. Move Tree
 
 **Operation**: Relocate a random tree to new (x, y) coordinates
 
@@ -369,12 +369,12 @@ perturb_move <- function(trees, plot_size) {
 }
 ```
 
-**Effect**: Changes spatial pattern (CE_R), canopy cover spatial
+**Effect**: Changes spatial pattern (CE\_R), canopy cover spatial
 distribution
 
 **Probability**: 30-40%
 
-### 2. Change Species
+### 2\. Change Species
 
 **Operation**: Change species of a random tree according to target
 proportions
@@ -392,7 +392,7 @@ perturb_species <- function(trees, species_names, species_probs) {
 
 **Probability**: 10-15%
 
-### 3. Adjust DBH
+### 3\. Adjust DBH
 
 **Operation**: Add random normal perturbation to tree DBH
 
@@ -410,7 +410,7 @@ allometry
 
 **Probability**: 15-25%
 
-### 4. Add Tree
+### 4\. Add Tree
 
 **Operation**: Insert new tree with random location, species, and DBH
 
@@ -431,7 +431,7 @@ perturb_add <- function(trees, plot_size, species_names,
 
 **Probability**: 5-25% (adaptive based on density error)
 
-### 5. Remove Tree
+### 5\. Remove Tree
 
 **Operation**: Delete random tree (respecting minimum)
 
@@ -447,7 +447,7 @@ perturb_remove <- function(trees, min_trees = 10) {
 
 **Probability**: 5-25% (adaptive based on density error)
 
-### 6. Add with Nurse Effect (Optional)
+### 6\. Add with Nurse Effect (Optional)
 
 **Operation**: Add PIED preferentially near existing JUSO/JUMO
 
@@ -468,7 +468,7 @@ perturb_add_with_nurse <- function(trees, ..., nurse_distance) {
 
 **Effect**: Improves nurse tree energy, creates clustered patterns
 
-------------------------------------------------------------------------
+-----
 
 ## Fire Behavior Metrics
 
@@ -542,7 +542,7 @@ CBH = height × species_ratio
 CBH = max(CBH, 0.5)  # Minimum 0.5m
 ```
 
-------------------------------------------------------------------------
+-----
 
 ## Computational Performance
 
@@ -553,7 +553,7 @@ crown overlap checks 2. **Clark-Evans R**: ~900 nearest-neighbor
 searches 3. **Nurse tree energy**: ~180 PIED × ~220 JUSO distance
 calculations 4. **Tree attributes**: ~900 allometric calculations
 
-At 50,000 iterations: **45 million** crown overlap checks!
+At 50,000 iterations: **45 million** crown overlap checks\!
 
 ### Optimization Strategy
 
@@ -591,14 +591,15 @@ double calcCanopyCoverParallel(NumericVector x, NumericVector y,
 }
 ```
 
-**Speedup factors** (measured on 16-core system):
+**Speedup factors** (measured on 16-core
+system):
 
-| Function                 | R   | C++ Serial | C++ Parallel | Speedup  |
-|--------------------------|-----|------------|--------------|----------|
-| calc_canopy_cover()      | 1×  | 12×        | 45×          | 45×      |
-| calc_nurse_tree_energy() | 1×  | 15×        | 68×          | 68×      |
-| calc_tree_attributes()   | 1×  | 8×         | 24×          | 24×      |
-| **Overall simulation**   | 1×  | 25×        | 120×         | **120×** |
+| Function                    | R  | C++ Serial | C++ Parallel | Speedup  |
+| --------------------------- | -- | ---------- | ------------ | -------- |
+| calc\_canopy\_cover()       | 1× | 12×        | 45×          | 45×      |
+| calc\_nurse\_tree\_energy() | 1× | 15×        | 68×          | 68×      |
+| calc\_tree\_attributes()    | 1× | 8×         | 24×          | 24×      |
+| **Overall simulation**      | 1× | 25×        | 120×         | **120×** |
 
 ### Thread Scaling
 
@@ -607,7 +608,7 @@ overhead)
 
 For 16-core system: `n_threads = 8-12`
 
-------------------------------------------------------------------------
+-----
 
 ## Usage Guide
 
@@ -665,7 +666,7 @@ history <- result$history
 
 **Convergence**: Check history plot for energy decline
 
-**Match quality**: Compare final_metrics to targets
+**Match quality**: Compare final\_metrics to targets
 
 ``` r
 cat(sprintf("Density: %.0f (target: %.0f)\n", 
@@ -713,7 +714,7 @@ if (all(c(density_error, cfl_error, cover_error) < 0.1)) {
 }
 ```
 
-------------------------------------------------------------------------
+-----
 
 ## Validation & Results
 
@@ -721,8 +722,8 @@ if (all(c(density_error, cfl_error, cover_error) < 0.1)) {
 
 **Test**: 50 independent simulations with Huffman et al. (2019) targets
 
-**Results**: - Mean CFL: 1.159 kg/m² (target: 1.16 kg/m²) - Error:
-0.09% - Within empirical range (1.044-1.292 kg/m²): 72%
+**Results**: - Mean CFL: 1.159 kg/m² (target: 1.16 kg/m²) - Error: 0.09%
+- Within empirical range (1.044-1.292 kg/m²): 72%
 
 **Conclusion**: 6.2× calibration factor is robust
 
@@ -750,12 +751,11 @@ allometry - QMD targets optional but recommended
 **Clark-Evans R**: - Target: 1.0 (random) - Achieved: 0.98-1.02 (with
 weight = 10)
 
-**Nurse tree effect**: - With
-`use_nurse_effect = TRUE, nurse_distance = 2.5`: - 65-75% of PIED within
-2.5m of nearest JUSO - Matches field observations of establishment
-patterns
+**Nurse tree effect**: - With `use_nurse_effect = TRUE, nurse_distance
+= 2.5`: - 65-75% of PIED within 2.5m of nearest JUSO - Matches field
+observations of establishment patterns
 
-------------------------------------------------------------------------
+-----
 
 ## References
 
@@ -810,21 +810,20 @@ Metropolis, N., Rosenbluth, A.W., Rosenbluth, M.N., Teller, A.H.,
 Teller, E. (1953). Equation of state calculations by fast computing
 machines. *Journal of Chemical Physics* 21:1087-1092.
 
-------------------------------------------------------------------------
+-----
 
 ## Appendix A: Complete Function Reference
 
 ### Main Simulation Function
 
-**[`simulate_stand()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/simulate_stand.md)** -
-**Purpose**: Run complete simulated annealing optimization - **Key
-parameters**: targets, weights, max_iterations, plot_interval -
-**Returns**: List with trees, metrics, history, energy
+**`simulate_stand()`** - **Purpose**: Run complete simulated annealing
+optimization - **Key parameters**: targets, weights, max\_iterations,
+plot\_interval - **Returns**: List with trees, metrics, history, energy
 
 ### Allometric Functions
 
-**`calc_crown_radius(dbh, species)`** - Linear relationship: radius =
-a + b × DBH - Species-specific parameters
+**`calc_crown_radius(dbh, species)`** - Linear relationship: radius = a
++ b × DBH - Species-specific parameters
 
 **`calc_height(dbh, species)`** - Asymptotic exponential: height = 1.3 +
 a × (1 - exp(-b × DBH)) - Maximum height varies by species
@@ -839,7 +838,7 @@ calibration factor
 from DBH and Species - Vectorized for efficiency
 
 **`calc_stand_metrics(trees, plot_size)`** - Aggregates tree-level to
-stand-level metrics - Calculates CE_R, cover, CFL, density, species
+stand-level metrics - Calculates CE\_R, cover, CFL, density, species
 props
 
 **`calc_canopy_cover(x, y, crown_radius, plot_size)`** - Raster-based
@@ -847,10 +846,9 @@ cover calculation - OpenMP-parallelized version available
 
 ### Perturbation Functions
 
-**`perturb_move(trees, plot_size)`**
-**`perturb_species(trees, species_names, species_probs)`**
-**`perturb_dbh(trees, dbh_sd)`** **`perturb_add(trees, ...)`**
-**`perturb_remove(trees, min_trees)`**
+**`perturb_move(trees, plot_size)`** **`perturb_species(trees,
+species_names, species_probs)`** **`perturb_dbh(trees, dbh_sd)`**
+**`perturb_add(trees, ...)`** **`perturb_remove(trees, min_trees)`**
 **`perturb_add_with_nurse(trees, ..., nurse_distance)`**
 
 ### Energy Functions
@@ -862,14 +860,14 @@ error formulation - Returns total energy for acceptance decision
 within distance of nearest JUSO/JUMO - Returns 1 - proportion (0 =
 perfect association)
 
-------------------------------------------------------------------------
+-----
 
 ## Appendix B: Troubleshooting
 
 ### Common Issues
 
-**1. Simulation not converging** - Increase max_iterations (try
-100,000) - Lower cooling_rate slightly (try 0.9998) - Reduce weight
+**1. Simulation not converging** - Increase max\_iterations (try
+100,000) - Lower cooling\_rate slightly (try 0.9998) - Reduce weight
 conflicts (check if targets are feasible)
 
 **2. Density staying fixed** - Increase density weight (try 70-80) -
@@ -879,8 +877,8 @@ Check adaptive perturbation logic - Verify targets are reasonable
 Verify allometric equations - May indicate infeasible target combination
 
 **4. Species proportions not matching** - Increase species weight (try
-70-80) - Ensure species_names matches species_props length - Check that
-perturbations use correct probabilities
+70-80) - Ensure species\_names matches species\_props length - Check
+that perturbations use correct probabilities
 
 **5. Installation errors** - Ensure Rtools installed (Windows) - Check
 C++ compiler available - Install dependencies: Rcpp, data.table,
@@ -900,7 +898,7 @@ source("use_optimized_functions_parallel.R")
 DEFAULT_THREADS <- 8  # 50-75% of cores
 ```
 
-**3. Reduce plot_interval for faster runs**
+**3. Reduce plot\_interval for faster runs**
 
 ``` r
 plot_interval = NULL  # Disable plotting
@@ -915,7 +913,7 @@ Rprof(NULL)
 summaryRprof("profile.out")
 ```
 
-------------------------------------------------------------------------
+-----
 
 *This documentation was last updated: January 2026*
 

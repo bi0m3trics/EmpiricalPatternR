@@ -10,6 +10,6 @@ plot_simulation_results(result)
 
 ## Arguments
 
-- result:
-
-  Result object from simulate_stand()
+  - result:
+    
+    Result object from simulate\_stand()

@@ -10,9 +10,9 @@ print_config(config)
 
 ## Arguments
 
-- config:
-
-  Configuration list from pj_huffman_2009() or create_config()
+  - config:
+    
+    Configuration list from pj\_huffman\_2009() or create\_config()
 
 ## Examples
 

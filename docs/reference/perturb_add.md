@@ -1,6 +1,7 @@
 # Add a new tree
 
-Add a new tree
+Add a new
+tree
 
 ## Usage
 
@@ -10,29 +11,29 @@ perturb_add(trees, plot_size, species_names, species_probs, dbh_mean, dbh_sd)
 
 ## Arguments
 
-- trees:
+  - trees:
+    
+    data.table. Tree data
 
-  data.table. Tree data
+  - plot\_size:
+    
+    Numeric. Plot dimension (m)
 
-- plot_size:
+  - species\_names:
+    
+    Character vector. Available species
 
-  Numeric. Plot dimension (m)
+  - species\_probs:
+    
+    Numeric vector. Species proportions
 
-- species_names:
+  - dbh\_mean:
+    
+    Numeric. Mean DBH (cm)
 
-  Character vector. Available species
-
-- species_probs:
-
-  Numeric vector. Species proportions
-
-- dbh_mean:
-
-  Numeric. Mean DBH (cm)
-
-- dbh_sd:
-
-  Numeric. SD of DBH (cm)
+  - dbh\_sd:
+    
+    Numeric. SD of DBH (cm)
 
 ## Value
 

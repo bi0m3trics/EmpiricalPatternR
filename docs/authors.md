@@ -2,8 +2,8 @@
 
 ## Authors
 
-- **[Andrew Sánchez Meador](https://github.com/bi0m3trics)**. Author,
-  maintainer.
+  - **[Andrew Sánchez Meador](https://github.com/bi0m3trics)**. Author,
+    maintainer.
 
 ## Citation
 

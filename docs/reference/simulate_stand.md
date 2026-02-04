@@ -27,61 +27,61 @@ simulate_stand(
 
 ## Arguments
 
-- targets:
+  - targets:
+    
+    List of target values (density\_ha, species\_props, mean\_dbh, etc.)
 
-  List of target values (density_ha, species_props, mean_dbh, etc.)
+  - weights:
+    
+    List of optimization weights (0-100 scale)
 
-- weights:
+  - plot\_size:
+    
+    Plot dimension (m), creates plot\_size x plot\_size area
 
-  List of optimization weights (0-100 scale)
+  - max\_iterations:
+    
+    Maximum annealing iterations
 
-- plot_size:
+  - initial\_temp:
+    
+    Initial temperature for annealing
 
-  Plot dimension (m), creates plot_size x plot_size area
+  - cooling\_rate:
+    
+    Temperature cooling rate per iteration
 
-- max_iterations:
+  - energy\_threshold:
+    
+    Stop if energy below this threshold
 
-  Maximum annealing iterations
+  - verbose:
+    
+    Print progress messages
 
-- initial_temp:
+  - print\_every:
+    
+    Print status every N iterations
 
-  Initial temperature for annealing
+  - plot\_interval:
+    
+    Update plots every N iterations (NULL = no plotting)
 
-- cooling_rate:
+  - save\_plots:
+    
+    Save intermediate plot images to files
 
-  Temperature cooling rate per iteration
+  - nurse\_distance:
+    
+    Target distance for PIED trees to nearest juniper (m)
 
-- energy_threshold:
+  - use\_nurse\_effect:
+    
+    Include nurse tree effect in optimization
 
-  Stop if energy below this threshold
-
-- verbose:
-
-  Print progress messages
-
-- print_every:
-
-  Print status every N iterations
-
-- plot_interval:
-
-  Update plots every N iterations (NULL = no plotting)
-
-- save_plots:
-
-  Save intermediate plot images to files
-
-- nurse_distance:
-
-  Target distance for PIED trees to nearest juniper (m)
-
-- use_nurse_effect:
-
-  Include nurse tree effect in optimization
-
-- mortality_prop:
-
-  Simulate this proportion of dead trees after optimization (0-1)
+  - mortality\_prop:
+    
+    Simulate this proportion of dead trees after optimization (0-1)
 
 ## Value
 
