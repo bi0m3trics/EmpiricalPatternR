@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(EmpericalPatternR)
+library(EmpiricalPatternR)
 
-test_check("EmpericalPatternR")
+test_check("EmpiricalPatternR")

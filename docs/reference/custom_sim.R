@@ -1,7 +1,7 @@
 # Custom Simulation: custom_simulation
 # Generated: %Y-%m-%d %H:%M:%S
 
-library(EmpericalPatternR)
+library(EmpiricalPatternR)
 
 custom_simulation <- function() {
   targets <- list(

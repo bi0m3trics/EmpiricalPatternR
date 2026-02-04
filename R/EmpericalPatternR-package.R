@@ -1,4 +1,4 @@
-#' EmpericalPatternR: Forest Stand Pattern Simulation
+#' EmpiricalPatternR: Forest Stand Pattern Simulation
 #'
 #' Simulates realistic forest stand patterns using simulated annealing
 #' optimization to match empirical targets for spatial patterns, canopy
@@ -108,8 +108,8 @@
 #' of surface and crown fire behavior. USDA Forest Service Research Paper RMRS-RP-29.
 #'
 #' @docType package
-#' @name EmpericalPatternR-package
-#' @aliases EmpericalPatternR
+#' @name EmpiricalPatternR-package
+#' @aliases EmpiricalPatternR
 #' @import data.table
 #' @import ggplot2
 #' @import spatstat
@@ -120,7 +120,7 @@
 #' @importFrom utils head tail flush.console
 #' @importFrom grDevices dev.copy dev.cur dev.new dev.off dev.prev dev.set png
 #' @importFrom graphics abline barplot grid layout legend mtext par plot.new points polygon rect text
-#' @useDynLib EmpericalPatternR, .registration = TRUE
+#' @useDynLib EmpiricalPatternR, .registration = TRUE
 "_PACKAGE"
 
 # Suppress R CMD check notes about data.table column names

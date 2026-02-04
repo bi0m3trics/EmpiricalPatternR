@@ -13,8 +13,8 @@
 ^Meta$
 ^\.DS_Store$
 ^.*\.Rproj$
-^EmpericalPatternR\.zip$
-^EmpericalPatternR_optim\.zip$
+^EmpiricalPatternR\.zip$
+^EmpiricalPatternR_optim\.zip$
 ^quick_test\.R$
 ^test_cfl_validation\.R$
 ^Reese's Stuff$

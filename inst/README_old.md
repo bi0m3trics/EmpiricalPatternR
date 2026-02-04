@@ -330,7 +330,7 @@ Mortality is size-selective (smaller trees more likely to die) and applied after
 
 When using this model, please cite:
 - Original empirical data: Huffman et al. (2019)
-- Model framework: EmpericalPatternR package
+- Model framework: EmpiricalPatternR package
 
 ---
 

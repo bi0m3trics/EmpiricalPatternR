@@ -1,4 +1,4 @@
-# EmpericalPatternR 0.1.0
+# EmpiricalPatternR 0.1.0
 
 ## Major Changes
 

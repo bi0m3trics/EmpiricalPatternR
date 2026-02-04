@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>EmpericalPatternR: Pattern-Based Forest Stand Simulation • EmpericalPatternR</title>
+<title>EmpiricalPatternR: Pattern-Based Forest Stand Simulation • EmpiricalPatternR</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -15,12 +15,12 @@
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="EmpericalPatternR: Pattern-Based Forest Stand Simulation">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="EmpiricalPatternR: Pattern-Based Forest Stand Simulation">
 <meta name="description" content="Simulates realistic forest stand patterns using simulated annealing optimization to match empirical targets for spatial patterns, canopy structure, species composition, and fire behavior metrics. Designed for pinyon-juniper woodlands with support for canopy fuel load (CFL) optimization and nurse tree effects. Includes OpenMP-parallelized C++ functions for high-performance computation.
 ">
 <meta property="og:description" content="Simulates realistic forest stand patterns using simulated annealing optimization to match empirical targets for spatial patterns, canopy structure, species composition, and fire behavior metrics. Designed for pinyon-juniper woodlands with support for canopy fuel load (CFL) optimization and nurse tree effects. Includes OpenMP-parallelized C++ functions for high-performance computation.
 ">
-<meta property="og:image" content="https://bi0m3trics.github.io/EmpericalPatternR/logo.png">
+<meta property="og:image" content="https://bi0m3trics.github.io/EmpiricalPatternR/logo.png">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -28,7 +28,7 @@
 
     <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="index.html">EmpericalPatternR</a>
+    <a class="navbar-brand me-2" href="index.html">EmpiricalPatternR</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
@@ -55,7 +55,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/bi0m3trics/EmpericalPatternR/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/bi0m3trics/EmpiricalPatternR/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -65,17 +65,17 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="empericalpatternr-">EmpericalPatternR <a class="anchor" aria-label="anchor" href="#empericalpatternr-"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="Empiricalpatternr-">EmpiricalPatternR <a class="anchor" aria-label="anchor" href="#Empiricalpatternr-"></a>
 </h1>
 </div>
 <!-- badges: start -->
 
 <p>Simulate realistic forest stand patterns using simulated annealing optimization to match empirical targets from field data.</p>
-<p><img src="reference/figures/banner.png" alt="EmpericalPatternR Banner"></p>
+<p><img src="reference/figures/banner.png" alt="EmpiricalPatternR Banner"></p>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><strong>EmpericalPatternR</strong> generates synthetic forest stands that match observed ecological patterns. Using simulated annealing, the package optimizes tree locations, sizes, and species to simultaneously match multiple targets including stand density, species composition, size distributions, canopy cover, fuel loads, and spatial patterns.</p>
+<p><strong>EmpiricalPatternR</strong> generates synthetic forest stands that match observed ecological patterns. Using simulated annealing, the package optimizes tree locations, sizes, and species to simultaneously match multiple targets including stand density, species composition, size distributions, canopy cover, fuel loads, and spatial patterns.</p>
 <p>Perfect for: - <strong>Fire behavior modeling</strong> - Generate stands with realistic fuel structures - <strong>Restoration planning</strong> - Create target stand conditions - <strong>Research</strong> - Explore how stand structure affects ecological processes - <strong>Teaching</strong> - Demonstrate pattern-based ecology</p>
 <div class="section level3">
 <h3 id="key-features">Key Features<a class="anchor" aria-label="anchor" href="#key-features"></a>
@@ -108,15 +108,15 @@
 <code class="sourceCode R"><span><span class="co"># Install devtools if needed</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Install EmpericalPatternR</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"yourusername/EmpericalPatternR"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># Install EmpiricalPatternR</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"yourusername/EmpiricalPatternR"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
 <p>Use a pre-built configuration:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bi0m3trics.github.io/EmpericalPatternR">EmpericalPatternR</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bi0m3trics.github.io/EmpiricalPatternR">EmpiricalPatternR</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get pre-built pinyon-juniper configuration (Huffman et al. 2009)</span></span>
 <span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pj_huffman_2009.html">pj_huffman_2009</a></span><span class="op">(</span></span>
@@ -272,7 +272,7 @@
 <div class="section level2">
 <h2 id="package-structure">Package Structure<a class="anchor" aria-label="anchor" href="#package-structure"></a>
 </h2>
-<pre><code>EmpericalPatternR/
+<pre><code>EmpiricalPatternR/
 ├── R/
 │   ├── allometric_equations.R    # Species-specific equations
 │   ├── config_system.R           # Configuration management
@@ -296,7 +296,7 @@
 </h2>
 <p>If you use this package in your research, please cite:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"EmpericalPatternR"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"EmpiricalPatternR"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="original-idea">Original Idea<a class="anchor" aria-label="anchor" href="#original-idea"></a>
 </h3>
@@ -319,7 +319,7 @@
 <div class="section level2">
 <h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
 </h2>
-<p>For questions or issues: - Open an issue on <a href="https://github.com/bi0m3trics/EmpericalPatternR/issues" class="external-link">GitHub</a> - See <a href="https://bi0m3trics.github.io/EmpericalPatternR/">documentation</a> - Contact the package maintainer</p>
+<p>For questions or issues: - Open an issue on <a href="https://github.com/bi0m3trics/EmpiricalPatternR/issues" class="external-link">GitHub</a> - See <a href="https://bi0m3trics.github.io/EmpiricalPatternR/">documentation</a> - Contact the package maintainer</p>
 <hr>
 <p><strong>Built with:</strong> R, Rcpp, data.table, spatstat, ggplot2</p>
 </div>
@@ -327,8 +327,8 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/bi0m3trics/EmpericalPatternR/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/bi0m3trics/EmpericalPatternR/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/bi0m3trics/EmpiricalPatternR/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/bi0m3trics/EmpiricalPatternR/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -343,7 +343,7 @@
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing EmpericalPatternR</a></li>
+<li><a href="authors.html#citation">Citing EmpiricalPatternR</a></li>
 </ul>
 </div>
 

@@ -1,4 +1,4 @@
-# 🎉 EmpericalPatternR - Complete Documentation Package
+# 🎉 EmpiricalPatternR - Complete Documentation Package
 
 ## ✅ COMPLETED SUCCESSFULLY!
 
@@ -11,15 +11,15 @@ makes it completely accessible to users!
 
 ### 1. Three Comprehensive Vignettes
 
-#### **Getting Started** ([vignettes/getting-started.Rmd](https://bi0m3trics.github.io/EmpericalPatternR/vignettes/getting-started.Rmd))
+#### **Getting Started** ([vignettes/getting-started.Rmd](https://bi0m3trics.github.io/EmpiricalPatternR/vignettes/getting-started.Rmd))
 
 Perfect for new users who want to: - Install the package - Run their
 first simulation with
-[`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/pj_huffman_2009.md) -
+[`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md) -
 Understand what configurations are - Analyze results - Create custom
 configs (2 methods) - Find key functions quickly
 
-#### **Pinyon-Juniper Woodland** ([vignettes/pinyon-juniper.Rmd](https://bi0m3trics.github.io/EmpericalPatternR/vignettes/pinyon-juniper.Rmd))
+#### **Pinyon-Juniper Woodland** ([vignettes/pinyon-juniper.Rmd](https://bi0m3trics.github.io/EmpiricalPatternR/vignettes/pinyon-juniper.Rmd))
 
 Complete workflow demonstrating: - Pre-built configuration usage -
 Understanding nurse tree effects (pinyons establishing near junipers) -
@@ -27,10 +27,10 @@ Running simulations with all parameters - Comprehensive results
 analysis - Customization examples (different densities, mortality
 scenarios) - Troubleshooting guide - Interpretation tips
 
-#### **Ponderosa Pine Forest** ([vignettes/ponderosa-pine.Rmd](https://bi0m3trics.github.io/EmpericalPatternR/vignettes/ponderosa-pine.Rmd))
+#### **Ponderosa Pine Forest** ([vignettes/ponderosa-pine.Rmd](https://bi0m3trics.github.io/EmpiricalPatternR/vignettes/ponderosa-pine.Rmd))
 
 Advanced customization showing: - Creating custom configurations with
-[`create_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/create_config.md) -
+[`create_config()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/create_config.md) -
 Multi-species stands (PIPO, PSME, ABCO) - Custom allometric parameters -
 Comparing different equation sets - Multiple scenarios (young stands,
 old-growth, post-fire) - Troubleshooting custom configs - Saving and
@@ -71,7 +71,7 @@ functionality
 ### 3. Enhanced README
 
 The
-[README.md](https://bi0m3trics.github.io/EmpericalPatternR/README.md)
+[README.md](https://bi0m3trics.github.io/EmpiricalPatternR/README.md)
 now includes: - Package badges (R-CMD-check, License) - Feature
 highlights with emojis - Clear quick start example - Documentation
 roadmap - Workflow diagram - Custom configuration examples - Performance
@@ -93,7 +93,7 @@ benchmarks - Citation information - Contributing guidelines
 
 1.  Navigate to the `docs/` folder:
 
-        d:\OneDrive - Northern Arizona University\GitHubRepos\EmpericalPatternR\docs\
+        d:\OneDrive - Northern Arizona University\GitHubRepos\EmpiricalPatternR\docs\
 
 2.  Open `index.html` in any web browser
 
@@ -106,10 +106,10 @@ benchmarks - Citation information - Contributing guidelines
 ### Deploy to GitHub Pages
 
 **Make your documentation publicly available at:**
-`https://bi0m3trics.github.io/EmpericalPatternR/`
+`https://bi0m3trics.github.io/EmpiricalPatternR/`
 
 **Steps:** 1. Update the GitHub URL in `_pkgdown.yml`:
-`yaml url: https://bi0m3trics.github.io/EmpericalPatternR`
+`yaml url: https://bi0m3trics.github.io/EmpiricalPatternR`
 
 2.  Commit and push everything:
 
@@ -128,7 +128,7 @@ benchmarks - Citation information - Contributing guidelines
     - Click **Save**
 
 4.  Wait 2-3 minutes, then visit:
-    `https://bi0m3trics.github.io/EmpericalPatternR/`
+    `https://bi0m3trics.github.io/EmpiricalPatternR/`
 
 ------------------------------------------------------------------------
 
@@ -138,10 +138,10 @@ benchmarks - Citation information - Contributing guidelines
 
 ``` r
 # Install
-devtools::install_github("bi0m3trics/EmpericalPatternR")
+devtools::install_github("bi0m3trics/EmpiricalPatternR")
 
 # Run pre-built example
-library(EmpericalPatternR)
+library(EmpiricalPatternR)
 config <- pj_huffman_2009()
 result <- simulate_stand(config$targets, config$weights, plot_size = 100)
 analyze_simulation_results(result, config$targets, prefix = "my_stand")
@@ -185,11 +185,11 @@ analyze_simulation_results(result, config$targets, prefix = "my_stand")
 ### Configuration System
 
 - ✅ Pre-built configs
-  ([`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/pj_huffman_2009.md))
+  ([`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md))
 - ✅ Custom configs
-  ([`create_config()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/create_config.md))
+  ([`create_config()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/create_config.md))
 - ✅ Template generation
-  ([`generate_config_template()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/generate_config_template.md))
+  ([`generate_config_template()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/generate_config_template.md))
 - ✅ Validation and saving
 
 ### Simulation Features
@@ -309,15 +309,15 @@ This regenerates the entire `docs/` folder with your changes.
 ### In Package
 
 - Function help:
-  [`?simulate_stand`](https://bi0m3trics.github.io/EmpericalPatternR/reference/simulate_stand.md)
+  [`?simulate_stand`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/simulate_stand.md)
 - Vignettes:
-  [`vignette("getting-started")`](https://bi0m3trics.github.io/EmpericalPatternR/articles/getting-started.md)
+  [`vignette("getting-started")`](https://bi0m3trics.github.io/EmpiricalPatternR/articles/getting-started.md)
 - Examples: `inst/examples/`
 
 ### Online (After Deploying)
 
-- Website: `https://bi0m3trics.github.io/EmpericalPatternR/`
-- Issues: `https://github.com/bi0m3trics/EmpericalPatternR/issues`
+- Website: `https://bi0m3trics.github.io/EmpiricalPatternR/`
+- Issues: `https://github.com/bi0m3trics/EmpiricalPatternR/issues`
 
 ### Published Data Sources
 
@@ -359,5 +359,5 @@ issues 5. Cite it properly 6. Contribute back
 
 ------------------------------------------------------------------------
 
-**Congratulations! 🎊 EmpericalPatternR is now fully documented and
+**Congratulations! 🎊 EmpiricalPatternR is now fully documented and
 ready for the world!**

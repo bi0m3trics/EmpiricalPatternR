@@ -1,8 +1,8 @@
 ---
-title: "Getting Started with EmpericalPatternR"
+title: "Getting Started with EmpiricalPatternR"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Getting Started with EmpericalPatternR}
+  %\VignetteIndexEntry{Getting Started with EmpiricalPatternR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-**EmpericalPatternR** simulates realistic forest stand patterns using simulated annealing optimization to match empirical targets for:
+**EmpiricalPatternR** simulates realistic forest stand patterns using simulated annealing optimization to match empirical targets for:
 
 - Spatial patterns (Clark-Evans R)
 - Species composition
@@ -34,12 +34,12 @@ This vignette shows you how to run your first simulation in just a few lines of 
 
 ```{r eval=FALSE}
 # Install from GitHub (if not already installed)
-# devtools::install_github("bi0m3trics/EmpericalPatternR")
-library(EmpericalPatternR)
+# devtools::install_github("bi0m3trics/EmpiricalPatternR")
+library(EmpiricalPatternR)
 ```
 
 ```{r setup}
-library(EmpericalPatternR)
+library(EmpiricalPatternR)
 ```
 
 ### Your First Simulation

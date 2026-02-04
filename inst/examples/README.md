@@ -1,6 +1,6 @@
-# EmpericalPatternR Examples
+# EmpiricalPatternR Examples
 
-This folder contains example scripts demonstrating how to use the EmpericalPatternR package to simulate forest stands matching empirical data.
+This folder contains example scripts demonstrating how to use the EmpiricalPatternR package to simulate forest stands matching empirical data.
 
 ## Available Examples
 
@@ -222,5 +222,5 @@ For detailed function documentation:
 For package overview:
 
 ```r
-?EmpericalPatternR
+?EmpiricalPatternR
 ```
