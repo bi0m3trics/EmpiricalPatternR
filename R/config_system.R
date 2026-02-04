@@ -364,7 +364,7 @@ save_config <- function(config, file = "simulation_config.R") {
   script <- paste0(
     "# Auto-generated simulation configuration\n",
     "# Created: ", Sys.time(), "\n\n",
-    "library(EmpiricalPatternR)\n\n",
+    "library(EmpericalPatternR)\n\n",
     "config <- ", deparse(config, width.cutoff = 70), "\n"
   )
   
@@ -413,7 +413,7 @@ generate_config_template <- function(file = "my_simulation_config.R",
 # Generated: %s
 # ==============================================================================
 
-library(EmpiricalPatternR)
+library(EmpericalPatternR)
 
 # Custom Simulation Configuration
 # @param density_ha Target tree density (trees per hectare)
@@ -476,7 +476,7 @@ library(EmpiricalPatternR)
     template <- sprintf('# Custom Simulation: %s
 # Generated: %s
 
-library(EmpiricalPatternR)
+library(EmpericalPatternR)
 
 %s <- function() {
   targets <- list(

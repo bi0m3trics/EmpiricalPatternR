@@ -1,5 +1,5 @@
 # ============================================================
-# EmpiricalPatternR Color Palette
+# EmpericalPatternR Color Palette
 # ------------------------------------------------------------
 # Cohesive color system for:
 #  - Forest ecology
@@ -8,12 +8,12 @@
 #  - Dark UI / pkgdown themes
 #
 # Author: Andrew J. Sanchez Meador
-# Package: EmpiricalPatternR
+# Package: EmpericalPatternR
 # ============================================================
 
 # ---- Primary Brand Colors ----------------------------------
 
-Empirical_primary <- c(
+emperical_primary <- c(
   forest_dark   = "#1F6B3A",  # evergreen tree
   forest_mid    = "#3E8F5B",
   forest_light  = "#7BC8A4",
@@ -29,7 +29,7 @@ Empirical_primary <- c(
 
 # ---- Background & Structural Colors ------------------------
 
-Empirical_background <- c(
+emperical_background <- c(
   night_blue     = "#0E2A36",  # outer hex / header border
   deep_teal      = "#143F4F",
   grid_teal      = "#1F5668",
@@ -42,7 +42,7 @@ Empirical_background <- c(
 
 # ---- Data Visualization Colors -----------------------------
 
-Empirical_data <- c(
+emperical_data <- c(
   blue_1  = "#1B3A4B",
   blue_2  = "#2F5D7C",
   blue_3  = "#4F7D99",
@@ -58,7 +58,7 @@ Empirical_data <- c(
 
 # ---- Fire Severity / Disturbance Gradient ------------------
 
-Empirical_fire <- c(
+emperical_fire <- c(
   "#4B1D0F",  # char
   "#7A2E17",
   "#A33A1E",
@@ -70,7 +70,7 @@ Empirical_fire <- c(
 
 # ---- Vegetation / Ecology Gradient -------------------------
 
-Empirical_forest <- c(
+emperical_forest <- c(
   "#0F2F1E",
   "#1F6B3A",
   "#3E8F5B",
@@ -81,7 +81,7 @@ Empirical_forest <- c(
 
 # ---- Tech / Binary Accents ---------------------------------
 
-Empirical_tech <- c(
+emperical_tech <- c(
   binary_light = "#BFE6E2",
   binary_mid   = "#6FB8B3",
   binary_dark  = "#2C7C7A",
@@ -92,7 +92,7 @@ Empirical_tech <- c(
 
 # ---- Text & Annotation Colors ------------------------------
 
-Empirical_text <- c(
+emperical_text <- c(
   text_light  = "#F7F7F7",
   text_dark   = "#1E1E1E",
   text_muted  = "#8FA3A8",
@@ -101,21 +101,21 @@ Empirical_text <- c(
 
 # ---- Master Palette ----------------------------------------
 
-Empirical_palette <- c(
-  Empirical_primary,
-  Empirical_background,
-  Empirical_data,
-  Empirical_fire,
-  Empirical_forest,
-  Empirical_tech,
-  Empirical_text
+emperical_palette <- c(
+  emperical_primary,
+  emperical_background,
+  emperical_data,
+  emperical_fire,
+  emperical_forest,
+  emperical_tech,
+  emperical_text
 )
 
 # ============================================================
 # Helper Functions
 # ============================================================
 
-#' Get EmpiricalPatternR color palettes
+#' Get EmpericalPatternR color palettes
 #'
 #' @param palette Character. One of:
 #'   "primary", "background", "data", "fire", "forest",
@@ -123,17 +123,17 @@ Empirical_palette <- c(
 #'
 #' @return A named character vector of hex colors
 #' @export
-Empirical_pal <- function(palette = "all") {
+emperical_pal <- function(palette = "all") {
   switch(
     palette,
-    primary    = Empirical_primary,
-    background = Empirical_background,
-    data       = Empirical_data,
-    fire       = Empirical_fire,
-    forest     = Empirical_forest,
-    tech       = Empirical_tech,
-    text       = Empirical_text,
-    all        = Empirical_palette,
+    primary    = emperical_primary,
+    background = emperical_background,
+    data       = emperical_data,
+    fire       = emperical_fire,
+    forest     = emperical_forest,
+    tech       = emperical_tech,
+    text       = emperical_text,
+    all        = emperical_palette,
     stop("Unknown palette name.")
   )
 }
@@ -142,24 +142,24 @@ Empirical_pal <- function(palette = "all") {
 #'
 #' @param palette Character. Palette name
 #' @export
-scale_color_Empirical <- function(palette = "data", ...) {
-  ggplot2::scale_color_manual(values = Empirical_pal(palette), ...)
+scale_color_emperical <- function(palette = "data", ...) {
+  ggplot2::scale_color_manual(values = emperical_pal(palette), ...)
 }
 
 #' ggplot2-friendly fill scale
 #'
 #' @param palette Character. Palette name
 #' @export
-scale_fill_Empirical <- function(palette = "data", ...) {
-  ggplot2::scale_fill_manual(values = Empirical_pal(palette), ...)
+scale_fill_emperical <- function(palette = "data", ...) {
+  ggplot2::scale_fill_manual(values = emperical_pal(palette), ...)
 }
 
 #' ggplot2 gradient scale (fire or forest)
 #'
 #' @param palette Character. "fire" or "forest"
 #' @export
-scale_fill_Empirical_gradient <- function(palette = "fire", ...) {
-  ggplot2::scale_fill_gradientn(colors = Empirical_pal(palette), ...)
+scale_fill_emperical_gradient <- function(palette = "fire", ...) {
+  ggplot2::scale_fill_gradientn(colors = emperical_pal(palette), ...)
 }
 
 # ============================================================

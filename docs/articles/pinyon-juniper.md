@@ -4,7 +4,7 @@
 
 This vignette demonstrates a complete workflow for simulating
 pinyon-juniper woodland structure using the pre-built
-[`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md)
+[`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/pj_huffman_2009.md)
 configuration based on published field data. We’ll cover:
 
 - Using pre-built configurations
@@ -27,7 +27,7 @@ structure with:
 ## Step 1: Load Package and Configuration
 
 ``` r
-library(EmpiricalPatternR)
+library(EmpericalPatternR)
 
 # Use pre-built configuration for pinyon-juniper
 config <- pj_huffman_2009(
@@ -117,7 +117,7 @@ The simulation uses **simulated annealing** to optimize stand structure:
 ## Step 4: Analyze Results
 
 The
-[`analyze_simulation_results()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/analyze_simulation_results.md)
+[`analyze_simulation_results()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/analyze_simulation_results.md)
 function provides comprehensive analysis:
 
 ``` r
@@ -282,10 +282,10 @@ and weight_nurse
 ## Next Steps
 
 - **Custom Configurations**: See
-  [`vignette("getting-started")`](https://bi0m3trics.github.io/EmpiricalPatternR/articles/getting-started.md)
+  [`vignette("getting-started")`](https://bi0m3trics.github.io/EmpericalPatternR/articles/getting-started.md)
   for creating custom configs
 - **Ponderosa Pine**: See
-  [`vignette("ponderosa-pine")`](https://bi0m3trics.github.io/EmpiricalPatternR/articles/ponderosa-pine.md)
+  [`vignette("ponderosa-pine")`](https://bi0m3trics.github.io/EmpericalPatternR/articles/ponderosa-pine.md)
   for different forest types
 - **Advanced Analysis**: Write custom R scripts to analyze output CSVs
 - **Publication**: Use results for fire behavior modeling, restoration
@@ -300,11 +300,11 @@ Research 43, 605-619.
 
 ## See Also
 
-- [`?pj_huffman_2009`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md) -
+- [`?pj_huffman_2009`](https://bi0m3trics.github.io/EmpericalPatternR/reference/pj_huffman_2009.md) -
   Configuration details
-- [`?simulate_stand`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/simulate_stand.md) -
+- [`?simulate_stand`](https://bi0m3trics.github.io/EmpericalPatternR/reference/simulate_stand.md) -
   Simulation parameters
-- [`?analyze_simulation_results`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/analyze_simulation_results.md) -
+- [`?analyze_simulation_results`](https://bi0m3trics.github.io/EmpericalPatternR/reference/analyze_simulation_results.md) -
   Analysis options
-- [`?get_default_allometric_params`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/get_default_allometric_params.md) -
+- [`?get_default_allometric_params`](https://bi0m3trics.github.io/EmpericalPatternR/reference/get_default_allometric_params.md) -
   Allometric equations

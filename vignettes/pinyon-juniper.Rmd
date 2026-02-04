@@ -1,6 +1,6 @@
 ---
 title: "Pinyon-Juniper Woodland Simulation"
-author: "EmpiricalPatternR Package"
+author: "EmpericalPatternR Package"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -39,7 +39,7 @@ Pinyon-juniper woodlands are widespread throughout the southwestern United State
 ## Step 1: Load Package and Configuration
 
 ```{r load_package, eval=FALSE}
-library(EmpiricalPatternR)
+library(EmpericalPatternR)
 
 # Use pre-built configuration for pinyon-juniper
 config <- pj_huffman_2009(

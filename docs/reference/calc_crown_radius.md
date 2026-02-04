@@ -31,7 +31,7 @@ calc_crown_radius(
 - allometric_params:
 
   List. Allometric parameters from
-  [`get_default_allometric_params()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/get_default_allometric_params.md)
+  [`get_default_allometric_params()`](https://bi0m3trics.github.io/EmpericalPatternR/reference/get_default_allometric_params.md)
   or custom parameters
 
 ## Value
