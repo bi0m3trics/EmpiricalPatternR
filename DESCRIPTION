@@ -1,4 +1,4 @@
-Package: EmpericalPatternR
+Package: EmpiricalPatternR
 Type: Package
 Title: Forest Stand Pattern Simulation with Simulated Annealing
 Version: 0.1.0
@@ -31,6 +31,6 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://bi0m3trics.github.io/EmpericalPatternR, https://github.com/bi0m3trics/EmpericalPatternR
-BugReports: https://github.com/bi0m3trics/EmpericalPatternR/issues
+URL: https://bi0m3trics.github.io/EmpiricalPatternR, https://github.com/bi0m3trics/EmpiricalPatternR
+BugReports: https://github.com/bi0m3trics/EmpiricalPatternR/issues
 Config/testthat/edition: 3

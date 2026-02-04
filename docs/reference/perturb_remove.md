@@ -10,13 +10,13 @@ perturb_remove(trees, min_trees = 10)
 
 ## Arguments
 
-  - trees:
-    
-    data.table. Tree data
+- trees:
 
-  - min\_trees:
-    
-    Integer. Minimum trees to maintain
+  data.table. Tree data
+
+- min_trees:
+
+  Integer. Minimum trees to maintain
 
 ## Value
 

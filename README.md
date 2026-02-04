@@ -1,4 +1,4 @@
-# EmpericalPatternR <img src="img/logo.png" align="right" height="139" />
+# EmpiricalPatternR <img src="img/logo.png" align="right" height="139" />
 
 <!-- badges: start -->
 ![license](https://img.shields.io/badge/Licence-GPL--3-blue.svg) 
@@ -7,11 +7,11 @@
 
 Simulate realistic forest stand patterns using simulated annealing optimization to match empirical targets from field data.
 
-<img src="man/figures/banner.png" alt="EmpericalPatternR Banner" />
+<img src="man/figures/banner.png" alt="EmpiricalPatternR Banner" />
 
 ## Overview
 
-**EmpericalPatternR** generates synthetic forest stands that match observed ecological patterns. Using simulated annealing, the package optimizes tree locations, sizes, and species to simultaneously match multiple targets including stand density, species composition, size distributions, canopy cover, fuel loads, and spatial patterns.
+**EmpiricalPatternR** generates synthetic forest stands that match observed ecological patterns. Using simulated annealing, the package optimizes tree locations, sizes, and species to simultaneously match multiple targets including stand density, species composition, size distributions, canopy cover, fuel loads, and spatial patterns.
 
 Perfect for:
 - **Fire behavior modeling** - Generate stands with realistic fuel structures
@@ -38,8 +38,8 @@ Install from GitHub:
 # Install devtools if needed
 install.packages("devtools")
 
-# Install EmpericalPatternR
-devtools::install_github("yourusername/EmpericalPatternR")
+# Install EmpiricalPatternR
+devtools::install_github("yourusername/EmpiricalPatternR")
 ```
 
 ## Quick Start
@@ -47,7 +47,7 @@ devtools::install_github("yourusername/EmpericalPatternR")
 Use a pre-built configuration:
 
 ```r
-library(EmpericalPatternR)
+library(EmpiricalPatternR)
 
 # Get pre-built pinyon-juniper configuration (Huffman et al. 2009)
 config <- pj_huffman_2009(
@@ -228,7 +228,7 @@ EmpericalPatternR/
 If you use this package in your research, please cite:
 
 ```r
-citation("EmpericalPatternR")
+citation("EmpiricalPatternR")
 ```
 
 ### Original Idea
@@ -253,8 +253,8 @@ GPL-3 License.
 ## Contact
 
 For questions or issues:
-- Open an issue on [GitHub](https://github.com/bi0m3trics/EmpericalPatternR/issues)
-- See [documentation](https://bi0m3trics.github.io/EmpericalPatternR/)
+- Open an issue on [GitHub](https://github.com/bi0m3trics/EmpiricalPatternR/issues)
+- See [documentation](https://bi0m3trics.github.io/EmpiricalPatternR/)
 - Contact the package maintainer
 
 ---

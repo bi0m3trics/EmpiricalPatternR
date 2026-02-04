@@ -20,35 +20,35 @@ perturb_add_with_nurse(
 
 ## Arguments
 
-  - trees:
-    
-    Data.table. Current tree data
+- trees:
 
-  - plot\_size:
-    
-    Numeric. Plot dimension in meters
+  Data.table. Current tree data
 
-  - species\_names:
-    
-    Character vector. Available species codes
+- plot_size:
 
-  - species\_probs:
-    
-    Numeric vector. Target species proportions (must sum to 1)
+  Numeric. Plot dimension in meters
 
-  - dbh\_mean:
-    
-    Numeric. Mean DBH for new tree (cm)
+- species_names:
 
-  - dbh\_sd:
-    
-    Numeric. Standard deviation of DBH (cm)
+  Character vector. Available species codes
 
-  - nurse\_distance:
-    
-    Numeric. Target distance to place PIED near juniper (m). Actual
-    distance is drawn from normal distribution with mean =
-    nurse\_distance and SD = 0.3 \* nurse\_distance.
+- species_probs:
+
+  Numeric vector. Target species proportions (must sum to 1)
+
+- dbh_mean:
+
+  Numeric. Mean DBH for new tree (cm)
+
+- dbh_sd:
+
+  Numeric. Standard deviation of DBH (cm)
+
+- nurse_distance:
+
+  Numeric. Target distance to place PIED near juniper (m). Actual
+  distance is drawn from normal distribution with mean = nurse_distance
+  and SD = 0.3 \* nurse_distance.
 
 ## Value
 
@@ -56,11 +56,11 @@ Data.table. Updated tree data with new tree added
 
 ## Details
 
-New tree species is selected based on species\_probs. If PIED is
-selected and junipers exist, tree is placed at distance ~
-N(nurse\_distance, 0.3\*nurse\_distance) from a randomly selected
-juniper. Position is constrained within plot bounds. DBH is drawn from
-N(dbh\_mean, dbh\_sd) and constrained to minimum 5cm.
+New tree species is selected based on species_probs. If PIED is selected
+and junipers exist, tree is placed at distance ~ N(nurse_distance,
+0.3\*nurse_distance) from a randomly selected juniper. Position is
+constrained within plot bounds. DBH is drawn from N(dbh_mean, dbh_sd)
+and constrained to minimum 5cm.
 
 ## Examples
 

@@ -10,9 +10,9 @@ calc_tree_attributes(trees)
 
 ## Arguments
 
-  - trees:
-    
-    Data table with x, y, Species, DBH columns
+- trees:
+
+  Data table with x, y, Species, DBH columns
 
 ## Value
 

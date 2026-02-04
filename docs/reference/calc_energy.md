@@ -17,29 +17,29 @@ calc_energy(
 
 ## Arguments
 
-  - metrics:
-    
-    Current stand metrics
+- metrics:
 
-  - targets:
-    
-    Target parameters
+  Current stand metrics
 
-  - weights:
-    
-    Weights for each component
+- targets:
 
-  - trees:
-    
-    Current trees (for nurse tree calc)
+  Target parameters
 
-  - nurse\_distance:
-    
-    Target nurse tree distance
+- weights:
 
-  - use\_nurse\_effect:
-    
-    Whether to include nurse tree energy
+  Weights for each component
+
+- trees:
+
+  Current trees (for nurse tree calc)
+
+- nurse_distance:
+
+  Target nurse tree distance
+
+- use_nurse_effect:
+
+  Whether to include nurse tree energy
 
 ## Value
 

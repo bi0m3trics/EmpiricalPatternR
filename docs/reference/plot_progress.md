@@ -20,38 +20,38 @@ plot_progress(
 
 ## Arguments
 
-  - trees:
-    
-    Current trees data
+- trees:
 
-  - metrics:
-    
-    Current metrics
+  Current trees data
 
-  - targets:
-    
-    Target parameters
+- metrics:
 
-  - history:
-    
-    History data table
+  Current metrics
 
-  - iter:
-    
-    Current iteration
+- targets:
 
-  - energy:
-    
-    Current energy
+  Target parameters
 
-  - temperature:
-    
-    Current temperature
+- history:
 
-  - plot\_size:
-    
-    Size of the plot area
+  History data table
 
-  - save\_plot:
-    
-    Whether to save plot to file
+- iter:
+
+  Current iteration
+
+- energy:
+
+  Current energy
+
+- temperature:
+
+  Current temperature
+
+- plot_size:
+
+  Size of the plot area
+
+- save_plot:
+
+  Whether to save plot to file

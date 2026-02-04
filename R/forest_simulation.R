@@ -1,4 +1,4 @@
-#' @useDynLib EmpericalPatternR, .registration = TRUE
+#' @useDynLib EmpiricalPatternR, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 #' @import data.table
 #' @importFrom data.table :=

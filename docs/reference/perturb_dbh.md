@@ -10,13 +10,13 @@ perturb_dbh(trees, dbh_sd_perturb = 3)
 
 ## Arguments
 
-  - trees:
-    
-    data.table. Tree data
+- trees:
 
-  - dbh\_sd\_perturb:
-    
-    Numeric. SD of DBH perturbation (cm)
+  data.table. Tree data
+
+- dbh_sd_perturb:
+
+  Numeric. SD of DBH perturbation (cm)
 
 ## Value
 

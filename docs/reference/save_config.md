@@ -10,13 +10,13 @@ save_config(config, file = "simulation_config.R")
 
 ## Arguments
 
-  - config:
-    
-    Configuration list
+- config:
 
-  - file:
-    
-    Output file path (default: "simulation\_config.R")
+  Configuration list
+
+- file:
+
+  Output file path (default: "simulation_config.R")
 
 ## Examples
 

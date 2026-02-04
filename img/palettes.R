@@ -8,7 +8,7 @@
 #  - Dark UI / pkgdown themes
 #
 # Author: Andrew J. Sanchez Meador
-# Package: EmpericalPatternR
+# Package: EmpiricalPatternR
 # ============================================================
 
 # ---- Primary Brand Colors ----------------------------------
@@ -115,7 +115,7 @@ emperical_palette <- c(
 # Helper Functions
 # ============================================================
 
-#' Get EmpericalPatternR color palettes
+#' Get EmpiricalPatternR color palettes
 #'
 #' @param palette Character. One of:
 #'   "primary", "background", "data", "fire", "forest",

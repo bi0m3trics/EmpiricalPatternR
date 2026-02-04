@@ -364,7 +364,7 @@ save_config <- function(config, file = "simulation_config.R") {
   script <- paste0(
     "# Auto-generated simulation configuration\n",
     "# Created: ", Sys.time(), "\n\n",
-    "library(EmpericalPatternR)\n\n",
+    "library(EmpiricalPatternR)\n\n",
     "config <- ", deparse(config, width.cutoff = 70), "\n"
   )
   

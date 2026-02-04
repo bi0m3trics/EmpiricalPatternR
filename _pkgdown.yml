@@ -1,10 +1,10 @@
-url: https://bi0m3trics.github.io/EmpericalPatternR
+url: https://bi0m3trics.github.io/EmpiricalPatternR
 template:
   bootstrap: 5
   bootswatch: flatly
 
 home:
-  title: "EmpericalPatternR: Pattern-Based Forest Stand Simulation"
+  title: "EmpiricalPatternR: Pattern-Based Forest Stand Simulation"
   description: >
     Simulates realistic forest stand patterns using simulated annealing
     optimization to match empirical targets for spatial patterns, canopy structure,
@@ -127,7 +127,7 @@ reference:
 
   - title: "Package Documentation"
     contents:
-      - EmpericalPatternR-package
+      - EmpiricalPatternR-package
 
 articles:
   - title: "Tutorials"

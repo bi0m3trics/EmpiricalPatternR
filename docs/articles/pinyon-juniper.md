@@ -4,30 +4,30 @@
 
 This vignette demonstrates a complete workflow for simulating
 pinyon-juniper woodland structure using the pre-built
-`pj_huffman_2009()` configuration based on published field data. We’ll
-cover:
+[`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md)
+configuration based on published field data. We’ll cover:
 
-  - Using pre-built configurations
-  - Understanding nurse tree effects (pinyons near junipers)
-  - Simulating mortality events
-  - Comprehensive results analysis
+- Using pre-built configurations
+- Understanding nurse tree effects (pinyons near junipers)
+- Simulating mortality events
+- Comprehensive results analysis
 
 ## Background
 
 Pinyon-juniper woodlands are widespread throughout the southwestern
-United States. This example uses target values from **Huffman et al.
-(2009)** control treatment plots, representing typical woodland
+United States. This example uses target values from **Huffman et
+al. (2009)** control treatment plots, representing typical woodland
 structure with:
 
-  - Moderate tree density (~900 trees/ha)
-  - Two-species composition (Pinus edulis and Juniperus osteosperma)
-  - Nurse tree associations (juvenile pinyons establish near junipers)
-  - Moderate canopy cover and fuel loads
+- Moderate tree density (~900 trees/ha)
+- Two-species composition (Pinus edulis and Juniperus osteosperma)
+- Nurse tree associations (juvenile pinyons establish near junipers)
+- Moderate canopy cover and fuel loads
 
 ## Step 1: Load Package and Configuration
 
 ``` r
-library(EmpericalPatternR)
+library(EmpiricalPatternR)
 
 # Use pre-built configuration for pinyon-juniper
 config <- pj_huffman_2009(
@@ -43,12 +43,11 @@ print(config)
 
 The configuration includes:
 
-  - **Targets**: Density, species composition, size distributions,
-    canopy metrics
-  - **Weights**: How important each target is during optimization
-  - **Simulation**: Plot size, iterations, temperature schedule
-  - **Allometric**: Species-specific equations for crown, height,
-    foliage
+- **Targets**: Density, species composition, size distributions, canopy
+  metrics
+- **Weights**: How important each target is during optimization
+- **Simulation**: Plot size, iterations, temperature schedule
+- **Allometric**: Species-specific equations for crown, height, foliage
 
 ## Step 2: Understanding Key Parameters
 
@@ -117,8 +116,9 @@ The simulation uses **simulated annealing** to optimize stand structure:
 
 ## Step 4: Analyze Results
 
-The `analyze_simulation_results()` function provides comprehensive
-analysis:
+The
+[`analyze_simulation_results()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/analyze_simulation_results.md)
+function provides comprehensive analysis:
 
 ``` r
 analyze_simulation_results(
@@ -131,8 +131,7 @@ analyze_simulation_results(
 )
 ```
 
-This
-    produces:
+This produces:
 
 ### Console Output
 
@@ -140,11 +139,11 @@ This
     SIMULATION RESULTS SUMMARY
     Stand: pj_woodland
     ================================================================================
-    
+
     OPTIMIZATION PERFORMANCE:
       Final Energy:            1234.56
       Convergence:             Excellent (energy < 2000)
-    
+
     STAND METRICS:
                               Achieved    Target      Diff     Status
       Density (trees/ha)      925         927         -2       ✓ GOOD
@@ -152,14 +151,14 @@ This
       Canopy Cover (%)        39.8        40.0        -0.2     ✓ GOOD
       CFL (kg/m²)             1.09        1.10        -0.01    ✓ GOOD
       Clark-Evans R           1.02        1.05        -0.03    ✓ GOOD
-    
+
     SPECIES COMPOSITION:
       PIED (Pinyon Pine)      47.8%       48.0%       -0.2%    ✓ GOOD
       JUSO (Utah Juniper)     52.2%       52.0%       +0.2%    ✓ GOOD
-    
+
     NURSE TREE ASSOCIATIONS:
       PIED within 3.0m of JUSO: 31.5%     32.0%       -0.5%    ✓ GOOD
-    
+
     MORTALITY SIMULATION:
       Trees killed:           93 (10.0%)
       Surviving trees:        834 (90.0%)
@@ -170,36 +169,36 @@ This
 Four CSV files are saved:
 
 1.  **`pj_woodland_all_trees.csv`**: All trees (live + dead)
-    
-      - Tree ID, species, DBH, height, x/y coordinates
-      - Crown radius, CBH, foliage mass, CFL
-      - Status (alive/dead), distance to nearest nurse
+
+    - Tree ID, species, DBH, height, x/y coordinates
+    - Crown radius, CBH, foliage mass, CFL
+    - Status (alive/dead), distance to nearest nurse
 
 2.  **`pj_woodland_live_trees.csv`**: Live trees only
 
 3.  **`pj_woodland_history.csv`**: Optimization convergence
-    
-      - Iteration, energy value, temperature
-      - Track improvement over time
+
+    - Iteration, energy value, temperature
+    - Track improvement over time
 
 4.  **`pj_woodland_summary.csv`**: Summary statistics
-    
-      - All achieved vs. target metrics
-      - Species composition
-      - Size distributions
+
+    - All achieved vs. target metrics
+    - Species composition
+    - Size distributions
 
 ### PDF Plots
 
 **`pj_woodland_plots.pdf`** contains 4 pages:
 
 1.  **Spatial Distribution**: Tree locations colored by species
-      - Shows spatial patterns and spacing
+    - Shows spatial patterns and spacing
 2.  **DBH Distribution**: Histogram comparing achieved vs. target
-      - Demonstrates size structure match
+    - Demonstrates size structure match
 3.  **Height Distribution**: Histogram comparing achieved vs. target
-      - Shows vertical structure
+    - Shows vertical structure
 4.  **Convergence**: Energy over iterations
-      - Confirms optimization success
+    - Confirms optimization success
 
 ## Step 5: Accessing Individual Results
 
@@ -260,35 +259,37 @@ config_test <- pj_huffman_2009(
 
 ### Good Convergence Indicators
 
-  - Final energy \< 2000
-  - Energy plot shows clear decline and plateau
-  - All metrics achieve “GOOD” status
-  - Species proportions within ±2% of targets
-  - Spatial R within ±0.10 of target
+- Final energy \< 2000
+- Energy plot shows clear decline and plateau
+- All metrics achieve “GOOD” status
+- Species proportions within ±2% of targets
+- Spatial R within ±0.10 of target
 
 ### Common Issues
 
-**High Final Energy (\>5000)** - Solution: Increase max\_iterations or
+**High Final Energy (\>5000)** - Solution: Increase max_iterations or
 adjust conflicting targets
 
-**Species Proportions Off** - Solution: Increase weight\_species in
+**Species Proportions Off** - Solution: Increase weight_species in
 configuration
 
-**Canopy Cover Mismatch** - Solution: Adjust both canopy\_cover target
-and weight\_canopy\_cover
+**Canopy Cover Mismatch** - Solution: Adjust both canopy_cover target
+and weight_canopy_cover
 
-**Nurse Effect Not Matching** - Solution: Check nurse\_distance setting
-and weight\_nurse
+**Nurse Effect Not Matching** - Solution: Check nurse_distance setting
+and weight_nurse
 
 ## Next Steps
 
-  - **Custom Configurations**: See `vignette("getting-started")` for
-    creating custom configs
-  - **Ponderosa Pine**: See `vignette("ponderosa-pine")` for different
-    forest types
-  - **Advanced Analysis**: Write custom R scripts to analyze output CSVs
-  - **Publication**: Use results for fire behavior modeling, restoration
-    planning, etc.
+- **Custom Configurations**: See
+  [`vignette("getting-started")`](https://bi0m3trics.github.io/EmpiricalPatternR/articles/getting-started.md)
+  for creating custom configs
+- **Ponderosa Pine**: See
+  [`vignette("ponderosa-pine")`](https://bi0m3trics.github.io/EmpiricalPatternR/articles/ponderosa-pine.md)
+  for different forest types
+- **Advanced Analysis**: Write custom R scripts to analyze output CSVs
+- **Publication**: Use results for fire behavior modeling, restoration
+  planning, etc.
 
 ## References
 
@@ -299,7 +300,11 @@ Research 43, 605-619.
 
 ## See Also
 
-  - `?pj_huffman_2009` - Configuration details
-  - `?simulate_stand` - Simulation parameters
-  - `?analyze_simulation_results` - Analysis options
-  - `?get_default_allometric_params` - Allometric equations
+- [`?pj_huffman_2009`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md) -
+  Configuration details
+- [`?simulate_stand`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/simulate_stand.md) -
+  Simulation parameters
+- [`?analyze_simulation_results`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/analyze_simulation_results.md) -
+  Analysis options
+- [`?get_default_allometric_params`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/get_default_allometric_params.md) -
+  Allometric equations

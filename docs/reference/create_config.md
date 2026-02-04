@@ -17,25 +17,25 @@ create_config(
 
 ## Arguments
 
-  - name:
-    
-    Configuration name for reference
+- name:
 
-  - targets:
-    
-    List of target stand metrics
+  Configuration name for reference
 
-  - weights:
-    
-    List of optimization weights
+- targets:
 
-  - simulation:
-    
-    List of simulation control parameters
+  List of target stand metrics
 
-  - allometric\_params:
-    
-    Allometric equation parameters
+- weights:
+
+  List of optimization weights
+
+- simulation:
+
+  List of simulation control parameters
+
+- allometric_params:
+
+  Allometric equation parameters
 
 ## Value
 

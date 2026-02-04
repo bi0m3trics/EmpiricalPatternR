@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-**EmpericalPatternR** simulates realistic forest stand patterns using simulated annealing optimization to match empirical targets for:
+**EmpiricalPatternR** simulates realistic forest stand patterns using simulated annealing optimization to match empirical targets for:
 
 - Spatial patterns (Clark-Evans R)
 - Species composition

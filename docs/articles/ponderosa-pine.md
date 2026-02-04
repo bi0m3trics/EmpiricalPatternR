@@ -3,23 +3,25 @@
 ## Overview
 
 This vignette demonstrates how to create **custom configurations** for
-different forest types using `create_config()`. We’ll simulate a
-ponderosa pine forest with:
+different forest types using
+[`create_config()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/create_config.md).
+We’ll simulate a ponderosa pine forest with:
 
-  - Custom target values (different from pinyon-juniper)
-  - Multiple species (PIPO, PSME, ABCO)
-  - Larger trees (montane forest)
-  - Different allometric relationships
-  - No nurse tree effect
+- Custom target values (different from pinyon-juniper)
+- Multiple species (PIPO, PSME, ABCO)
+- Larger trees (montane forest)
+- Different allometric relationships
+- No nurse tree effect
 
 ## Why Custom Configurations?
 
-The pre-built `pj_huffman_2009()` configuration is great for
-pinyon-juniper woodlands, but other forest types have different
-characteristics:
+The pre-built
+[`pj_huffman_2009()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/pj_huffman_2009.md)
+configuration is great for pinyon-juniper woodlands, but other forest
+types have different characteristics:
 
 | Characteristic | Pinyon-Juniper  | Ponderosa Pine        |
-| -------------- | --------------- | --------------------- |
+|----------------|-----------------|-----------------------|
 | Density        | ~900 trees/ha   | ~450 trees/ha         |
 | Mean DBH       | 15 cm           | 35 cm                 |
 | Mean Height    | 8 m             | 18 m                  |
@@ -30,7 +32,7 @@ characteristics:
 ## Step 1: Load Package
 
 ``` r
-library(EmpericalPatternR)
+library(EmpiricalPatternR)
 ```
 
 ## Step 2: Get Ponderosa Allometric Parameters
@@ -57,8 +59,8 @@ ponderosa_params$foliage$PIPO
 ```
 
 These parameters come from published equations: - **Crown**: Reese et
-al. (log-log with height) - **Height**: Chapman-Richards growth model -
-**Foliage**: Miller et al. (log-log)
+al. (log-log with height) - **Height**: Chapman-Richards growth model -
+**Foliage**: Miller et al. (log-log)
 
 ## Step 3: Create Custom Configuration
 
@@ -112,8 +114,8 @@ white fir - `mean_dbh = 35`: Much larger trees (mature forest) -
 
 **Optimization Weights**: - `weight_density = 80`: Critical to match
 tree count - `weight_species = 60`: Important for composition -
-`weight_canopy_cover = 60`: Important for structure - `weight_nurse
-= 0`: Disabled (no nurse effect in ponderosa)
+`weight_canopy_cover = 60`: Important for structure -
+`weight_nurse = 0`: Disabled (no nurse effect in ponderosa)
 
 **Simulation Parameters**: - `max_iterations = 5000`: Fewer needed
 (lower density) - `cooling_rate = 0.9999`: Slower cooling (more
@@ -158,7 +160,7 @@ analyze_simulation_results(
     SIMULATION RESULTS SUMMARY
     Stand: ponderosa_forest
     ================================================================================
-    
+
     STAND METRICS:
                               Achieved    Target      Diff     Status
       Density (trees/ha)      448         450         -2       ✓ GOOD
@@ -167,12 +169,12 @@ analyze_simulation_results(
       Canopy Cover (%)        44.7        45.0        -0.3     ✓ GOOD
       CFL (kg/m²)             0.84        0.85        -0.01    ✓ GOOD
       Clark-Evans R           1.38        1.40        -0.02    ✓ GOOD
-    
+
     SPECIES COMPOSITION:
       PIPO (Ponderosa Pine)   69.8%       70.0%       -0.2%    ✓ GOOD
       PSME (Douglas-fir)      20.1%       20.0%       +0.1%    ✓ GOOD
       ABCO (White Fir)        10.1%       10.0%       +0.1%    ✓ GOOD
-    
+
     MORTALITY SIMULATION:
       Trees killed:           45 (10.0%)
       Surviving trees:        403 (90.0%)
@@ -325,9 +327,11 @@ generate_config_template(
 **Note**: Current version uses built-in allometric equations during
 simulation. To fully integrate custom equations, you would:
 
-1.  Modify `calc_tree_attributes()` to accept `allometric_params`
-    argument
-2.  Pass custom parameters through `simulate_stand()`
+1.  Modify
+    [`calc_tree_attributes()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/calc_tree_attributes.md)
+    to accept `allometric_params` argument
+2.  Pass custom parameters through
+    [`simulate_stand()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/simulate_stand.md)
 3.  Apply custom equations to all attribute calculations
 
 This is a planned enhancement. For now, custom allometry can be: -
@@ -336,17 +340,23 @@ Incorporated in derived metrics
 
 ## Next Steps
 
-  - **Template System**: Use `generate_config_template()` for easier
-    customization
-  - **Multiple Runs**: Compare different configurations/scenarios
-  - **Sensitivity Analysis**: Test how results change with parameter
-    variations
-  - **Field Validation**: Compare simulated stands to field measurements
+- **Template System**: Use
+  [`generate_config_template()`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/generate_config_template.md)
+  for easier customization
+- **Multiple Runs**: Compare different configurations/scenarios
+- **Sensitivity Analysis**: Test how results change with parameter
+  variations
+- **Field Validation**: Compare simulated stands to field measurements
 
 ## See Also
 
-  - `?create_config` - Full parameter documentation
-  - `?get_ponderosa_allometric_params` - Allometric equation details
-  - `?generate_config_template` - Create editable templates
-  - `vignette("getting-started")` - Package introduction
-  - `vignette("pinyon-juniper")` - Pre-built configuration example
+- [`?create_config`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/create_config.md) -
+  Full parameter documentation
+- [`?get_ponderosa_allometric_params`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/get_ponderosa_allometric_params.md) -
+  Allometric equation details
+- [`?generate_config_template`](https://bi0m3trics.github.io/EmpiricalPatternR/reference/generate_config_template.md) -
+  Create editable templates
+- [`vignette("getting-started")`](https://bi0m3trics.github.io/EmpiricalPatternR/articles/getting-started.md) -
+  Package introduction
+- [`vignette("pinyon-juniper")`](https://bi0m3trics.github.io/EmpiricalPatternR/articles/pinyon-juniper.md) -
+  Pre-built configuration example

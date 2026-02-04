@@ -22,37 +22,37 @@ analyze_simulation_results(
 
 ## Arguments
 
-  - result:
-    
-    Result object from simulate\_stand()
+- result:
 
-  - targets:
-    
-    List of target parameters used in simulation
+  Result object from simulate_stand()
 
-  - prefix:
-    
-    Character prefix for output filenames (default: "simulation")
+- targets:
 
-  - save\_plots:
-    
-    Logical, whether to save PDF plots (default: TRUE)
+  List of target parameters used in simulation
 
-  - plot\_width:
-    
-    Width of PDF plots in inches (default: 12)
+- prefix:
 
-  - plot\_height:
-    
-    Height of PDF plots in inches (default: 8)
+  Character prefix for output filenames (default: "simulation")
 
-  - nurse\_distance\_target:
-    
-    Target distance for nurse tree effect (default: 2.5m)
+- save_plots:
 
-  - target\_mortality:
-    
-    Target mortality percentage (default: 15.0)
+  Logical, whether to save PDF plots (default: TRUE)
+
+- plot_width:
+
+  Width of PDF plots in inches (default: 12)
+
+- plot_height:
+
+  Height of PDF plots in inches (default: 8)
+
+- nurse_distance_target:
+
+  Target distance for nurse tree effect (default: 2.5m)
+
+- target_mortality:
+
+  Target mortality percentage (default: 15.0)
 
 ## Value
 
