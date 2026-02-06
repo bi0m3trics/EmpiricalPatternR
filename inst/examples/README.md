@@ -1,12 +1,12 @@
-# EmpericalPatternR Examples
+# EmpiricalPatternR Examples
 
-This folder contains example scripts demonstrating how to use the EmpericalPatternR package to simulate forest stands matching empirical data.
+This folder contains example scripts demonstrating how to use the EmpiricalPatternR package to simulate forest stands matching empirical data.
 
 ## Available Examples
 
 ### Example 1: Pinyon-Juniper Woodland (`example_01_pinyon_juniper.R`)
 
-Simulates a pinyon-juniper woodland stand based on Huffman et al. (2009) field data from Fishlake National Forest, Utah.
+Simulates a pinyon-juniper woodland stand based on Huffman et al. (2009) field data from northern Arizona.
 
 **Features demonstrated:**
 - Matching empirical density and species composition
@@ -205,7 +205,7 @@ legend("topright", c("Live", "Dead"), col = c("darkgreen", "gray50"), pch = 19)
 
 ## References
 
-Huffman, D.W., Fulé, P.Z., Crouse, J.E., & Pearson, K.M. (2009). A comparison of fire hazard mitigation alternatives in pinyon-juniper woodlands of Arizona. *Forest Ecology and Management*, 257, 628-635.
+Huffman, D.W., Fulé, P.Z., Crouse, J.E., & Pearson, K.M. (2009). A comparison of fire hazard mitigation alternatives in pinyon-juniper woodlands of Arizona. *Forest Ecology & Management*, 257, 628-635.
 
 ## Getting Help
 
@@ -222,5 +222,5 @@ For detailed function documentation:
 For package overview:
 
 ```r
-?EmpericalPatternR
+?EmpiricalPatternR
 ```

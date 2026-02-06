@@ -22,7 +22,7 @@ Perfect for:
 ### Key Features
 
 - **Pre-built configurations** for common forest types (pinyon-juniper, ponderosa pine)
-- **Pattern matching** to empirical field data (Huffman et al. 2009)
+- **Pattern matching** to empirical field data (Huffman et al., 2009)
 - **Flexible allometry** with species-specific equations (Reese, Miller)
 - **Fast C++ engine** with OpenMP parallelization (50-300× speedup)
 - **Canopy fuel load** optimization for fire behavior
@@ -49,7 +49,7 @@ Use a pre-built configuration:
 ```r
 library(EmpiricalPatternR)
 
-# Get pre-built pinyon-juniper configuration (Huffman et al. 2009)
+# Get pre-built pinyon-juniper configuration (Huffman et al., 2009)
 config <- pj_huffman_2009(
   density_ha = 927,
   cfl = 1.10,
@@ -203,7 +203,7 @@ Fast versions available:
 ## Package Structure
 
 ```
-EmpericalPatternR/
+EmpiricalPatternR/
 ├── R/
 │   ├── allometric_equations.R    # Species-specific equations
 │   ├── config_system.R           # Configuration management
@@ -249,6 +249,10 @@ Contributions are welcome! Please:
 ## License
 
 GPL-3 License.
+
+## References
+
+Huffman, D.W., Fulé, P.Z., Crouse, J.E., & Pearson, K.M. (2009). A comparison of fire hazard mitigation alternatives in pinyon-juniper woodlands of Arizona. *Forest Ecology & Management*, 257, 628-635. https://doi.org/10.1016/j.foreco.2008.09.041
 
 ## Contact
 

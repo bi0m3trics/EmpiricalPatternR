@@ -13,7 +13,7 @@
 #' Create Pinyon-Juniper Configuration (Huffman et al. 2009)
 #' 
 #' Pre-configured simulation parameters for pinyon-juniper woodland based on
-#' Huffman et al. (2009) Control Treatment data from Fishlake National Forest, Utah.
+#' Huffman et al. (2009) control treatment data from northern Arizona.
 #' 
 #' @param density_ha Total tree density (trees/ha). Default: 927
 #' @param canopy_cover Target canopy cover proportion (0-1). Default: 0.40
@@ -32,8 +32,9 @@
 #' }
 #' 
 #' @references
-#'   Huffman, D.W., et al. (2009). Herbaceous vegetation control after thinning
-#'   in southwestern ponderosa pine forests. Forest Ecology and Management.
+#'   Huffman, D.W., Fulé, P.Z., Crouse, J.E., & Pearson, K.M. (2009). 
+#'   A comparison of fire hazard mitigation alternatives in pinyon-juniper 
+#'   woodlands of Arizona. Forest Ecology & Management, 257, 628-635.
 #' 
 #' @export
 #' @examples
@@ -413,7 +414,7 @@ generate_config_template <- function(file = "my_simulation_config.R",
 # Generated: %s
 # ==============================================================================
 
-library(EmpericalPatternR)
+library(EmpiricalPatternR)
 
 # Custom Simulation Configuration
 # @param density_ha Target tree density (trees per hectare)
@@ -476,7 +477,7 @@ library(EmpericalPatternR)
     template <- sprintf('# Custom Simulation: %s
 # Generated: %s
 
-library(EmpericalPatternR)
+library(EmpiricalPatternR)
 
 %s <- function() {
   targets <- list(

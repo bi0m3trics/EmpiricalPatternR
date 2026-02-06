@@ -1,6 +1,6 @@
 # ==============================================================================
 # Example 1: Pinyon-Juniper Woodland Simulation
-# Based on Huffman et al. (2009) Control Treatment Data
+# Based on Huffman et al. (2009) - Northern Arizona
 # ==============================================================================
 #
 # This example demonstrates the config system and simulation capabilities:
@@ -14,11 +14,11 @@
 #
 # ==============================================================================
 
-library(EmpericalPatternR)
+library(EmpiricalPatternR)
 
 message(
   sprintf(
-    "\n%s\n  EXAMPLE 1: Pinyon-Juniper Woodland Simulation\n  Based on Huffman et al. (2009) - Control Treatment 2007\n%s\n",
+    "\n%s\n  EXAMPLE 1: Pinyon-Juniper Woodland Simulation\n  Based on Huffman et al. (2009) - Northern Arizona\n%s\n",
     paste(rep("=", 72), collapse = ""),
     paste(rep("=", 72), collapse = "")
   )

@@ -58,7 +58,7 @@ emperical_data <- c(
 
 # ---- Fire Severity / Disturbance Gradient ------------------
 
-emperical_fire <- c(
+empirical_fire <- c(
   "#4B1D0F",  # char
   "#7A2E17",
   "#A33A1E",
@@ -70,7 +70,7 @@ emperical_fire <- c(
 
 # ---- Vegetation / Ecology Gradient -------------------------
 
-emperical_forest <- c(
+empirical_forest <- c(
   "#0F2F1E",
   "#1F6B3A",
   "#3E8F5B",
@@ -81,7 +81,7 @@ emperical_forest <- c(
 
 # ---- Tech / Binary Accents ---------------------------------
 
-emperical_tech <- c(
+empirical_tech <- c(
   binary_light = "#BFE6E2",
   binary_mid   = "#6FB8B3",
   binary_dark  = "#2C7C7A",
@@ -92,7 +92,7 @@ emperical_tech <- c(
 
 # ---- Text & Annotation Colors ------------------------------
 
-emperical_text <- c(
+empirical_text <- c(
   text_light  = "#F7F7F7",
   text_dark   = "#1E1E1E",
   text_muted  = "#8FA3A8",
@@ -101,14 +101,14 @@ emperical_text <- c(
 
 # ---- Master Palette ----------------------------------------
 
-emperical_palette <- c(
-  emperical_primary,
-  emperical_background,
-  emperical_data,
-  emperical_fire,
-  emperical_forest,
-  emperical_tech,
-  emperical_text
+empirical_palette <- c(
+  empirical_primary,
+  empirical_background,
+  empirical_data,
+  empirical_fire,
+  empirical_forest,
+  empirical_tech,
+  empirical_text
 )
 
 # ============================================================
@@ -142,24 +142,24 @@ emperical_pal <- function(palette = "all") {
 #'
 #' @param palette Character. Palette name
 #' @export
-scale_color_emperical <- function(palette = "data", ...) {
-  ggplot2::scale_color_manual(values = emperical_pal(palette), ...)
+scale_color_empirical <- function(palette = "data", ...) {
+  ggplot2::scale_color_manual(values = empirical_pal(palette), ...)
 }
 
 #' ggplot2-friendly fill scale
 #'
 #' @param palette Character. Palette name
 #' @export
-scale_fill_emperical <- function(palette = "data", ...) {
-  ggplot2::scale_fill_manual(values = emperical_pal(palette), ...)
+scale_fill_empirical <- function(palette = "data", ...) {
+  ggplot2::scale_fill_manual(values = empirical_pal(palette), ...)
 }
 
 #' ggplot2 gradient scale (fire or forest)
 #'
 #' @param palette Character. "fire" or "forest"
 #' @export
-scale_fill_emperical_gradient <- function(palette = "fire", ...) {
-  ggplot2::scale_fill_gradientn(colors = emperical_pal(palette), ...)
+scale_fill_empirical_gradient <- function(palette = "fire", ...) {
+  ggplot2::scale_fill_gradientn(colors = empirical_pal(palette), ...)
 }
 
 # ============================================================

@@ -29,7 +29,7 @@ This vignette demonstrates a complete workflow for simulating pinyon-juniper woo
 
 ## Background
 
-Pinyon-juniper woodlands are widespread throughout the southwestern United States. This example uses target values from **Huffman et al. (2009)** control treatment plots, representing typical woodland structure with:
+Pinyon-juniper woodlands are widespread throughout the southwestern United States. This example uses target values from **Huffman et al. (2009)** control treatment plots in northern Arizona, representing typical woodland structure with:
 
 - Moderate tree density (~900 trees/ha)
 - Two-species composition (Pinus edulis and Juniperus osteosperma)
