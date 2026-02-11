@@ -28,9 +28,9 @@ Returns squared deviation of mean distance from target. Returns 0 if
 either species is absent.
 }
 \examples{
-\donttest{
-trees <- data.table::data.table(x = runif(100, 0, 100), y = runif(100, 0, 100),
-                    Species = sample(c("PIED", "JUSO"), 100, replace = TRUE))
+library(data.table)
+set.seed(1)
+trees <- data.table(x = runif(50, 0, 20), y = runif(50, 0, 20),
+                    Species = sample(c("PIED", "JUSO"), 50, replace = TRUE))
 calc_nurse_tree_energy(trees, nurse_distance = 3.0)
-}
 }

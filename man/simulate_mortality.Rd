@@ -45,15 +45,16 @@ This approach ensures:
 - Deterministic given the same input (reproducible)
 }
 \examples{
-\dontrun{
-# Simulate 20\% mortality
-trees_with_mortality <- simulate_mortality(result$trees, target_mortality_prop = 0.20)
-table(trees_with_mortality$Status)  # Count live vs dead
-
-# Analyze size distribution of mortality
-dead_trees <- trees_with_mortality[Status == "dead"]
-mean(dead_trees$DBH)  # Smaller trees preferentially killed
-}
+library(data.table)
+set.seed(1)
+trees <- data.table(
+  Number = 1:20, x = runif(20, 0, 20), y = runif(20, 0, 20),
+  Species = sample(c("PIED", "JUMO"), 20, replace = TRUE),
+  DBH = pmax(rnorm(20, 20, 5), 5)
+)
+trees <- calc_tree_attributes(trees)
+result <- simulate_mortality(trees, target_mortality_prop = 0.20)
+table(result$Status)
 }
 \seealso{
 \code{\link{calc_mortality_probability}}

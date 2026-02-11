@@ -15,3 +15,11 @@ TRUE if valid, otherwise stops with error message
 \description{
 Check that configuration has all required components and valid values.
 }
+\examples{
+config <- pj_huffman_2009()
+validate_config(config)
+
+# Custom config
+my_cfg <- create_config(name = "test")
+validate_config(my_cfg)
+}

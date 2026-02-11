@@ -7,8 +7,20 @@
 print_simulation_summary(result)
 }
 \arguments{
-\item{result}{Result object from simulate_stand()}
+\item{result}{Result object from \code{\link{simulate_stand}}}
 }
 \description{
-Print Simulation Summary
+Prints a formatted comparison of simulated vs. target stand metrics.
+}
+\examples{
+\donttest{
+config <- pj_huffman_2009(max_iterations = 200)
+set.seed(42)
+result <- simulate_stand(
+  targets = config$targets, weights = config$weights,
+  plot_size = 20, max_iterations = 200,
+  verbose = FALSE, plot_interval = NULL
+)
+print_simulation_summary(result)
+}
 }

@@ -27,11 +27,11 @@ can edit. The template includes all required parameters with descriptions and
 example values. This is useful for creating custom simulations.
 }
 \examples{
-\donttest{
 # Generate a template based on P-J config
-generate_config_template("my_pj_config.R", "my_pj_simulation")
+generate_config_template(file.path(tempdir(), "my_pj_config.R"),
+                         "my_pj_simulation")
 
 # Generate a blank custom template
-generate_config_template("custom_sim.R", "custom_simulation", base_config = "custom")
-}
+generate_config_template(file.path(tempdir(), "custom_sim.R"),
+                         "custom_simulation", base_config = "custom")
 }

@@ -59,9 +59,18 @@ annealing optimization. Optimizes spatial pattern, species composition,
 size structure, and fire behavior metrics.
 }
 \examples{
-\dontrun{
-targets <- list(density_ha = 960, species_props = c(0.55, 0.45),
-                mean_dbh = 18, sd_dbh = 8, canopy_cover = 0.40, cfl = 1.16)
-result <- simulate_stand(targets, max_iterations = 50000)
+\donttest{
+config <- pj_huffman_2009(max_iterations = 500)
+set.seed(42)
+result <- simulate_stand(
+  targets        = config$targets,
+  weights        = config$weights,
+  plot_size      = 20,
+  max_iterations = 500,
+  verbose        = FALSE,
+  plot_interval  = NULL
+)
+result$energy
+nrow(result$trees)
 }
 }

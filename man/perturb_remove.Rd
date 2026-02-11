@@ -17,3 +17,10 @@ data.table. Modified tree data
 \description{
 Remove a random tree
 }
+\examples{
+library(data.table)
+trees <- data.table(Number = 1:10, x = runif(10), y = runif(10),
+                    Species = "PIED", DBH = rep(20, 10))
+set.seed(1)
+nrow(perturb_remove(trees, min_trees = 5))  # 9
+}

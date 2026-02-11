@@ -90,10 +90,11 @@ targets <- list(
 
 \section{Examples}{
 
-Complete working examples in \code{inst/examples/}:
+See the package vignettes for complete worked examples:
 \itemize{
-  \item \code{example_01_pinyon_juniper.R} - P-J woodland (Huffman 2009)
-  \item \code{example_02_ponderosa_pine.R} - Ponderosa pine forest
+  \item \code{vignette("pinyon-juniper-woodland")} - P-J woodland (Huffman 2009)
+  \item \code{vignette("ponderosa-pine-forest")} - Ponderosa pine forest
+  \item \code{vignette("configuration-guide")} - Full configuration reference
 }
 }
 

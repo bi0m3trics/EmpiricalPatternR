@@ -46,12 +46,13 @@ from a randomly selected juniper. Position is constrained within plot bounds.
 DBH is drawn from N(dbh_mean, dbh_sd) and constrained to minimum 5cm.
 }
 \examples{
-\donttest{
-trees <- data.table::data.table(Number = 1:10, x = runif(10, 0, 100), 
-                    y = runif(10, 0, 100), 
+library(data.table)
+set.seed(1)
+trees <- data.table(Number = 1:10, x = runif(10, 0, 20),
+                    y = runif(10, 0, 20),
                     Species = sample(c("PIED", "JUSO"), 10, replace = TRUE),
-                    DBH = rnorm(10, 20, 5))
-trees_new <- perturb_add_with_nurse(trees, 100, c("PIED", "JUSO"),
+                    DBH = pmax(rnorm(10, 20, 5), 5))
+trees_new <- perturb_add_with_nurse(trees, 20, c("PIED", "JUSO"),
                                     c(0.7, 0.3), 20, 5, 2.5)
-}
+nrow(trees_new)  # nrow(trees) + 1
 }

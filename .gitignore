@@ -13,7 +13,6 @@ src/*.so
 src/*.dll
 
 # Package build files
-inst/doc
 doc/
 Meta/
 
@@ -39,3 +38,5 @@ example_pjwoodland_simulation.R
 
 # Other stuff
 misc/
+/doc/
+/Meta/

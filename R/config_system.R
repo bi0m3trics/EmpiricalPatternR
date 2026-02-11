@@ -308,6 +308,13 @@ print_config <- function(config) {
 #' @param config Configuration list
 #' @return TRUE if valid, otherwise stops with error message
 #' @export
+#' @examples
+#' config <- pj_huffman_2009()
+#' validate_config(config)
+#'
+#' # Custom config
+#' my_cfg <- create_config(name = "test")
+#' validate_config(my_cfg)
 validate_config <- function(config) {
   
   # Check required components
@@ -358,7 +365,7 @@ validate_config <- function(config) {
 #' @export
 #' @examples
 #' config <- pj_huffman_2009(density_ha = 1000)
-#' save_config(config, "my_simulation.R")
+#' save_config(config, file.path(tempdir(), "my_simulation.R"))
 save_config <- function(config, file = "simulation_config.R") {
   
   # Create R script
@@ -390,13 +397,13 @@ save_config <- function(config, file = "simulation_config.R") {
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' # Generate a template based on P-J config
-#' generate_config_template("my_pj_config.R", "my_pj_simulation")
-#' 
+#' generate_config_template(file.path(tempdir(), "my_pj_config.R"),
+#'                          "my_pj_simulation")
+#'
 #' # Generate a blank custom template
-#' generate_config_template("custom_sim.R", "custom_simulation", base_config = "custom")
-#' }
+#' generate_config_template(file.path(tempdir(), "custom_sim.R"),
+#'                          "custom_simulation", base_config = "custom")
 generate_config_template <- function(file = "my_simulation_config.R",
                                      config_name = "my_custom_config",
                                      base_config = c("pj", "custom")) {

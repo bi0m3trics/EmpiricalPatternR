@@ -10,8 +10,18 @@ calc_tree_attributes(trees)
 \item{trees}{Data table with x, y, Species, DBH columns}
 }
 \value{
-Data table with all attributes
+Data table with all attributes added
 }
 \description{
-Calculate all tree attributes from basic measurements
+Adds Height, CrownRadius, CrownDiameter, CrownArea, CrownBaseHeight,
+CrownLength, and CanopyFuelMass columns to a tree data table.
+}
+\examples{
+library(data.table)
+trees <- data.table(
+  Number = 1:3, x = c(5, 10, 15), y = c(5, 10, 15),
+  Species = c("PIED", "JUMO", "PIED"), DBH = c(15, 20, 25)
+)
+result <- calc_tree_attributes(trees)
+names(result)
 }

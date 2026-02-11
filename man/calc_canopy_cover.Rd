@@ -19,5 +19,12 @@ calc_canopy_cover(x, y, crown_radius, plot_size = 100)
 Proportion of plot covered by canopy (0-1)
 }
 \description{
-Calculate total canopy cover accounting for overlap
+Uses a raster approach (0.5 m resolution) to account for crown overlap.
+}
+\examples{
+# Small stand on a 20 m plot
+x <- c(5, 10, 15)
+y <- c(5, 10, 15)
+cr <- c(2, 3, 2.5)
+calc_canopy_cover(x, y, cr, plot_size = 20)
 }

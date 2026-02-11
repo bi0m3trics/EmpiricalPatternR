@@ -20,3 +20,15 @@ Stand metrics list
 Calculate stand metrics using parallel processing for large stands.
 Useful for stands with >500 trees.
 }
+\examples{
+library(data.table)
+set.seed(1)
+trees <- data.table(
+  Number = 1:10, x = runif(10, 0, 20), y = runif(10, 0, 20),
+  Species = sample(c("PIED", "JUMO"), 10, replace = TRUE),
+  DBH = pmax(rnorm(10, 20, 5), 5)
+)
+trees <- calc_tree_attributes(trees)
+metrics <- calc_stand_metrics_parallel(trees, plot_size = 20)
+metrics$density_ha
+}

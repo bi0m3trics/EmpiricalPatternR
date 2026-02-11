@@ -18,3 +18,10 @@ Data.table with added Height, CrownRadius, CrownBaseHeight, etc.
 Calculate tree attributes for multiple trees efficiently using vectorization.
 Significantly faster than row-by-row calculations for large stands.
 }
+\examples{
+library(data.table)
+trees <- data.table(DBH = c(15, 20, 25),
+                    Species = c("PIED", "JUMO", "PIED"))
+result <- calc_tree_attributes_fast(trees)
+names(result)
+}

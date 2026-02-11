@@ -24,3 +24,10 @@ Proportion of plot covered by canopy (0-1)
 Optimized canopy cover calculation using matrix operations instead of loops.
 Approximately 2-3x faster than original implementation.
 }
+\examples{
+set.seed(1)
+x <- runif(20, 0, 20)
+y <- runif(20, 0, 20)
+cr <- runif(20, 1, 3)
+calc_canopy_cover_fast(x, y, cr, plot_size = 20)
+}

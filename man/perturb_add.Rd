@@ -25,3 +25,10 @@ data.table. Modified tree data
 \description{
 Add a new tree
 }
+\examples{
+library(data.table)
+trees <- data.table(Number = 1:5, x = 1:5, y = 1:5,
+                    Species = "PIED", DBH = rep(20, 5))
+set.seed(1)
+perturb_add(trees, 20, c("PIED", "JUSO"), c(0.7, 0.3), 20, 5)
+}

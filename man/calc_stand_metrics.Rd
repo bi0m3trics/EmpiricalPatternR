@@ -7,7 +7,7 @@
 calc_stand_metrics(trees, plot_size = 100)
 }
 \arguments{
-\item{trees}{Data table with all tree attributes}
+\item{trees}{Data table with all tree attributes (from \code{calc_tree_attributes})}
 
 \item{plot_size}{Plot size (m)}
 }
@@ -15,5 +15,19 @@ calc_stand_metrics(trees, plot_size = 100)
 List of metrics
 }
 \description{
-Calculate all stand-level metrics
+Computes density, Clark-Evans R, DBH/height summaries, species composition,
+canopy cover, canopy bulk density, crown fuel load, and canopy depth.
+}
+\examples{
+library(data.table)
+set.seed(1)
+trees <- data.table(
+  Number = 1:10, x = runif(10, 0, 20), y = runif(10, 0, 20),
+  Species = sample(c("PIED", "JUMO"), 10, replace = TRUE),
+  DBH = pmax(rnorm(10, 20, 5), 5)
+)
+trees <- calc_tree_attributes(trees)
+metrics <- calc_stand_metrics(trees, plot_size = 20)
+metrics$density_ha
+metrics$canopy_cover
 }

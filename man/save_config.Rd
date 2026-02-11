@@ -16,5 +16,5 @@ Save configuration as R script for reproducibility.
 }
 \examples{
 config <- pj_huffman_2009(density_ha = 1000)
-save_config(config, "my_simulation.R")
+save_config(config, file.path(tempdir(), "my_simulation.R"))
 }

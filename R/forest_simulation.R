@@ -30,12 +30,21 @@ NULL
 # ==============================================================================
 
 #' Calculate total canopy cover accounting for overlap
+#'
+#' Uses a raster approach (0.5 m resolution) to account for crown overlap.
+#'
 #' @param x Vector of x coordinates (m)
 #' @param y Vector of y coordinates (m)
 #' @param crown_radius Vector of crown radii (m)
 #' @param plot_size Size of plot (assumes square, m)
 #' @return Proportion of plot covered by canopy (0-1)
 #' @export
+#' @examples
+#' # Small stand on a 20 m plot
+#' x <- c(5, 10, 15)
+#' y <- c(5, 10, 15)
+#' cr <- c(2, 3, 2.5)
+#' calc_canopy_cover(x, y, cr, plot_size = 20)
 calc_canopy_cover <- function(x, y, crown_radius, plot_size = 100) {
   # Use a raster approach to account for overlap
   # Create a grid with 0.5m resolution
@@ -79,9 +88,21 @@ calc_canopy_cover <- function(x, y, crown_radius, plot_size = 100) {
 # ==============================================================================
 
 #' Calculate all tree attributes from basic measurements
+#'
+#' Adds Height, CrownRadius, CrownDiameter, CrownArea, CrownBaseHeight,
+#' CrownLength, and CanopyFuelMass columns to a tree data table.
+#'
 #' @param trees Data table with x, y, Species, DBH columns
-#' @return Data table with all attributes
+#' @return Data table with all attributes added
 #' @export
+#' @examples
+#' library(data.table)
+#' trees <- data.table(
+#'   Number = 1:3, x = c(5, 10, 15), y = c(5, 10, 15),
+#'   Species = c("PIED", "JUMO", "PIED"), DBH = c(15, 20, 25)
+#' )
+#' result <- calc_tree_attributes(trees)
+#' names(result)
 calc_tree_attributes <- function(trees) {
   trees <- copy(trees)
   
@@ -115,10 +136,26 @@ calc_tree_attributes <- function(trees) {
 # ==============================================================================
 
 #' Calculate all stand-level metrics
-#' @param trees Data table with all tree attributes
+#'
+#' Computes density, Clark-Evans R, DBH/height summaries, species composition,
+#' canopy cover, canopy bulk density, crown fuel load, and canopy depth.
+#'
+#' @param trees Data table with all tree attributes (from \code{calc_tree_attributes})
 #' @param plot_size Plot size (m)
 #' @return List of metrics
 #' @export
+#' @examples
+#' library(data.table)
+#' set.seed(1)
+#' trees <- data.table(
+#'   Number = 1:10, x = runif(10, 0, 20), y = runif(10, 0, 20),
+#'   Species = sample(c("PIED", "JUMO"), 10, replace = TRUE),
+#'   DBH = pmax(rnorm(10, 20, 5), 5)
+#' )
+#' trees <- calc_tree_attributes(trees)
+#' metrics <- calc_stand_metrics(trees, plot_size = 20)
+#' metrics$density_ha
+#' metrics$canopy_cover
 calc_stand_metrics <- function(trees, plot_size = 100) {
   n_trees <- nrow(trees)
   plot_area_ha <- (plot_size^2) / 10000
@@ -251,6 +288,12 @@ calc_energy <- function(metrics, targets, weights, trees = NULL,
 #' @param plot_size Numeric. Plot dimension (m)
 #' @return data.table. Modified tree data
 #' @export
+#' @examples
+#' library(data.table)
+#' trees <- data.table(Number = 1:5, x = 1:5, y = 1:5,
+#'                     Species = "PIED", DBH = rep(20, 5))
+#' set.seed(1)
+#' perturb_move(trees, plot_size = 20)
 perturb_move <- function(trees, plot_size = 100) {
   idx <- sample(nrow(trees), 1)
   trees_new <- copy(trees)
@@ -265,6 +308,12 @@ perturb_move <- function(trees, plot_size = 100) {
 #' @param species_probs Numeric vector. Target species proportions
 #' @return data.table. Modified tree data
 #' @export
+#' @examples
+#' library(data.table)
+#' trees <- data.table(Number = 1:5, x = 1:5, y = 1:5,
+#'                     Species = "PIED", DBH = rep(20, 5))
+#' set.seed(1)
+#' perturb_species(trees, c("PIED", "JUSO"), c(0.7, 0.3))
 perturb_species <- function(trees, species_names, species_probs) {
   idx <- sample(nrow(trees), 1)
   trees_new <- copy(trees)
@@ -277,6 +326,12 @@ perturb_species <- function(trees, species_names, species_probs) {
 #' @param dbh_sd_perturb Numeric. SD of DBH perturbation (cm)
 #' @return data.table. Modified tree data
 #' @export
+#' @examples
+#' library(data.table)
+#' trees <- data.table(Number = 1:5, x = 1:5, y = 1:5,
+#'                     Species = "PIED", DBH = rep(20, 5))
+#' set.seed(1)
+#' perturb_dbh(trees, dbh_sd_perturb = 3)
 perturb_dbh <- function(trees, dbh_sd_perturb = 3) {
   idx <- sample(nrow(trees), 1)
   trees_new <- copy(trees)
@@ -294,6 +349,12 @@ perturb_dbh <- function(trees, dbh_sd_perturb = 3) {
 #' @param dbh_sd Numeric. SD of DBH (cm)
 #' @return data.table. Modified tree data
 #' @export
+#' @examples
+#' library(data.table)
+#' trees <- data.table(Number = 1:5, x = 1:5, y = 1:5,
+#'                     Species = "PIED", DBH = rep(20, 5))
+#' set.seed(1)
+#' perturb_add(trees, 20, c("PIED", "JUSO"), c(0.7, 0.3), 20, 5)
 perturb_add <- function(trees, plot_size, species_names, species_probs, dbh_mean, dbh_sd) {
   new_tree <- data.table(
     Number = max(trees$Number) + 1,
@@ -312,6 +373,12 @@ perturb_add <- function(trees, plot_size, species_names, species_probs, dbh_mean
 #' @param min_trees Integer. Minimum trees to maintain
 #' @return data.table. Modified tree data
 #' @export
+#' @examples
+#' library(data.table)
+#' trees <- data.table(Number = 1:10, x = runif(10), y = runif(10),
+#'                     Species = "PIED", DBH = rep(20, 10))
+#' set.seed(1)
+#' nrow(perturb_remove(trees, min_trees = 5))  # 9
 perturb_remove <- function(trees, min_trees = 10) {
   if (nrow(trees) <= min_trees) return(trees)
   idx <- sample(nrow(trees), 1)
@@ -342,11 +409,11 @@ perturb_remove <- function(trees, min_trees = 10) {
 #' either species is absent.
 #' @export
 #' @examples
-#' \donttest{
-#' trees <- data.table::data.table(x = runif(100, 0, 100), y = runif(100, 0, 100),
-#'                     Species = sample(c("PIED", "JUSO"), 100, replace = TRUE))
+#' library(data.table)
+#' set.seed(1)
+#' trees <- data.table(x = runif(50, 0, 20), y = runif(50, 0, 20),
+#'                     Species = sample(c("PIED", "JUSO"), 50, replace = TRUE))
 #' calc_nurse_tree_energy(trees, nurse_distance = 3.0)
-#' }
 calc_nurse_tree_energy <- function(trees, nurse_distance = 3.0) {
   pied_trees <- trees[Species == "PIED"]
   juxx_trees <- trees[Species %in% c("JUMO", "JUSO")]
@@ -394,14 +461,15 @@ calc_nurse_tree_energy <- function(trees, nurse_distance = 3.0) {
 #' DBH is drawn from N(dbh_mean, dbh_sd) and constrained to minimum 5cm.
 #' @export
 #' @examples
-#' \donttest{
-#' trees <- data.table::data.table(Number = 1:10, x = runif(10, 0, 100), 
-#'                     y = runif(10, 0, 100), 
+#' library(data.table)
+#' set.seed(1)
+#' trees <- data.table(Number = 1:10, x = runif(10, 0, 20),
+#'                     y = runif(10, 0, 20),
 #'                     Species = sample(c("PIED", "JUSO"), 10, replace = TRUE),
-#'                     DBH = rnorm(10, 20, 5))
-#' trees_new <- perturb_add_with_nurse(trees, 100, c("PIED", "JUSO"),
+#'                     DBH = pmax(rnorm(10, 20, 5), 5))
+#' trees_new <- perturb_add_with_nurse(trees, 20, c("PIED", "JUSO"),
 #'                                     c(0.7, 0.3), 20, 5, 2.5)
-#' }
+#' nrow(trees_new)  # nrow(trees) + 1
 perturb_add_with_nurse <- function(trees, plot_size, species_names, species_probs, 
                                    dbh_mean, dbh_sd, nurse_distance = 3.0) {
   # Decide which species to add
@@ -479,11 +547,9 @@ perturb_add_with_nurse <- function(trees, plot_size, species_names, species_prob
 #' Probabilities are constrained to [0, 1].
 #' @export
 #' @examples
-#' \donttest{
-#' trees <- data.frame(DBH = c(5, 15, 25, 35), 
+#' trees <- data.frame(DBH = c(5, 15, 25, 35),
 #'                     Species = c("PIED", "PIED", "JUSO", "JUSO"))
 #' calc_mortality_probability(trees)
-#' }
 calc_mortality_probability <- function(trees, mort_params = NULL) {
   if (is.null(mort_params)) {
     # Default parameters: smaller trees more likely to die
@@ -548,15 +614,16 @@ calc_mortality_probability <- function(trees, mort_params = NULL) {
 #' @export
 #' @seealso \code{\link{calc_mortality_probability}}
 #' @examples
-#' \dontrun{
-#' # Simulate 20% mortality
-#' trees_with_mortality <- simulate_mortality(result$trees, target_mortality_prop = 0.20)
-#' table(trees_with_mortality$Status)  # Count live vs dead
-#' 
-#' # Analyze size distribution of mortality
-#' dead_trees <- trees_with_mortality[Status == "dead"]
-#' mean(dead_trees$DBH)  # Smaller trees preferentially killed
-#' }
+#' library(data.table)
+#' set.seed(1)
+#' trees <- data.table(
+#'   Number = 1:20, x = runif(20, 0, 20), y = runif(20, 0, 20),
+#'   Species = sample(c("PIED", "JUMO"), 20, replace = TRUE),
+#'   DBH = pmax(rnorm(20, 20, 5), 5)
+#' )
+#' trees <- calc_tree_attributes(trees)
+#' result <- simulate_mortality(trees, target_mortality_prop = 0.20)
+#' table(result$Status)
 simulate_mortality <- function(trees, target_mortality_prop = 0.15, mort_params = NULL) {
   trees <- copy(trees)
   
@@ -615,10 +682,19 @@ simulate_mortality <- function(trees, target_mortality_prop = 0.15, mort_params 
 #' @return List containing trees, metrics, history, and final energy
 #' @export
 #' @examples
-#' \dontrun{
-#' targets <- list(density_ha = 960, species_props = c(0.55, 0.45),
-#'                 mean_dbh = 18, sd_dbh = 8, canopy_cover = 0.40, cfl = 1.16)
-#' result <- simulate_stand(targets, max_iterations = 50000)
+#' \donttest{
+#' config <- pj_huffman_2009(max_iterations = 500)
+#' set.seed(42)
+#' result <- simulate_stand(
+#'   targets        = config$targets,
+#'   weights        = config$weights,
+#'   plot_size      = 20,
+#'   max_iterations = 500,
+#'   verbose        = FALSE,
+#'   plot_interval  = NULL
+#' )
+#' result$energy
+#' nrow(result$trees)
 #' }
 simulate_stand <- function(targets,
                           weights = NULL,
@@ -1035,9 +1111,23 @@ plot_progress <- function(trees, metrics, targets, history, iter, energy, temper
 }
 
 #' Plot Simulation Results
-#' 
-#' @param result Result object from simulate_stand()
+#'
+#' Creates a four-panel ggplot2 diagnostic display: spatial pattern,
+#' crown coverage, DBH distribution, and convergence history.
+#'
+#' @param result Result object from \code{\link{simulate_stand}}
 #' @export
+#' @examples
+#' \donttest{
+#' config <- pj_huffman_2009(max_iterations = 200)
+#' set.seed(42)
+#' result <- simulate_stand(
+#'   targets = config$targets, weights = config$weights,
+#'   plot_size = 20, max_iterations = 200,
+#'   verbose = FALSE, plot_interval = NULL
+#' )
+#' plot_simulation_results(result)
+#' }
 plot_simulation_results <- function(result) {
   trees <- result$trees
   metrics <- result$metrics
@@ -1084,9 +1174,22 @@ plot_simulation_results <- function(result) {
 }
 
 #' Print Simulation Summary
-#' 
-#' @param result Result object from simulate_stand()
+#'
+#' Prints a formatted comparison of simulated vs. target stand metrics.
+#'
+#' @param result Result object from \code{\link{simulate_stand}}
 #' @export
+#' @examples
+#' \donttest{
+#' config <- pj_huffman_2009(max_iterations = 200)
+#' set.seed(42)
+#' result <- simulate_stand(
+#'   targets = config$targets, weights = config$weights,
+#'   plot_size = 20, max_iterations = 200,
+#'   verbose = FALSE, plot_interval = NULL
+#' )
+#' print_simulation_summary(result)
+#' }
 print_simulation_summary <- function(result) {
   metrics <- result$metrics
   targets <- result$targets
@@ -1154,15 +1257,17 @@ print_simulation_summary <- function(result) {
 #'
 #' @examples
 #' \donttest{
-#' # Use built-in config for complete parameters
-#' config <- pj_huffman_2009()
+#' config <- pj_huffman_2009(max_iterations = 200)
+#' set.seed(42)
 #' result <- simulate_stand(
-#'   targets = config$targets,
-#'   weights = config$weights,
-#'   plot_size = 100,
-#'   max_iterations = 1000
+#'   targets = config$targets, weights = config$weights,
+#'   plot_size = 20, max_iterations = 200,
+#'   verbose = FALSE, plot_interval = NULL,
+#'   mortality_prop = 0.15
 #' )
-#' analyze_simulation_results(result, config$targets, prefix = "pj_woodland")
+#' analyze_simulation_results(result, config$targets,
+#'                            prefix = file.path(tempdir(), "demo"),
+#'                            save_plots = FALSE)
 #' }
 analyze_simulation_results <- function(result, targets, 
                                       prefix = "simulation",
@@ -1399,6 +1504,12 @@ analyze_simulation_results <- function(result, targets,
   # CONVERGENCE ANALYSIS
   # ============================================================================
   
+  total_iters <- if (nrow(result$history) > 0) {
+    as.integer(max(result$history$iteration))
+  } else {
+    0L
+  }
+
   message(sprintf(
     paste0(
       "\nOPTIMIZATION CONVERGENCE\n",
@@ -1409,9 +1520,9 @@ analyze_simulation_results <- function(result, targets,
       "Status:                       %s"
     ),
     result$energy,
-    max(result$history$iteration),
+    total_iters,
     1e-5,
-    ifelse(result$energy < 1e-5, "CONVERGED ✓", "Did not fully converge")
+    ifelse(result$energy < 1e-5, "CONVERGED \u2713", "Did not fully converge")
   ))
   
   # ============================================================================
@@ -1521,6 +1632,6 @@ analyze_simulation_results <- function(result, targets,
     nurse_distances = dist_to_nurse,
     species_stats = species_stats,
     diameter_dist = diam_dist,
-    convergence = list(energy = result$energy, iterations = max(result$history$iteration))
+    convergence = list(energy = result$energy, iterations = total_iters)
   ))
 }

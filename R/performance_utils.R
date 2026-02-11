@@ -22,6 +22,12 @@
 #' @param grid_res Grid resolution (m). Default 0.5m.
 #' @return Proportion of plot covered by canopy (0-1)
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- runif(20, 0, 20)
+#' y <- runif(20, 0, 20)
+#' cr <- runif(20, 1, 3)
+#' calc_canopy_cover_fast(x, y, cr, plot_size = 20)
 calc_canopy_cover_fast <- function(x, y, crown_radius, plot_size = 100, grid_res = 0.5) {
   
   n_cells <- ceiling(plot_size / grid_res)
@@ -92,6 +98,12 @@ calc_energy_cached <- function(metrics, targets, weights, trees = NULL,
 #' @param allometric_params Allometric parameters (optional)
 #' @return Data.table with added Height, CrownRadius, CrownBaseHeight, etc.
 #' @export
+#' @examples
+#' library(data.table)
+#' trees <- data.table(DBH = c(15, 20, 25),
+#'                     Species = c("PIED", "JUMO", "PIED"))
+#' result <- calc_tree_attributes_fast(trees)
+#' names(result)
 calc_tree_attributes_fast <- function(trees, allometric_params = NULL) {
   
   trees <- copy(trees)
@@ -245,6 +257,17 @@ should_full_update <- function(iteration, batch_size = 10) {
 #' @param n_cores Number of cores to use (NULL = auto-detect)
 #' @return Stand metrics list
 #' @export
+#' @examples
+#' library(data.table)
+#' set.seed(1)
+#' trees <- data.table(
+#'   Number = 1:10, x = runif(10, 0, 20), y = runif(10, 0, 20),
+#'   Species = sample(c("PIED", "JUMO"), 10, replace = TRUE),
+#'   DBH = pmax(rnorm(10, 20, 5), 5)
+#' )
+#' trees <- calc_tree_attributes(trees)
+#' metrics <- calc_stand_metrics_parallel(trees, plot_size = 20)
+#' metrics$density_ha
 calc_stand_metrics_parallel <- function(trees, plot_size = 100, n_cores = NULL) {
   
   # For small stands, parallel overhead not worth it

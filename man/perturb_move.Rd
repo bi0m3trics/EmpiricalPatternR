@@ -17,3 +17,10 @@ data.table. Modified tree data
 \description{
 Move a random tree to a new location
 }
+\examples{
+library(data.table)
+trees <- data.table(Number = 1:5, x = 1:5, y = 1:5,
+                    Species = "PIED", DBH = rep(20, 5))
+set.seed(1)
+perturb_move(trees, plot_size = 20)
+}

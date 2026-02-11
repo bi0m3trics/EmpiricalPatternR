@@ -42,14 +42,16 @@ generates summary tables, and saves outputs to CSV files and PDF plots.
 }
 \examples{
 \donttest{
-# Use built-in config for complete parameters
-config <- pj_huffman_2009()
+config <- pj_huffman_2009(max_iterations = 200)
+set.seed(42)
 result <- simulate_stand(
-  targets = config$targets,
-  weights = config$weights,
-  plot_size = 100,
-  max_iterations = 1000
+  targets = config$targets, weights = config$weights,
+  plot_size = 20, max_iterations = 200,
+  verbose = FALSE, plot_interval = NULL,
+  mortality_prop = 0.15
 )
-analyze_simulation_results(result, config$targets, prefix = "pj_woodland")
+analyze_simulation_results(result, config$targets,
+                           prefix = file.path(tempdir(), "demo"),
+                           save_plots = FALSE)
 }
 }

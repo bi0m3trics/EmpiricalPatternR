@@ -35,9 +35,7 @@ This creates decreasing mortality with increasing DBH:
 Probabilities are constrained to [0, 1].
 }
 \examples{
-\donttest{
-trees <- data.frame(DBH = c(5, 15, 25, 35), 
+trees <- data.frame(DBH = c(5, 15, 25, 35),
                     Species = c("PIED", "PIED", "JUSO", "JUSO"))
 calc_mortality_probability(trees)
-}
 }

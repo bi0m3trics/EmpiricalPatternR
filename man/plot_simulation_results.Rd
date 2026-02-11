@@ -7,8 +7,21 @@
 plot_simulation_results(result)
 }
 \arguments{
-\item{result}{Result object from simulate_stand()}
+\item{result}{Result object from \code{\link{simulate_stand}}}
 }
 \description{
-Plot Simulation Results
+Creates a four-panel ggplot2 diagnostic display: spatial pattern,
+crown coverage, DBH distribution, and convergence history.
+}
+\examples{
+\donttest{
+config <- pj_huffman_2009(max_iterations = 200)
+set.seed(42)
+result <- simulate_stand(
+  targets = config$targets, weights = config$weights,
+  plot_size = 20, max_iterations = 200,
+  verbose = FALSE, plot_interval = NULL
+)
+plot_simulation_results(result)
+}
 }
