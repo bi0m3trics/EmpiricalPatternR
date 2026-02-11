@@ -63,17 +63,6 @@ To also build the vignettes during installation (takes a bit longer):
 remotes::install_github("bi0m3trics/EmpiricalPatternR", build_vignettes = TRUE)
 ```
 
-### Verify installation
-
-``` r
-library(EmpiricalPatternR)
-packageVersion("EmpiricalPatternR")
-# [1] '0.1.0'
-=======
-devtools::install_github("Bi0m3trics/EmpiricalPatternR")
->>>>>>> ae50238afe4973a5fcc79438159306aa3dda6789
-```
-
 ## Quick Start
 
 This minimal example simulates a pinyon-juniper woodland in under a minute.
