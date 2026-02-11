@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Andrew Sánchez Meador" />
+
+<meta name="date" content="2026-02-10" />
+
+<title>Configuration Guide</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Configuration Guide</h1>
+<h4 class="author">Andrew Sánchez Meador</h4>
+<h4 class="date">2026-02-10</h4>
+
+
+
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>Every simulation in <strong>EmpiricalPatternR</strong> is driven by a
+<em>configuration list</em> that bundles four components:</p>
+<table>
+<colgroup>
+<col width="55%" />
+<col width="45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>targets</strong></td>
+<td>Stand structure goals the optimizer tries to match</td>
+</tr>
+<tr class="even">
+<td><strong>weights</strong></td>
+<td>How much each target matters during optimization</td>
+</tr>
+<tr class="odd">
+<td><strong>simulation</strong></td>
+<td>Algorithm control (iterations, temperature, plot size, …)</td>
+</tr>
+<tr class="even">
+<td><strong>allometric_params</strong></td>
+<td>Species-specific equations for crown, height, foliage</td>
+</tr>
+</tbody>
+</table>
+<p>This vignette explains every entry in detail so you can create,
+modify, and validate configurations for any forest type.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(EmpiricalPatternR)</span></code></pre></div>
+<hr />
+</div>
+<div id="creating-a-configuration" class="section level2">
+<h2>1 Creating a Configuration</h2>
+<div id="pre-built-pj_huffman_2009" class="section level3">
+<h3>1.1 Pre-built: <code>pj_huffman_2009()</code></h3>
+<p>The fastest way to get started is the pre-built pinyon-juniper
+configuration:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>config <span class="ot">&lt;-</span> <span class="fu">pj_huffman_2009</span>()</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">print_config</span>(config)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; ========================================================================</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; SIMULATION CONFIGURATION: Default</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; ========================================================================</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; TARGET METRICS:</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt;   Density:        927 trees/ha</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt;   Species:        75.5% PIED, 24.5% JUSO</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt;   Mean DBH:       20.5 cm (SD = 8.5 cm)</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt;   Canopy Cover:   40.0%</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt;   CFL:            1.10 kg/m^2</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt;   Spatial R:      1.00</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; OPTIMIZATION WEIGHTS (0-100 scale):</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt;   Density:        70 (HIGH)</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt;   Species:        70 (HIGH)</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt;   Canopy Cover:   70 (HIGH)</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt;   CFL:            60 (HIGH)</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">#&gt;   Spatial R:      10 (emergent)</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="co">#&gt; SIMULATION SETTINGS:</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="co">#&gt;   Max Iterations: 50000</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="co">#&gt;   Plot Size:      20.0 m</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="co">#&gt;   Plotting:       ENABLED</span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="co">#&gt;   Mortality:      20.0%</span></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="co">#&gt; ========================================================================</span></span></code></pre></div>
+<p>You can override any default at call time:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>config <span class="ot">&lt;-</span> <span class="fu">pj_huffman_2009</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="at">density_ha     =</span> <span class="dv">600</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="at">canopy_cover   =</span> <span class="fl">0.30</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  <span class="at">cfl            =</span> <span class="fl">0.80</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  <span class="at">max_iterations =</span> <span class="dv">5000</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="custom-create_config" class="section level3">
+<h3>1.2 Custom: <code>create_config()</code></h3>
+<p>For any forest type, build a configuration from scratch:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>my_config <span class="ot">&lt;-</span> <span class="fu">create_config</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">&quot;My Custom Stand&quot;</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="at">targets =</span> <span class="fu">list</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="at">density_ha    =</span> <span class="dv">500</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    <span class="at">species_props =</span> <span class="fu">c</span>(<span class="at">SP1 =</span> <span class="fl">0.60</span>, <span class="at">SP2 =</span> <span class="fl">0.40</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>    <span class="at">species_names =</span> <span class="fu">c</span>(<span class="st">&quot;SP1&quot;</span>, <span class="st">&quot;SP2&quot;</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>    <span class="at">mean_dbh      =</span> <span class="fl">25.0</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    <span class="at">sd_dbh        =</span> <span class="fl">10.0</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>    <span class="at">mean_height   =</span> <span class="fl">8.0</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>    <span class="at">sd_height     =</span> <span class="fl">3.0</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    <span class="at">canopy_cover  =</span> <span class="fl">0.50</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>    <span class="at">cfl           =</span> <span class="fl">1.0</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>    <span class="at">clark_evans_r =</span> <span class="fl">1.0</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>  ),</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>    <span class="at">ce           =</span> <span class="dv">10</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>    <span class="at">dbh_mean     =</span> <span class="dv">5</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>    <span class="at">dbh_sd       =</span> <span class="dv">5</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>    <span class="at">height_mean  =</span> <span class="dv">5</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>    <span class="at">height_sd    =</span> <span class="dv">5</span>,</span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>    <span class="at">species      =</span> <span class="dv">70</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>    <span class="at">canopy_cover =</span> <span class="dv">70</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>    <span class="at">cfl          =</span> <span class="dv">60</span>,</span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>    <span class="at">density      =</span> <span class="dv">70</span>,</span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>    <span class="at">nurse_effect =</span> <span class="dv">0</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>  ),</span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>  <span class="at">simulation =</span> <span class="fu">list</span>(</span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>    <span class="at">plot_size        =</span> <span class="dv">100</span>,</span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>    <span class="at">max_iterations   =</span> <span class="dv">10000</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>    <span class="at">temp_initial     =</span> <span class="dv">100</span>,</span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>    <span class="at">temp_final       =</span> <span class="fl">0.01</span>,</span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a>    <span class="at">cooling_rate     =</span> <span class="fl">0.9999</span>,</span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a>    <span class="at">plot_interval    =</span> <span class="dv">1000</span>,</span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a>    <span class="at">verbose          =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a>    <span class="at">enable_plotting  =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a>    <span class="at">nurse_distance   =</span> <span class="dv">0</span>,</span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a>    <span class="at">use_nurse_effect =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a>    <span class="at">mortality_prop   =</span> <span class="fl">0.15</span></span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a>  )</span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="template-file-generate_config_template" class="section level3">
+<h3>1.3 Template file: <code>generate_config_template()</code></h3>
+<p>Want an editable R script you can modify and
+<code>source()</code>?</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">generate_config_template</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="at">file        =</span> <span class="st">&quot;my_sim_config.R&quot;</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="at">config_name =</span> <span class="st">&quot;my_custom_sim&quot;</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="at">base_config =</span> <span class="st">&quot;pj&quot;</span>          <span class="co"># or &quot;custom&quot; for a blank slate</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>)</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co"># Then edit the file and:</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;my_sim_config.R&quot;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>config <span class="ot">&lt;-</span> <span class="fu">my_custom_sim</span>()</span></code></pre></div>
+<hr />
+</div>
+</div>
+<div id="targets-configtargets" class="section level2">
+<h2>2 Targets — <code>config$targets</code></h2>
+<p>Targets define the stand characteristics the optimizer will try to
+reproduce.</p>
+<div id="density_ha-numeric" class="section level3">
+<h3>2.1 <code>density_ha</code> (numeric)</h3>
+<p>Total tree density in trees per hectare. The optimizer converts this
+to an expected tree count for the plot: <span class="math inline">\(n =
+\text{density\_ha} \times \text{plot\_size}^2 / 10\,000\)</span>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># 927 trees/ha on a 20 m × 20 m plot ≈ 37 trees</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="dv">927</span> <span class="sc">*</span> (<span class="dv">20</span><span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="dv">10000</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; [1] 37.08</span></span></code></pre></div>
+</div>
+<div id="species_props-named-numeric-vector" class="section level3">
+<h3>2.2 <code>species_props</code> (named numeric vector)</h3>
+<p>Target proportions for each species. Names <strong>must</strong>
+match the species codes used in allometric parameter lists (e.g.,
+<code>&quot;PIED&quot;</code>, <code>&quot;JUSO&quot;</code>, <code>&quot;PIPO&quot;</code>). Must sum
+to 1.0.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Two species</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">c</span>(<span class="at">PIED =</span> <span class="fl">0.755</span>, <span class="at">JUSO =</span> <span class="fl">0.245</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt;  PIED  JUSO </span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt; 0.755 0.245</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co"># Three species</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="fu">c</span>(<span class="at">PIPO =</span> <span class="fl">0.70</span>, <span class="at">PSME =</span> <span class="fl">0.20</span>, <span class="at">ABCO =</span> <span class="fl">0.10</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt; PIPO PSME ABCO </span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt;  0.7  0.2  0.1</span></span></code></pre></div>
+</div>
+<div id="species_names-character-vector" class="section level3">
+<h3>2.3 <code>species_names</code> (character vector)</h3>
+<p>Character vector of species codes matching
+<code>species_props</code>. Used internally to sample species
+identities.</p>
+</div>
+<div id="mean_dbh-sd_dbh-numeric-cm" class="section level3">
+<h3>2.4 <code>mean_dbh</code> / <code>sd_dbh</code> (numeric, cm)</h3>
+<p>Target mean and standard deviation of diameter at breast height.
+Initial trees are drawn from <span class="math inline">\(\text{Normal}(\text{mean\_dbh},\,
+\text{sd\_dbh})\)</span>, truncated at a 5 cm minimum.</p>
+</div>
+<div id="mean_height-sd_height-numeric-m" class="section level3">
+<h3>2.5 <code>mean_height</code> / <code>sd_height</code> (numeric,
+m)</h3>
+<p>Target mean and standard deviation of total tree height. Heights are
+<strong>not</strong> drawn directly; they are predicted allometrically
+from DBH. These targets are matched via the optimizer adjusting the DBH
+distribution.</p>
+</div>
+<div id="canopy_cover-numeric-01" class="section level3">
+<h3>2.6 <code>canopy_cover</code> (numeric, 0–1)</h3>
+<p>Target proportion of the plot area covered by tree crowns. Calculated
+with overlap removal using a 0.5 m raster grid.</p>
+</div>
+<div id="cfl-canopy-fuel-load-numeric-kgm²" class="section level3">
+<h3>2.7 <code>cfl</code> — canopy fuel load (numeric, kg/m²)</h3>
+<p>Target crown fuel load = total foliage mass / plot area. Important
+for fire behavior modeling.</p>
+</div>
+<div id="clark_evans_r-numeric" class="section level3">
+<h3>2.8 <code>clark_evans_r</code> (numeric)</h3>
+<p>Target Clark-Evans nearest-neighbour index:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Value</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>&lt; 1.0</td>
+<td>Clumped (aggregated)</td>
+</tr>
+<tr class="even">
+<td>≈ 1.0</td>
+<td>Random (Poisson)</td>
+</tr>
+<tr class="odd">
+<td>&gt; 1.0</td>
+<td>Regular (dispersed)</td>
+</tr>
+</tbody>
+</table>
+<p>Typical values: 0.8–1.5.</p>
+<hr />
+</div>
+</div>
+<div id="weights-configweights" class="section level2">
+<h2>3 Weights — <code>config$weights</code></h2>
+<p>Weights tell the optimizer how important each target is on a
+<strong>0–100 scale</strong>. The energy function computes a weighted
+sum of squared relative errors.</p>
+<div id="weight-interpretation" class="section level3">
+<h3>Weight interpretation</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Range</th>
+<th>Priority</th>
+<th>When to use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>Ignore</td>
+<td>Metric not relevant for your analysis</td>
+</tr>
+<tr class="even">
+<td>1–20</td>
+<td>Low</td>
+<td>Let it emerge from other constraints</td>
+</tr>
+<tr class="odd">
+<td>20–50</td>
+<td>Moderate</td>
+<td>Balance with other metrics</td>
+</tr>
+<tr class="even">
+<td>50–80</td>
+<td>High</td>
+<td>Actively optimize toward target</td>
+</tr>
+<tr class="odd">
+<td>80–100</td>
+<td>Critical</td>
+<td>Dominates the optimization</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="individual-weights" class="section level3">
+<h3>Individual weights</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Weight</th>
+<th>Default (P-J)</th>
+<th>Controls</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ce</code></td>
+<td>10</td>
+<td>Clark-Evans spatial pattern</td>
+</tr>
+<tr class="even">
+<td><code>dbh_mean</code></td>
+<td>2</td>
+<td>Mean DBH</td>
+</tr>
+<tr class="odd">
+<td><code>dbh_sd</code></td>
+<td>2</td>
+<td>DBH standard deviation</td>
+</tr>
+<tr class="even">
+<td><code>height_mean</code></td>
+<td>1</td>
+<td>Mean height</td>
+</tr>
+<tr class="odd">
+<td><code>height_sd</code></td>
+<td>1</td>
+<td>Height standard deviation</td>
+</tr>
+<tr class="even">
+<td><code>species</code></td>
+<td>70</td>
+<td>Species composition</td>
+</tr>
+<tr class="odd">
+<td><code>density</code></td>
+<td>70</td>
+<td>Stand density (trees/ha)</td>
+</tr>
+<tr class="even">
+<td><code>canopy_cover</code></td>
+<td>70</td>
+<td>Canopy cover</td>
+</tr>
+<tr class="odd">
+<td><code>cfl</code></td>
+<td>60</td>
+<td>Canopy fuel load</td>
+</tr>
+<tr class="even">
+<td><code>nurse_effect</code></td>
+<td>5</td>
+<td>PIED proximity to junipers</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tips" class="section level3">
+<h3>Tips</h3>
+<ul>
+<li>Set <strong>density</strong>, <strong>species</strong>, and
+<strong>canopy_cover</strong> high (60–80) — these are directly observed
+field metrics.</li>
+<li>Keep <strong>ce</strong>, <strong>dbh_mean</strong>, and
+<strong>height</strong> low (1–20) — these tend to emerge naturally from
+allometry and density.</li>
+<li>Set <code>nurse_effect = 0</code> for forest types without
+facilitation.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Weights for a managed ponderosa stand</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">list</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="at">ce =</span> <span class="dv">30</span>, <span class="at">dbh_mean =</span> <span class="dv">15</span>, <span class="at">dbh_sd =</span> <span class="dv">10</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="at">height_mean =</span> <span class="dv">10</span>, <span class="at">height_sd =</span> <span class="dv">5</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  <span class="at">species =</span> <span class="dv">60</span>, <span class="at">canopy_cover =</span> <span class="dv">60</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  <span class="at">cfl =</span> <span class="dv">50</span>, <span class="at">density =</span> <span class="dv">80</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>  <span class="at">nurse_effect =</span> <span class="dv">0</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>)</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; $ce</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; [1] 30</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">#&gt; $dbh_mean</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt; [1] 15</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt; $dbh_sd</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; [1] 10</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#&gt; $height_mean</span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co">#&gt; [1] 10</span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#&gt; $height_sd</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; [1] 5</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a><span class="co">#&gt; $species</span></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="co">#&gt; [1] 60</span></span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a><span class="co">#&gt; $canopy_cover</span></span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a><span class="co">#&gt; [1] 60</span></span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a><span class="co">#&gt; $cfl</span></span>
+<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a><span class="co">#&gt; [1] 50</span></span>
+<span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a><span class="co">#&gt; $density</span></span>
+<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a><span class="co">#&gt; [1] 80</span></span>
+<span id="cb8-35"><a href="#cb8-35" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-36"><a href="#cb8-36" tabindex="-1"></a><span class="co">#&gt; $nurse_effect</span></span>
+<span id="cb8-37"><a href="#cb8-37" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+<hr />
+</div>
+</div>
+<div id="simulation-parameters-configsimulation" class="section level2">
+<h2>4 Simulation Parameters — <code>config$simulation</code></h2>
+<p>These control the simulated annealing algorithm and output.</p>
+<div id="plot_size-numeric-m" class="section level3">
+<h3>4.1 <code>plot_size</code> (numeric, m)</h3>
+<p>Side length of the square simulation plot. A 100 m plot gives 1 ha; a
+20 m plot gives 0.04 ha. Smaller plots run faster but have fewer trees
+and more edge effects.</p>
+</div>
+<div id="max_iterations-integer" class="section level3">
+<h3>4.2 <code>max_iterations</code> (integer)</h3>
+<p>Total number of perturbation attempts.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Count</th>
+<th>Use case</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>100–500</td>
+<td>Quick smoke test</td>
+</tr>
+<tr class="even">
+<td>1,000–5,000</td>
+<td>Development &amp; exploration</td>
+</tr>
+<tr class="odd">
+<td>5,000–10,000</td>
+<td>Standard analysis</td>
+</tr>
+<tr class="even">
+<td>10,000–50,000+</td>
+<td>Publication quality</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="temp_initial-numeric" class="section level3">
+<h3>4.3 <code>temp_initial</code> (numeric)</h3>
+<p>Starting temperature for simulated annealing. Higher values allow
+more exploration early on. Default: 100 in
+<code>pj_huffman_2009()</code>.</p>
+</div>
+<div id="temp_final-numeric" class="section level3">
+<h3>4.4 <code>temp_final</code> (numeric)</h3>
+<p>Temperature at which the algorithm effectively freezes. Default:
+0.01.</p>
+</div>
+<div id="cooling_rate-numeric-01" class="section level3">
+<h3>4.5 <code>cooling_rate</code> (numeric, 0–1)</h3>
+<p>Multiplicative cooling factor applied each iteration: <span class="math inline">\(T_{i+1} = T_i \times
+\text{cooling\_rate}\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Value</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.999</td>
+<td>Fast cooling — fewer iterations needed</td>
+</tr>
+<tr class="even">
+<td>0.9999</td>
+<td>Standard — good balance</td>
+</tr>
+<tr class="odd">
+<td>0.99995+</td>
+<td>Slow cooling — thorough exploration</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="plot_interval-integer" class="section level3">
+<h3>4.6 <code>plot_interval</code> (integer)</h3>
+<p>Update progress plots every <em>N</em> iterations. Set to
+<code>NULL</code> (or omit) to disable live plotting. Default: 1000.</p>
+</div>
+<div id="verbose-logical" class="section level3">
+<h3>4.7 <code>verbose</code> (logical)</h3>
+<p>Print iteration-level progress messages to the console.</p>
+</div>
+<div id="enable_plotting-logical" class="section level3">
+<h3>4.8 <code>enable_plotting</code> (logical)</h3>
+<p>Master switch for live plots during the run.</p>
+</div>
+<div id="nurse_distance-numeric-m" class="section level3">
+<h3>4.9 <code>nurse_distance</code> (numeric, m)</h3>
+<p>Target mean distance from PIED to nearest juniper. Only used when
+<code>use_nurse_effect = TRUE</code>. Based on field observations;
+default 3.0 m for P-J woodlands.</p>
+</div>
+<div id="use_nurse_effect-logical" class="section level3">
+<h3>4.10 <code>use_nurse_effect</code> (logical)</h3>
+<p>Include nurse tree facilitation energy component. Set
+<code>TRUE</code> for P-J woodlands, <code>FALSE</code> for other forest
+types.</p>
+</div>
+<div id="mortality_prop-numeric-01" class="section level3">
+<h3>4.11 <code>mortality_prop</code> (numeric, 0–1)</h3>
+<p>Proportion of trees killed <strong>after</strong> the optimization
+finishes. Mortality is size-dependent (smaller trees die
+preferentially).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Value</th>
+<th>Scenario</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.0</td>
+<td>No disturbance</td>
+</tr>
+<tr class="even">
+<td>0.05–0.15</td>
+<td>Low-intensity disturbance</td>
+</tr>
+<tr class="odd">
+<td>0.15–0.30</td>
+<td>Moderate disturbance</td>
+</tr>
+<tr class="even">
+<td>0.30–0.60</td>
+<td>High-intensity disturbance</td>
+</tr>
+<tr class="odd">
+<td>0.60–0.90</td>
+<td>Stand-replacing event</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+</div>
+<div id="allometric-parameters-configallometric_params" class="section level2">
+<h2>5 Allometric Parameters — <code>config$allometric_params</code></h2>
+<p>These control tree attribute prediction from DBH. See
+<code>?get_default_allometric_params</code> and
+<code>?get_ponderosa_allometric_params</code> for the shipped parameter
+sets.</p>
+<div id="crown_diameter" class="section level3">
+<h3>5.1 <code>crown_diameter</code></h3>
+<p>Species-keyed list of log-log crown diameter coefficients:</p>
+<p><span class="math display">\[\ln(\text{CD}) = a + b \ln(\text{DBH}) +
+c \ln(H)\]</span></p>
+<p>Crown radius = CD / 2, with a 0.3 m floor.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">get_default_allometric_params</span>()</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>params<span class="sc">$</span>crown_diameter<span class="sc">$</span>PIED</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">#&gt; $a</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#&gt; [1] -0.0915</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#&gt; $b</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.2484</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt; $c</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#&gt; [1] 0.3177</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">#&gt; $n</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">#&gt; [1] 1658</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="co">#&gt; $rmse</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co">#&gt; [1] 0.94</span></span></code></pre></div>
+</div>
+<div id="height" class="section level3">
+<h3>5.2 <code>height</code></h3>
+<p>Asymptotic exponential height model:</p>
+<p><span class="math display">\[H = 1.3 + a \bigl(1 - e^{-b \cdot
+\text{DBH}}\bigr)\]</span></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>params<span class="sc">$</span>height<span class="sc">$</span>PIED</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#&gt; $a</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; [1] 12</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; $b</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; [1] 0.045</span></span></code></pre></div>
+</div>
+<div id="crown-base-height" class="section level3">
+<h3>5.3 Crown base height</h3>
+<p>Two methods controlled by <code>cbh_method</code>:</p>
+<p><strong><code>&quot;reese_quadratic&quot;</code></strong> (default for
+P-J):</p>
+<p><span class="math display">\[\text{CBH} = b_0 + b_1 H + b_2 D + b_3
+H^2 + b_4 D^2 + b_5 (H \cdot D)\]</span></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>params<span class="sc">$</span>cbh_method</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;reese_quadratic&quot;</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>params<span class="sc">$</span>cbh_reese<span class="sc">$</span>PIED</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co">#&gt; $b0</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#&gt; [1] -0.068753</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#&gt; $b1</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#&gt; [1] 0.082146</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co">#&gt; $b2</span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="co">#&gt; [1] -0.000171</span></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co">#&gt; $b3</span></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="co">#&gt; [1] 0.024922</span></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co">#&gt; $b4</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="co">#&gt; [1] 0.000964</span></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a><span class="co">#&gt; $b5</span></span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="co">#&gt; [1] -0.009256</span></span></code></pre></div>
+<p><strong><code>&quot;simple_ratio&quot;</code></strong> (ponderosa and
+generic):</p>
+<p><span class="math display">\[\text{CBH} = \text{cbh\_ratio} \times
+H\]</span></p>
+</div>
+<div id="foliage-biomass" class="section level3">
+<h3>5.4 Foliage biomass</h3>
+<p>Two methods controlled by <code>foliage_method</code>:</p>
+<p><strong><code>&quot;miller_1981&quot;</code></strong> (default for P-J):</p>
+<p><span class="math display">\[\ln(W_f) = a + b
+\ln(\text{DBH})\]</span></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>params<span class="sc">$</span>foliage_method</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;miller_1981&quot;</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>params<span class="sc">$</span>foliage_miller<span class="sc">$</span>PIED</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#&gt; $a</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt; [1] -1.593</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt; $b</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co">#&gt; [1] 2.03</span></span></code></pre></div>
+<p><strong><code>&quot;crown_volume&quot;</code></strong> (generic):</p>
+<p><span class="math display">\[\text{mass} = a \cdot
+\text{DBH}^b\]</span></p>
+</div>
+<div id="adding-your-own-species" class="section level3">
+<h3>5.5 Adding your own species</h3>
+<p>Create a modified copy of an existing parameter set:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>my_params <span class="ot">&lt;-</span> <span class="fu">get_default_allometric_params</span>()</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co"># Add a new species</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>my_params<span class="sc">$</span>crown_diameter<span class="sc">$</span>QUGA <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">b =</span> <span class="fl">0.25</span>, <span class="at">c =</span> <span class="fl">0.40</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>my_params<span class="sc">$</span>height<span class="sc">$</span>QUGA          <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">15</span>, <span class="at">b =</span> <span class="fl">0.035</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>my_params<span class="sc">$</span>crown_ratio<span class="sc">$</span>QUGA     <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="fl">0.70</span>, <span class="at">b =</span> <span class="fl">0.09</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>my_params<span class="sc">$</span>crown_mass<span class="sc">$</span>QUGA      <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="fl">0.18</span>, <span class="at">b =</span> <span class="fl">2.15</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co"># Use in a config</span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>config <span class="ot">&lt;-</span> <span class="fu">create_config</span>(</span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">&quot;Gambel Oak Mix&quot;</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a>  <span class="at">targets =</span> <span class="fu">list</span>(</span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a>    <span class="at">density_ha    =</span> <span class="dv">800</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>    <span class="at">species_props =</span> <span class="fu">c</span>(<span class="at">PIED =</span> <span class="fl">0.50</span>, <span class="at">QUGA =</span> <span class="fl">0.50</span>),</span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>    <span class="at">species_names =</span> <span class="fu">c</span>(<span class="st">&quot;PIED&quot;</span>, <span class="st">&quot;QUGA&quot;</span>),</span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>    <span class="at">mean_dbh =</span> <span class="dv">18</span>, <span class="at">sd_dbh =</span> <span class="dv">7</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a>    <span class="at">mean_height =</span> <span class="dv">6</span>, <span class="at">sd_height =</span> <span class="dv">2</span>,</span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a>    <span class="at">canopy_cover =</span> <span class="fl">0.55</span>, <span class="at">cfl =</span> <span class="fl">0.90</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a>    <span class="at">clark_evans_r =</span> <span class="fl">0.9</span></span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a>  ),</span>
+<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a>  <span class="at">allometric_params =</span> my_params</span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a>)</span></code></pre></div>
+<hr />
+</div>
+</div>
+<div id="validation" class="section level2">
+<h2>6 Validation</h2>
+<p>Always validate before running:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>config <span class="ot">&lt;-</span> <span class="fu">pj_huffman_2009</span>()</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="fu">validate_config</span>(config)</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co">#&gt; Configuration validated successfully</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<p><code>validate_config()</code> checks:</p>
+<ul>
+<li>Required components present (<code>targets</code>,
+<code>weights</code>, <code>simulation</code>)</li>
+<li>Required target fields present (<code>density_ha</code>,
+<code>species_props</code>, <code>species_names</code>,
+<code>canopy_cover</code>, <code>cfl</code>)</li>
+<li>Density and plot size are positive</li>
+<li>Canopy cover is between 0 and 1</li>
+<li>Species proportions sum to 1.0 (warns and normalizes if not)</li>
+<li>Max iterations is positive</li>
+</ul>
+<hr />
+</div>
+<div id="saving-and-sharing" class="section level2">
+<h2>7 Saving and Sharing</h2>
+<div id="save-as-r-object" class="section level3">
+<h3>Save as R object</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">save_config</span>(config, <span class="st">&quot;my_config.R&quot;</span>)</span></code></pre></div>
+</div>
+<div id="generate-an-editable-template" class="section level3">
+<h3>Generate an editable template</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">generate_config_template</span>(<span class="st">&quot;my_template.R&quot;</span>, <span class="st">&quot;my_sim&quot;</span>, <span class="at">base_config =</span> <span class="st">&quot;pj&quot;</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="co"># Edit the file, then source it</span></span></code></pre></div>
+<hr />
+</div>
+</div>
+<div id="quick-reference" class="section level2">
+<h2>8 Quick Reference</h2>
+<pre><code>#&gt; 
+#&gt; config &lt;- create_config(
+#&gt;   name              = &#39;My Stand&#39;,
+#&gt;   targets = list(
+#&gt;     density_ha      = 500,
+#&gt;     species_props   = c(SP1 = 0.6, SP2 = 0.4),
+#&gt;     species_names   = c(&#39;SP1&#39;, &#39;SP2&#39;),
+#&gt;     mean_dbh        = 25, sd_dbh = 10,
+#&gt;     mean_height     = 8,  sd_height = 3,
+#&gt;     canopy_cover    = 0.50,
+#&gt;     cfl             = 1.0,
+#&gt;     clark_evans_r   = 1.0
+#&gt;   ),
+#&gt;   weights = list(
+#&gt;     ce = 10, dbh_mean = 5, dbh_sd = 5,
+#&gt;     height_mean = 5, height_sd = 5,
+#&gt;     species = 70, canopy_cover = 70, cfl = 60,
+#&gt;     density = 70, nurse_effect = 0
+#&gt;   ),
+#&gt;   simulation = list(
+#&gt;     plot_size = 100, max_iterations = 10000,
+#&gt;     temp_initial = 100, temp_final = 0.01,
+#&gt;     cooling_rate = 0.9999, plot_interval = 1000,
+#&gt;     verbose = TRUE, enable_plotting = TRUE,
+#&gt;     nurse_distance = 0, use_nurse_effect = FALSE,
+#&gt;     mortality_prop = 0.15
+#&gt;   )
+#&gt; )</code></pre>
+</div>
+<div id="see-also" class="section level2">
+<h2>See Also</h2>
+<ul>
+<li><code>vignette(&quot;pinyon-juniper-woodland&quot;)</code> — complete P-J
+workflow</li>
+<li><code>vignette(&quot;ponderosa-pine-forest&quot;)</code> — custom forest type
+example</li>
+<li><code>?pj_huffman_2009</code> — pre-built shortcut</li>
+<li><code>?create_config</code> — config builder</li>
+<li><code>?validate_config</code> — validation rules</li>
+<li><code>?get_default_allometric_params</code> — P-J allometric
+details</li>
+<li><code>?get_ponderosa_allometric_params</code> — ponderosa allometric
+details</li>
+</ul>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,506 @@
+---
+title: "Configuration Guide"
+author: "Andrew Sánchez Meador"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Configuration Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Overview
+
+Every simulation in **EmpiricalPatternR** is driven by a *configuration list*
+that bundles four components:
+
+| Component | Purpose |
+|-----------|---------|
+| **targets** | Stand structure goals the optimizer tries to match |
+| **weights** | How much each target matters during optimization |
+| **simulation** | Algorithm control (iterations, temperature, plot size, ...) |
+| **allometric_params** | Species-specific equations for crown, height, foliage |
+
+This vignette explains every entry in detail so you can create, modify, and
+validate configurations for any forest type.
+
+```{r load}
+library(EmpiricalPatternR)
+```
+
+---
+
+## 1 Creating a Configuration
+
+### 1.1 Pre-built: `pj_huffman_2009()`
+
+The fastest way to get started is the pre-built pinyon-juniper configuration:
+
+```{r prebuilt}
+config <- pj_huffman_2009()
+print_config(config)
+```
+
+You can override any default at call time:
+
+```{r prebuilt-custom}
+config <- pj_huffman_2009(
+  density_ha     = 600,
+  canopy_cover   = 0.30,
+  cfl            = 0.80,
+  max_iterations = 5000
+)
+```
+
+### 1.2 Custom: `create_config()`
+
+For any forest type, build a configuration from scratch:
+
+```{r custom-config}
+my_config <- create_config(
+  name = "My Custom Stand",
+  targets = list(
+    density_ha    = 500,
+    species_props = c(SP1 = 0.60, SP2 = 0.40),
+    species_names = c("SP1", "SP2"),
+    mean_dbh      = 25.0,
+    sd_dbh        = 10.0,
+    mean_height   = 8.0,
+    sd_height     = 3.0,
+    canopy_cover  = 0.50,
+    cfl           = 1.0,
+    clark_evans_r = 1.0
+  ),
+  weights = list(
+    ce           = 10,
+    dbh_mean     = 5,
+    dbh_sd       = 5,
+    height_mean  = 5,
+    height_sd    = 5,
+    species      = 70,
+    canopy_cover = 70,
+    cfl          = 60,
+    density      = 70,
+    nurse_effect = 0
+  ),
+  simulation = list(
+    plot_size        = 100,
+    max_iterations   = 10000,
+    temp_initial     = 100,
+    temp_final       = 0.01,
+    cooling_rate     = 0.9999,
+    plot_interval    = 1000,
+    verbose          = TRUE,
+    enable_plotting  = TRUE,
+    nurse_distance   = 0,
+    use_nurse_effect = FALSE,
+    mortality_prop   = 0.15
+  )
+)
+```
+
+### 1.3 Template file: `generate_config_template()`
+
+Want an editable R script you can modify and `source()`?
+
+```{r template, eval = FALSE}
+generate_config_template(
+  file        = "my_sim_config.R",
+  config_name = "my_custom_sim",
+  base_config = "pj"          # or "custom" for a blank slate
+)
+
+# Then edit the file and:
+source("my_sim_config.R")
+config <- my_custom_sim()
+```
+
+---
+
+## 2 Targets — `config$targets`
+
+Targets define the stand characteristics the optimizer will try to reproduce.
+
+### 2.1 `density_ha` (numeric)
+
+Total tree density in trees per hectare.
+The optimizer converts this to an expected tree count for the plot:
+$n = \text{density\_ha} \times \text{plot\_size}^2 / 10\,000$.
+
+```{r density-example}
+# 927 trees/ha on a 20 m × 20 m plot ≈ 37 trees
+927 * (20^2) / 10000
+```
+
+### 2.2 `species_props` (named numeric vector)
+
+Target proportions for each species.
+Names **must** match the species codes used in allometric parameter lists
+(e.g., `"PIED"`, `"JUSO"`, `"PIPO"`).
+Must sum to 1.0.
+
+```{r species-props}
+# Two species
+c(PIED = 0.755, JUSO = 0.245)
+
+# Three species
+c(PIPO = 0.70, PSME = 0.20, ABCO = 0.10)
+```
+
+### 2.3 `species_names` (character vector)
+
+Character vector of species codes matching `species_props`.
+Used internally to sample species identities.
+
+### 2.4 `mean_dbh` / `sd_dbh` (numeric, cm)
+
+Target mean and standard deviation of diameter at breast height.
+Initial trees are drawn from $\text{Normal}(\text{mean\_dbh},\, \text{sd\_dbh})$,
+truncated at a 5 cm minimum.
+
+### 2.5 `mean_height` / `sd_height` (numeric, m)
+
+Target mean and standard deviation of total tree height.
+Heights are **not** drawn directly; they are predicted allometrically from DBH.
+These targets are matched via the optimizer adjusting the DBH distribution.
+
+### 2.6 `canopy_cover` (numeric, 0--1)
+
+Target proportion of the plot area covered by tree crowns.
+Calculated with overlap removal using a 0.5 m raster grid.
+
+### 2.7 `cfl` — canopy fuel load (numeric, kg/m²)
+
+Target crown fuel load = total foliage mass / plot area.
+Important for fire behavior modeling.
+
+### 2.8 `clark_evans_r` (numeric)
+
+Target Clark-Evans nearest-neighbour index:
+
+| Value | Interpretation |
+|-------|----------------|
+| < 1.0 | Clumped (aggregated) |
+| ≈ 1.0 | Random (Poisson) |
+| > 1.0 | Regular (dispersed) |
+
+Typical values: 0.8--1.5.
+
+---
+
+## 3 Weights — `config$weights`
+
+Weights tell the optimizer how important each target is on a **0--100 scale**.
+The energy function computes a weighted sum of squared relative errors.
+
+### Weight interpretation
+
+| Range | Priority | When to use |
+|-------|----------|-------------|
+| 0 | Ignore | Metric not relevant for your analysis |
+| 1--20 | Low | Let it emerge from other constraints |
+| 20--50 | Moderate | Balance with other metrics |
+| 50--80 | High | Actively optimize toward target |
+| 80--100 | Critical | Dominates the optimization |
+
+### Individual weights
+
+| Weight | Default (P-J) | Controls |
+|--------|--------------|----------|
+| `ce` | 10 | Clark-Evans spatial pattern |
+| `dbh_mean` | 2 | Mean DBH |
+| `dbh_sd` | 2 | DBH standard deviation |
+| `height_mean` | 1 | Mean height |
+| `height_sd` | 1 | Height standard deviation |
+| `species` | 70 | Species composition |
+| `density` | 70 | Stand density (trees/ha) |
+| `canopy_cover` | 70 | Canopy cover |
+| `cfl` | 60 | Canopy fuel load |
+| `nurse_effect` | 5 | PIED proximity to junipers |
+
+### Tips
+
+- Set **density**, **species**, and **canopy_cover** high (60--80) — these are
+  directly observed field metrics.
+- Keep **ce**, **dbh_mean**, and **height** low (1--20) — these tend to emerge
+  naturally from allometry and density.
+- Set `nurse_effect = 0` for forest types without facilitation.
+
+```{r weight-example}
+# Weights for a managed ponderosa stand
+list(
+  ce = 30, dbh_mean = 15, dbh_sd = 10,
+  height_mean = 10, height_sd = 5,
+  species = 60, canopy_cover = 60,
+  cfl = 50, density = 80,
+  nurse_effect = 0
+)
+```
+
+---
+
+## 4 Simulation Parameters — `config$simulation`
+
+These control the simulated annealing algorithm and output.
+
+### 4.1 `plot_size` (numeric, m)
+
+Side length of the square simulation plot.
+A 100 m plot gives 1 ha; a 20 m plot gives 0.04 ha.
+Smaller plots run faster but have fewer trees and more edge effects.
+
+### 4.2 `max_iterations` (integer)
+
+Total number of perturbation attempts.
+
+| Count | Use case |
+|-------|----------|
+| 100--500 | Quick smoke test |
+| 1,000--5,000 | Development & exploration |
+| 5,000--10,000 | Standard analysis |
+| 10,000--50,000+ | Publication quality |
+
+### 4.3 `temp_initial` (numeric)
+
+Starting temperature for simulated annealing.
+Higher values allow more exploration early on.
+Default: 100 in `pj_huffman_2009()`.
+
+### 4.4 `temp_final` (numeric)
+
+Temperature at which the algorithm effectively freezes.
+Default: 0.01.
+
+### 4.5 `cooling_rate` (numeric, 0--1)
+
+Multiplicative cooling factor applied each iteration:
+$T_{i+1} = T_i \times \text{cooling\_rate}$.
+
+| Value | Behaviour |
+|-------|-----------|
+| 0.999 | Fast cooling — fewer iterations needed |
+| 0.9999 | Standard — good balance |
+| 0.99995+ | Slow cooling — thorough exploration |
+
+### 4.6 `plot_interval` (integer)
+
+Update progress plots every *N* iterations.
+Set to `NULL` (or omit) to disable live plotting.
+Default: 1000.
+
+### 4.7 `verbose` (logical)
+
+Print iteration-level progress messages to the console.
+
+### 4.8 `enable_plotting` (logical)
+
+Master switch for live plots during the run.
+
+### 4.9 `nurse_distance` (numeric, m)
+
+Target mean distance from PIED to nearest juniper.
+Only used when `use_nurse_effect = TRUE`.
+Based on field observations; default 3.0 m for P-J woodlands.
+
+### 4.10 `use_nurse_effect` (logical)
+
+Include nurse tree facilitation energy component.
+Set `TRUE` for P-J woodlands, `FALSE` for other forest types.
+
+### 4.11 `mortality_prop` (numeric, 0--1)
+
+Proportion of trees killed **after** the optimization finishes.
+Mortality is size-dependent (smaller trees die preferentially).
+
+| Value | Scenario |
+|-------|----------|
+| 0.0 | No disturbance |
+| 0.05--0.15 | Low-intensity disturbance |
+| 0.15--0.30 | Moderate disturbance |
+| 0.30--0.60 | High-intensity disturbance |
+| 0.60--0.90 | Stand-replacing event |
+
+---
+
+## 5 Allometric Parameters — `config$allometric_params`
+
+These control tree attribute prediction from DBH.
+See `?get_default_allometric_params` and
+`?get_ponderosa_allometric_params` for the shipped parameter sets.
+
+### 5.1 `crown_diameter`
+
+Species-keyed list of log-log crown diameter coefficients:
+
+$$\ln(\text{CD}) = a + b \ln(\text{DBH}) + c \ln(H)$$
+
+Crown radius = CD / 2, with a 0.3 m floor.
+
+```{r cd-params}
+params <- get_default_allometric_params()
+params$crown_diameter$PIED
+```
+
+### 5.2 `height`
+
+Asymptotic exponential height model:
+
+$$H = 1.3 + a \bigl(1 - e^{-b \cdot \text{DBH}}\bigr)$$
+
+```{r ht-params}
+params$height$PIED
+```
+
+### 5.3 Crown base height
+
+Two methods controlled by `cbh_method`:
+
+**`"reese_quadratic"`** (default for P-J):
+
+$$\text{CBH} = b_0 + b_1 H + b_2 D + b_3 H^2 + b_4 D^2 + b_5 (H \cdot D)$$
+
+```{r cbh-params}
+params$cbh_method
+params$cbh_reese$PIED
+```
+
+**`"simple_ratio"`** (ponderosa and generic):
+
+$$\text{CBH} = \text{cbh\_ratio} \times H$$
+
+### 5.4 Foliage biomass
+
+Two methods controlled by `foliage_method`:
+
+**`"miller_1981"`** (default for P-J):
+
+$$\ln(W_f) = a + b \ln(\text{DBH})$$
+
+```{r foliage-params}
+params$foliage_method
+params$foliage_miller$PIED
+```
+
+**`"crown_volume"`** (generic):
+
+$$\text{mass} = a \cdot \text{DBH}^b$$
+
+### 5.5 Adding your own species
+
+Create a modified copy of an existing parameter set:
+
+```{r custom-species}
+my_params <- get_default_allometric_params()
+
+# Add a new species
+my_params$crown_diameter$QUGA <- list(a = -0.3, b = 0.25, c = 0.40)
+my_params$height$QUGA          <- list(a = 15, b = 0.035)
+my_params$crown_ratio$QUGA     <- list(a = 0.70, b = 0.09)
+my_params$crown_mass$QUGA      <- list(a = 0.18, b = 2.15)
+
+# Use in a config
+config <- create_config(
+  name = "Gambel Oak Mix",
+  targets = list(
+    density_ha    = 800,
+    species_props = c(PIED = 0.50, QUGA = 0.50),
+    species_names = c("PIED", "QUGA"),
+    mean_dbh = 18, sd_dbh = 7,
+    mean_height = 6, sd_height = 2,
+    canopy_cover = 0.55, cfl = 0.90,
+    clark_evans_r = 0.9
+  ),
+  allometric_params = my_params
+)
+```
+
+---
+
+## 6 Validation
+
+Always validate before running:
+ 
+```{r validate}
+config <- pj_huffman_2009()
+validate_config(config)
+```
+
+`validate_config()` checks:
+
+- Required components present (`targets`, `weights`, `simulation`)
+- Required target fields present (`density_ha`, `species_props`, `species_names`,
+  `canopy_cover`, `cfl`)
+- Density and plot size are positive
+- Canopy cover is between 0 and 1
+- Species proportions sum to 1.0 (warns and normalizes if not)
+- Max iterations is positive
+
+---
+
+## 7 Saving and Sharing
+
+### Save as R object
+
+```{r save-rds, eval = FALSE}
+save_config(config, "my_config.R")
+```
+
+### Generate an editable template
+
+```{r gen-template, eval = FALSE}
+generate_config_template("my_template.R", "my_sim", base_config = "pj")
+# Edit the file, then source it
+```
+
+---
+
+## 8 Quick Reference
+
+```{r quick-ref, echo = FALSE}
+cat("
+config <- create_config(
+  name              = 'My Stand',
+  targets = list(
+    density_ha      = 500,
+    species_props   = c(SP1 = 0.6, SP2 = 0.4),
+    species_names   = c('SP1', 'SP2'),
+    mean_dbh        = 25, sd_dbh = 10,
+    mean_height     = 8,  sd_height = 3,
+    canopy_cover    = 0.50,
+    cfl             = 1.0,
+    clark_evans_r   = 1.0
+  ),
+  weights = list(
+    ce = 10, dbh_mean = 5, dbh_sd = 5,
+    height_mean = 5, height_sd = 5,
+    species = 70, canopy_cover = 70, cfl = 60,
+    density = 70, nurse_effect = 0
+  ),
+  simulation = list(
+    plot_size = 100, max_iterations = 10000,
+    temp_initial = 100, temp_final = 0.01,
+    cooling_rate = 0.9999, plot_interval = 1000,
+    verbose = TRUE, enable_plotting = TRUE,
+    nurse_distance = 0, use_nurse_effect = FALSE,
+    mortality_prop = 0.15
+  )
+)
+")
+```
+
+## See Also
+
+- `vignette("pinyon-juniper-woodland")` --- complete P-J workflow
+- `vignette("ponderosa-pine-forest")` --- custom forest type example
+- `?pj_huffman_2009` --- pre-built shortcut
+- `?create_config` --- config builder
+- `?validate_config` --- validation rules
+- `?get_default_allometric_params` --- P-J allometric details
+- `?get_ponderosa_allometric_params` --- ponderosa allometric details

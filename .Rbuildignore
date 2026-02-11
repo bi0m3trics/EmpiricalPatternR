@@ -1,31 +1,32 @@
+# R / RStudio session files
 ^\.Rproj\.user$
 ^\.Rhistory$
 ^\.RData$
 ^\.Ruserdata$
+^.*\.Rproj$
+
+# Compiled object files
 ^.*\.o$
 ^.*\.so$
 ^.*\.dll$
-^src/.*\.o$
-^src/.*\.so$
-^src/.*\.dll$
+
+# Build artifacts (created by devtools::build_vignettes)
 ^doc$
 ^Meta$
+
+# OS files
 ^\.DS_Store$
-^.*\.Rproj$
-^EmpiricalPatternR\.zip$
-^EmpiricalPatternR_optim\.zip$
-^quick_test\.R$
-^test_cfl_validation\.R$
-^Reese's Stuff$
+
+# GitHub / CI
+^\.github$
+
+# pkgdown
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^\.github$
-^README\.Rmd$
-^.*simulation.*\.csv$
-^.*simulation.*\.pdf$
-^.*example.*\.csv$
-^.*example.*\.pdf$
-^my_simulation\.R$
-^test_template\.R$
-^ReesesStuff$
+
+# Not part of the package
+^literature$
+^img$
+^.*\.csv$
+^.*\.pdf$

@@ -1,0 +1,214 @@
+---
+title: "Pinyon-Juniper Woodland Simulation"
+author: "Andrew Sánchez Meador"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Pinyon-Juniper Woodland Simulation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+## Overview
+
+This vignette demonstrates a complete workflow for simulating pinyon-juniper
+woodland structure using the pre-built `pj_huffman_2009()` configuration based on
+published field data from Huffman et al. (2009). We cover:
+ 
+- Using pre-built configurations
+- Running a simulated annealing optimization
+- Understanding nurse tree effects (pinyons near junipers)
+- Simulating post-disturbance mortality
+- Comprehensive results analysis
+
+## Background
+
+Pinyon-juniper woodlands are widespread throughout the southwestern United States.
+This example uses target values from **Huffman et al. (2009)** control treatment
+plots in northern Arizona, representing typical woodland structure with:
+
+- Moderate tree density (~927 trees/ha)
+- Two-species composition (*Pinus edulis* and *Juniperus osteosperma*)
+- Nurse tree associations (juvenile pinyons establish near junipers)
+- Moderate canopy cover and fuel loads
+
+## Step 1: Load Package and Configuration
+
+```{r load-package}
+library(EmpiricalPatternR)
+```
+
+Use the pre-built configuration for pinyon-juniper woodland:
+
+```{r config}
+config <- pj_huffman_2009(
+  density_ha = 927,
+  cfl = 1.10,
+  canopy_cover = 0.40,
+  max_iterations = 10000
+)
+
+# Display configuration summary
+print_config(config)
+```
+
+The configuration includes:
+
+| Component | Description |
+|-----------|-------------|
+| **targets** | Density, species composition, size distributions, canopy metrics |
+| **weights** | How important each target is during optimization (0-100 scale) |
+| **simulation** | Plot size, iterations, temperature schedule, nurse effect |
+| **allometric_params** | Species-specific equations for crown, height, foliage |
+
+### Key targets
+
+```{r show-targets}
+cat(sprintf(
+  "  Density:        %d trees/ha\n  Species:        %.1f%% PIED, %.1f%% JUSO\n  Mean DBH:       %.1f cm\n  Canopy Cover:   %.0f%%\n  CFL:            %.2f kg/m²\n  Nurse Effect:   %s (target: %.1f m)\n",
+  config$targets$density_ha,
+  config$targets$species_props["PIED"] * 100,
+  config$targets$species_props["JUSO"] * 100,
+  config$targets$mean_dbh,
+  config$targets$canopy_cover * 100,
+  config$targets$cfl,
+  ifelse(config$simulation$use_nurse_effect, "ENABLED", "DISABLED"),
+  config$simulation$nurse_distance
+))
+```
+
+## Step 2: Run Simulation
+
+The simulation uses **simulated annealing** to iteratively optimize stand structure:
+
+1. Start with random tree positions and attributes
+2. Iteratively add, remove, move, or modify trees
+3. Accept changes that improve the match to targets
+4. Gradually reduce acceptance of worse solutions (cooling)
+5. Converge to an optimal configuration
+
+```{r run-sim, eval = FALSE}
+set.seed(123)  # For reproducibility
+
+result <- simulate_stand(
+  targets         = config$targets,
+  weights         = config$weights,
+  plot_size       = config$simulation$plot_size,
+  max_iterations  = config$simulation$max_iterations,
+  initial_temp    = config$simulation$temp_initial,
+  cooling_rate    = config$simulation$cooling_rate,
+  verbose         = TRUE,
+  plot_interval   = 1000,
+  save_plots      = FALSE,
+  nurse_distance  = config$simulation$nurse_distance,
+  use_nurse_effect = config$simulation$use_nurse_effect,
+  mortality_prop  = config$simulation$mortality_prop
+)
+```
+
+## Step 3: Analyze Results
+
+Use the comprehensive analysis function:
+
+```{r analyze, eval = FALSE}
+analyze_simulation_results(
+  result              = result,
+  targets             = config$targets,
+  prefix              = "pj_woodland",
+  save_plots          = TRUE,
+  nurse_distance_target = config$simulation$nurse_distance,
+  target_mortality    = config$simulation$mortality_prop * 100
+)
+```
+
+This produces:
+
+- **Console summary** comparing simulated vs. target values
+- **CSV files**: all trees, live trees, convergence history, summary statistics
+- **PDF plots**: spatial patterns, diameter distributions
+
+### Quick visualization
+
+```{r quick-viz, eval = FALSE}
+# Print summary to console
+print_simulation_summary(result)
+
+# ggplot-based diagnostic panels
+plot_simulation_results(result)
+```
+
+## Step 4: Access Results
+
+The result object contains everything you need for further analysis:
+
+```{r access, eval = FALSE}
+# Final tree list with all attributes
+head(result$trees)
+
+# Stand-level metrics
+result$metrics
+
+# Optimization convergence history
+tail(result$history)
+
+# Final energy value
+result$energy
+```
+
+## Customising the Pinyon-Juniper Run
+
+### Lower density (thinned stand)
+
+```{r thin, eval = FALSE}
+config_thin <- pj_huffman_2009(
+  density_ha     = 500,
+  canopy_cover   = 0.25,
+  cfl            = 0.60,
+  max_iterations = 10000
+)
+```
+
+### Higher mortality (drought scenario)
+
+```{r drought, eval = FALSE}
+config_drought <- pj_huffman_2009(density_ha = 927)
+# Override mortality in the simulation call:
+result_drought <- simulate_stand(
+  targets        = config_drought$targets,
+  weights        = config_drought$weights,
+  plot_size      = config_drought$simulation$plot_size,
+  max_iterations = config_drought$simulation$max_iterations,
+  mortality_prop = 0.30
+)
+```
+
+## Iteration Guidelines
+
+| Iterations | Use case |
+|------------|----------|
+| 100--500 | Quick testing, rough approximation |
+| 1,000--5,000 | Development and exploration |
+| 5,000--10,000 | Standard analysis |
+| 10,000--50,000 | High-quality results for publication |
+
+## References
+
+Huffman, D.W., Fulé, P.Z., Crouse, J.E., & Pearson, K.M. (2009).
+A comparison of fire hazard mitigation alternatives in pinyon-juniper
+woodlands of Arizona. *Forest Ecology and Management*, 257, 628--635.
+
+## See Also
+
+- `vignette("ponderosa-pine-forest")` --- custom allometric equations
+- `vignette("configuration-guide")` --- full config reference
+- `?simulate_stand` --- all simulation parameters
+- `?pj_huffman_2009` --- pre-built configuration details
