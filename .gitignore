@@ -3,7 +3,6 @@
 .RData
 .Rproj.user
 .Rproj.user/
-*.Rproj
 
 # Compiled files
 *.o
@@ -13,15 +12,10 @@ src/*.o
 src/*.so
 src/*.dll
 
-# RcppExports (auto-generated)
-src/RcppExports.cpp
-R/RcppExports.R
-
 # Package build files
 inst/doc
 doc/
 Meta/
-man/*.Rd
 
 # Temporary files
 *.tmp
