@@ -1,267 +1,340 @@
-# EmpiricalPatternR <img src="img/logo.png" align="right" height="139" />
+# EmpiricalPatternR <img src="img/logo.png" align="right" height="139"/>
 
 <!-- badges: start -->
-![license](https://img.shields.io/badge/Licence-GPL--3-blue.svg) 
-[![](https://www.r-pkg.org/badges/version/spanner)](https://cran.r-project.org/package=spanner)
+
+![license](https://img.shields.io/badge/Licence-GPL--3-blue.svg)
+
 <!-- badges: end -->
 
 Simulate realistic forest stand patterns using simulated annealing optimization to match empirical targets from field data.
 
-<img src="man/figures/banner.png" alt="EmpiricalPatternR Banner" />
+<img src="man/figures/banner.png" alt="EmpiricalPatternR Banner"/>
 
-## Overview
+## What does this package do?
 
-**EmpiricalPatternR** generates synthetic forest stands that match observed ecological patterns. Using simulated annealing, the package optimizes tree locations, sizes, and species to simultaneously match multiple targets including stand density, species composition, size distributions, canopy cover, fuel loads, and spatial patterns.
+**EmpiricalPatternR** generates synthetic forest stands that reproduce the structure and spatial patterns observed in real forests. You provide ecological targets — tree density, species mix, size distributions, canopy cover, fuel loads, and spatial arrangement — and the package uses **simulated annealing** to create a stand of individually located trees that matches all of those targets simultaneously.
 
-Perfect for:
-- **Fire behavior modeling** - Generate stands with realistic fuel structures
-- **Restoration planning** - Create target stand conditions
-- **Research** - Explore how stand structure affects ecological processes
-- **Teaching** - Demonstrate pattern-based ecology
+The result is a tree list (species, DBH, height, crown dimensions, x/y location) that you can feed directly into fire-behavior models, use as a restoration reference, or analyze for pattern-process research.
+
+### Who is this for?
+
+| Use case | How EmpiricalPatternR helps |
+|------------------------------------|------------------------------------|
+| **Fire behavior modeling** | Generate stands with realistic canopy fuel structure for FlamMap, FARSITE, etc. |
+| **Restoration planning** | Create quantitative stand-structure targets from published data |
+| **Ecological research** | Explore how spatial patterns affect processes like facilitation or competition |
+| **Teaching** | Demonstrate pattern-based ecology with fully reproducible examples |
 
 ### Key Features
 
-- **Pre-built configurations** for common forest types (pinyon-juniper, ponderosa pine)
-- **Pattern matching** to empirical field data (Huffman et al., 2009)
-- **Flexible allometry** with species-specific equations (Reese, Miller)
-- **Fast C++ engine** with OpenMP parallelization (50-300× speedup)
-- **Canopy fuel load** optimization for fire behavior
-- **Nurse tree effects** for facilitation patterns
-- **Comprehensive analysis** with automated reports and visualizations
-- **Fully tested** with 62 unit tests covering all major functions
+-   **Pre-built configurations** for pinyon-juniper woodland (Huffman et al. 2009) and ponderosa pine
+-   **Simulated annealing engine** that simultaneously optimizes spatial pattern, species composition, size distributions, canopy cover, and fuel loads
+-   **Flexible allometry** with species-specific equations
+-   **Fast C++ backend** with OpenMP parallelization
+-   **Canopy fuel load (CFL)** and **canopy bulk density (CBD)** optimization for fire behavior
+-   **Nurse tree effects** for modeling facilitation patterns (e.g., pinyon near juniper)
+-   **Post-optimization mortality** to simulate disturbance events
+-   **Comprehensive analysis** with automated reports, CSV exports, and multi-panel plots
 
 ## Installation
 
-Install from GitHub:
+### Prerequisites
 
-```r
-# Install devtools if needed
-install.packages("devtools")
+You need a working C++ toolchain because the package compiles C++ source at install time:
+
+-   **Windows** — Install [Rtools](https://cran.r-project.org/bin/windows/Rtools/) (match the version to your R version)
+-   **macOS** — Install Xcode Command Line Tools: `xcode-select --install`
+-   **Linux** — Install `r-base-dev` or equivalent (`sudo apt install r-base-dev` on Ubuntu/Debian)
+
+### Install from GitHub
+
+``` r
+# Install remotes if needed
+install.packages("remotes")
 
 # Install EmpiricalPatternR
+<<<<<<< HEAD
+remotes::install_github("bi0m3trics/EmpiricalPatternR")
+```
+
+To also build the vignettes during installation (takes a bit longer):
+
+``` r
+remotes::install_github("bi0m3trics/EmpiricalPatternR", build_vignettes = TRUE)
+```
+
+### Verify installation
+
+``` r
+library(EmpiricalPatternR)
+packageVersion("EmpiricalPatternR")
+# [1] '0.1.0'
+=======
 devtools::install_github("Bi0m3trics/EmpiricalPatternR")
+>>>>>>> ae50238afe4973a5fcc79438159306aa3dda6789
 ```
 
 ## Quick Start
 
-Use a pre-built configuration:
+This minimal example simulates a pinyon-juniper woodland in under a minute.
 
-```r
+### Step 1 — Load the package and pick a configuration
+
+``` r
 library(EmpiricalPatternR)
 
-# Get pre-built pinyon-juniper configuration (Huffman et al., 2009)
-config <- pj_huffman_2009(
-  density_ha = 927,
-  cfl = 1.10,
-  canopy_cover = 0.40,
-  max_iterations = 10000
-)
+# Pre-built configuration based on Huffman et al. (2009) control data
+config <- pj_huffman_2009(max_iterations = 10000)
+```
 
-# Run simulation
+`pj_huffman_2009()` returns a list with four components — `targets`, `weights`, `simulation`, and `allometric_params` — that together define the full simulation. You can override any default; for example, `pj_huffman_2009(density_ha = 800, canopy_cover = 0.35)`.
+
+### Step 2 — Run the simulation
+
+``` r
 set.seed(123)
 result <- simulate_stand(
-  targets = config$targets,
-  weights = config$weights,
-  plot_size = config$simulation$plot_size,
+  targets        = config$targets,
+  weights        = config$weights,
+  plot_size      = config$simulation$plot_size,
   max_iterations = config$simulation$max_iterations,
-  use_nurse_effect = TRUE,
-  mortality_prop = 0.10
+  verbose        = TRUE,
+  plot_interval  = 2000,       # update plots every 2000 iterations
+  use_nurse_effect = TRUE,     # place pinyon near juniper
+  mortality_prop   = 0.15      # 15% post-simulation mortality
 )
+```
 
-# Comprehensive analysis (console output + CSV files + PDF plots)
+`simulate_stand()` returns a list containing:
+
+| Element | Description |
+|------------------------------------|------------------------------------|
+| `result$trees` | `data.table` of every tree — x, y, Species, DBH, Height, CrownRadius, Status, … |
+| `result$metrics` | Final stand metrics (density, canopy cover, CFL, Clark-Evans R, …) |
+| `result$energy` | Final energy value (lower = closer to all targets) |
+| `result$history` | `data.table` of energy and metrics recorded during optimization |
+| `result$targets` | The targets you provided (useful for downstream functions) |
+
+### Step 3 — Inspect results
+
+``` r
+# Quick console summary comparing simulated vs. target
+print_simulation_summary(result)
+
+# Multi-panel ggplot2 figure (spatial pattern, crowns, DBH histogram, convergence)
+plot_simulation_results(result)
+
+# Full analysis — console report + CSV files + optional PDF plots
 analyze_simulation_results(
-  result = result,
-  targets = config$targets,
-  prefix = "my_woodland",
+  result     = result,
+  targets    = config$targets,
+  prefix     = "my_woodland",
   save_plots = TRUE
 )
 ```
 
-**Output:**
-- `my_woodland_all_trees.csv` - All trees with attributes
-- `my_woodland_live_trees.csv` - Live trees only
-- `my_woodland_summary.csv` - Summary statistics
-- `my_woodland_plots.pdf` - Spatial and size distributions
+`analyze_simulation_results()` writes four files to disk:
 
-
-## Documentation
-
-**Get Started:**
-- [Getting Started Guide](articles/getting-started.html) - Installation, quick start, basic usage
-- [Pinyon-Juniper Example](articles/pinyon-juniper.html) - Complete P-J woodland workflow  
-- [Ponderosa Pine Example](articles/ponderosa-pine.html) - Custom configurations for different forest types
-
-**Key Functions:**
-- `?pj_huffman_2009` - Pre-built P-J configuration
-- `?create_config` - Build custom configurations
-- `?simulate_stand` - Main simulation engine
-- `?analyze_simulation_results` - Comprehensive analysis
-- `?generate_config_template` - Generate editable configuration templates
-
-**Full Reference:**
-- [Function Reference](reference/index.html) - All functions organized by topic
+| File | Contents |
+|------------------------------------|------------------------------------|
+| `my_woodland_all_trees.csv` | All trees with attributes and live/dead status |
+| `my_woodland_live_trees.csv` | Live trees only |
+| `my_woodland_summary.csv` | Species-level summary statistics |
+| `my_woodland_plots.pdf` | Multi-panel spatial and size-distribution plots |
 
 ## Create Custom Configurations
 
-For forest types beyond pinyon-juniper:
+You are not limited to pinyon-juniper. `create_config()` takes named lists for each component so you can define any forest type:
 
-```r
-# Create custom configuration
+``` r
 config <- create_config(
-  density_ha = 450,
-  species_props = c(PIPO = 0.70, PSME = 0.20, ABCO = 0.10),
-  mean_dbh = 35.0,
-  mean_height = 18.0,
-  canopy_cover = 0.45,
-  cfl = 0.85,
-  clark_evans_r = 1.4,
-  plot_size = 100,
-  max_iterations = 5000
+  name = "Ponderosa Pine Stand",
+  targets = list(
+    density_ha    = 450,
+    species_props = c(PIPO = 0.70, PSME = 0.20, ABCO = 0.10),
+    species_names = c("PIPO", "PSME", "ABCO"),
+    mean_dbh = 35.0, sd_dbh = 12.0,
+    mean_height = 18.0, sd_height = 5.0,
+    canopy_cover  = 0.45,
+    cfl           = 0.85,
+    clark_evans_r = 1.4
+  ),
+  weights = list(
+    ce = 10, dbh_mean = 5, dbh_sd = 5,
+    height_mean = 5, height_sd = 3,
+    species = 80, canopy_cover = 70,
+    cfl = 60, density = 90, nurse_effect = 0
+  ),
+  simulation = list(
+    plot_size = 100, max_iterations = 50000,
+    cooling_rate = 0.9999, verbose = TRUE,
+    enable_plotting = TRUE, plot_interval = 5000
+  ),
+  allometric_params = get_ponderosa_allometric_params()
 )
 
-# Or generate an editable template
+# Then run exactly as before
+result <- simulate_stand(
+  targets = config$targets, weights = config$weights,
+  plot_size = config$simulation$plot_size,
+  max_iterations = config$simulation$max_iterations
+)
+```
+
+You can also generate an **editable R script** as a starting point:
+
+``` r
 generate_config_template(
-  file = "my_config.R",
+  file        = "my_config.R",
   config_name = "my_custom_config",
-  base_config = "pj"  # Start from P-J template
+  base_config = "pj"      # or "custom" for a blank template
 )
-# Edit my_config.R, then: source("my_config.R"); config <- my_custom_config()
+# Edit my_config.R, then:
+#   source("my_config.R")
+#   config <- my_custom_config()
 ```
 
-See the [ponderosa pine vignette](articles/ponderosa-pine.html) for detailed custom configuration examples.
+See the **Configuration Guide** vignette for a field-by-field explanation of every config entry:
 
-## Simulation Workflow
-
+``` r
+vignette("configuration-guide", package = "EmpiricalPatternR")
 ```
-1. Define Configuration
-   ├─ Use pre-built: pj_huffman_2009()
-   ├─ Create custom: create_config()
-   └─ Or template: generate_config_template()
-   
-2. Run Simulation
-   └─ simulate_stand() with simulated annealing
-   
-3. Analyze Results
-   ├─ analyze_simulation_results() for comprehensive output
-   ├─ CSV exports for further analysis
-   └─ PDF plots for visualization
-   
-4. Apply to Research
-   ├─ Fire behavior modeling (FlamMap, FARSITE)
-   ├─ Restoration target development
-   └─ Ecological pattern analysis
-```
-## Realtime Simulation Graphics
 
-<img src="img/Output.png" alt="Output form the Simulations" />
+## Understanding Weights
+
+Weights control how hard the optimizer tries to match each target. They use a 0–100 scale:
+
+| Range  | Priority | Effect                                          |
+|--------|----------|-------------------------------------------------|
+| 0      | Off      | Metric is ignored                               |
+| 1–20   | Low      | Loosely matched; acts as a secondary constraint |
+| 20–50  | Moderate | Balanced with other metrics                     |
+| 50–80  | High     | Strong influence on final stand                 |
+| 80–100 | Critical | Dominates optimization; matched first           |
+
+A typical starting point for pinyon-juniper:
+
+``` r
+weights <- list(
+  density      = 70,   # match tree count closely
+  species      = 70,   # species proportions are important
+  canopy_cover = 70,   # canopy cover matters for fuels
+  cfl          = 60,   # fuel load is a key output
+  ce           = 10,   # spatial pattern emerges naturally
+  dbh_mean     = 2,    # size structure follows from density + allometry
+  dbh_sd       = 2,
+  height_mean  = 2,
+  height_sd    = 2,
+  nurse_effect = 20    # moderate facilitation pressure
+)
+```
 
 ## Allometric Equations
 
-Built-in equations from published literature:
+Built-in equations:
 
-```r
+``` r
 # Pinyon-juniper (default)
 params_pj <- get_default_allometric_params()
 
-# Ponderosa pine (Reese et al., Miller et al.)
+# Ponderosa pine
 params_pp <- get_ponderosa_allometric_params()
 
-# Custom equations
-my_params <- list(
-  crown_radius = list(
-    MYSP = list(a = -0.204, b = 0.649, c = 0.421)  # ln(CD) = a + b*ln(DBH) + c*ln(H)
-  ),
-  height = list(
-    MYSP = list(a = 27.0, b = 0.025)  # H = 1.3 + a*(1-exp(-b*DBH))
-  ),
-  foliage = list(
-    MYSP = list(a = -2.287, b = 1.924)  # ln(W_f) = a + b*ln(DBH)
-  )
-)
-
-# Use in calculations
-height <- calc_height(dbh = 40, species = "MYSP", params = my_params)
-radius <- calc_crown_radius(dbh = 40, height = height, species = "MYSP", params = my_params)
+# Individual calculations
+calc_height(dbh = 25, species = "PIED")
+calc_crown_radius(dbh = 25, height = 8, species = "PIED")
+calc_crown_base_height(dbh = 25, height = 8, species = "PIED")
+calc_canopy_fuel_mass(dbh = 25, species = "PIED")
 ```
 
-## Performance
+You can supply your own parameters as a nested list - see `?get_default_allometric_params` for the expected structure.
 
-The package uses optimized C++ with OpenMP parallelization:
+## Realtime Simulation Graphics
 
-| Function | R Version | C++ Version | Speedup |
-|----------|-----------|-------------|---------|
-| `calc_canopy_cover()` | 2.5s | 0.05s | **50×** |
-| `calc_tree_attributes()` | 15s | 0.05s | **300×** |
-| Full simulation (10k iterations) | ~45 min | ~5 min | **9×** |
+When `plot_interval` is set, the simulation updates a live multi-panel display showing the stand map, canopy cover, convergence history, and species proportions as the optimizer runs:
 
-Fast versions available:
-- `calc_canopy_cover_fast()` - Parallelized canopy cover
-- `calc_tree_attributes_fast()` - Batch tree calculations
-- `calc_clark_evans_fast()` - Optimized spatial index
-- `calc_stand_metrics_parallel()` - Full metrics with parallelization
+<img src="img/Output.png" alt="Output from the Simulations"/>
 
-## Package Structure
+## Vignettes
 
+After installation (with `build_vignettes = TRUE`), three vignettes walk through complete workflows:
+
+``` r
+# Field-by-field guide to every configuration entry
+vignette("configuration-guide", package = "EmpiricalPatternR")
+
+# Pinyon-juniper woodland simulation from start to finish
+vignette("pinyon-juniper-woodland", package = "EmpiricalPatternR")
+
+# Ponderosa pine forest with custom configuration
+vignette("ponderosa-pine-forest", package = "EmpiricalPatternR")
 ```
-EmpiricalPatternR/
-├── R/
-│   ├── allometric_equations.R    # Species-specific equations
-│   ├── config_system.R           # Configuration management
-│   ├── forest_simulation.R       # Main simulation engine
-│   └── performance_utils.R       # Fast C++ wrappers
-├── src/                          # C++ optimized functions
-│   ├── OptimizedUtilitiesOpenMP.cpp
-│   └── NumericUtilities.cpp
-├── inst/examples/                # Complete working examples
-│   ├── example_01_pinyon_juniper.R
-│   └── example_02_ponderosa_pine.R
-├── vignettes/                    # Extended tutorials
-│   ├── getting-started.Rmd
-│   ├── pinyon-juniper.Rmd
-│   └── ponderosa-pine.Rmd
-├── tests/testthat/               # Unit tests (62 tests)
-└── man/                          # Function documentation
+
+## Simulation Workflow
+
+```         
+1. Define Configuration
+   ├─ Pre-built:  pj_huffman_2009()
+   ├─ Custom:     create_config(targets = ..., weights = ..., ...)
+   └─ Template:   generate_config_template("my_config.R")
+
+2. Run Simulation
+   └─ simulate_stand()  →  simulated annealing optimization
+
+3. (Optional) Apply Mortality
+   └─ Built-in: mortality_prop argument in simulate_stand()
+   └─ Manual:   simulate_mortality(trees, target_mortality_prop = 0.20)
+
+4. Analyze & Export
+   ├─ print_simulation_summary()
+   ├─ plot_simulation_results()
+   └─ analyze_simulation_results()  →  CSV + PDF outputs
 ```
 
 ## Citation
 
 If you use this package in your research, please cite:
 
-```r
+``` r
 citation("EmpiricalPatternR")
 ```
 
-### Original Idea
+### Literature
 
-- Pommerening, A., 2006. Evaluating structural indices by reversing forest structural analysis. *Forest Ecology and Management* 224, 266–277. <https://doi.org/10.1016/j.foreco.2005.12.039>
+-   Pommerening, A., (2006). Evaluating structural indices by reversing forest structural analysis. *Forest Ecology and Management* 224, 266–277. <https://doi.org/10.1016/j.foreco.2005.12.039>
 
-- Pommerening, A. and Stoyan, D., 2008. Reconstructing spatial tree point patterns from nearest neighbour summary statistics measured in small subwindows. *Canadian Journal of Forest Research* 38, 1110–1122. <https://doi.org/10.1139/X07-222>
+-   Pommerening, A. & Stoyan, D., (2008). Reconstructing spatial tree point patterns from nearest neighbour summary statistics measured in small subwindows. *Canadian Journal of Forest Research* 38, 1110–1122. <https://doi.org/10.1139/X07-222>
+
+-   Huffman, D.W., Fulé, P.Z., Crouse, J.E., & Pearson, K.M. (2009). A comparison of fire hazard mitigation alternatives in pinyon-juniper woodlands of Arizona. *Forest Ecology & Management*, 257, 628–635. <https://doi.org/10.1016/j.foreco.2008.09.041>
+
+-   Huffman, D. W., Stoddard, M. T., Springer, J. D., Crouse, J. E., Sánchez Meador, A. J., & Nepal, S. (2019). Stand Dynamics of Pinyon-Juniper Woodlands After Hazardous Fuels Reduction Treatments in Arizona. Rangeland Ecology and Management, 72(5), 757-767. <https://doi.org/10.1016/j.rama.2019.05.005>
+
+-   Miller, E.L., Meeuwig, R.O., & Budy, J.D. (1981). Biomass of singleleaf pinyon and Utah juniper. Res. Pap. INT-273. Ogden, UT: U.S. Department of Agriculture, Forest Service, Intermountain Forest and Range Experiment Station. 18 p. <https://doi.org/10.2737/INT-RP-273>
+
+-   Grier, C.C., Elliott, K.J., & McCullough, D.G. (1992). Biomass distribution and productivity of *Pinus edulis*--*Juniperus monosperma* woodlands of north-central Arizona. *Forest Ecology and Management*, 50, 331--350. <https://doi.org/10.1016/0378-1127(92)90346-b>
+
+-   William A. Bechtold, Largest-Crown-Width Prediction Models for 53 Species in the Western United States, Western Journal of Applied Forestry, Volume 19, Issue 4, October 2004, Pages 245–251, <https://doi.org/10.1093/wjaf/19.4.245>
 
 ## Contributing
 
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Ensure `devtools::check()` passes
-5. Submit a pull request
+Contributions are welcome!
+
+1.  Fork the repository
+2.  Create a feature branch
+3.  Add tests for new functionality
+4.  Ensure `devtools::check()` passes with 0 errors and 0 warnings
+5.  Submit a pull request
 
 ## License
 
-GPL-3 License.
-
-## References
-
-Huffman, D.W., Fulé, P.Z., Crouse, J.E., & Pearson, K.M. (2009). A comparison of fire hazard mitigation alternatives in pinyon-juniper woodlands of Arizona. *Forest Ecology & Management*, 257, 628-635. https://doi.org/10.1016/j.foreco.2008.09.041
+GPL-3
 
 ## Contact
 
-For questions or issues:
-- Open an issue on [GitHub](https://github.com/bi0m3trics/EmpiricalPatternR/issues)
-- See [documentation](https://bi0m3trics.github.io/EmpiricalPatternR/)
-- Contact the package maintainer
+-   **Issues & feature requests:** [GitHub Issues](https://github.com/bi0m3trics/EmpiricalPatternR/issues)
+-   **Documentation site:** <https://bi0m3trics.github.io/EmpiricalPatternR/>
+-   **Package maintainer:** Andrew Sánchez Meador ([andrew.sanchezmeador\@nau.edu](mailto:andrew.sanchezmeador@nau.edu){.email})
 
----
+------------------------------------------------------------------------
 
-**Built with:** R, Rcpp, data.table, spatstat, ggplot2
-
+**Built with:** R, Rcpp, data.table, spatstat, ggplot2, gridExtra
