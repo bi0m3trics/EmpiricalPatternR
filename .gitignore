@@ -18,4 +18,3 @@ Thumbs.db
 
 # Simulation output files (not part of the package)
 *.csv
-*.pdf
