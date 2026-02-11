@@ -39,7 +39,7 @@ Install from GitHub:
 install.packages("devtools")
 
 # Install EmpiricalPatternR
-devtools::install_github("yourusername/EmpiricalPatternR")
+devtools::install_github("Bi0m3trics/EmpiricalPatternR")
 ```
 
 ## Quick Start
