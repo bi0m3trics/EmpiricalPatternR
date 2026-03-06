@@ -13,7 +13,7 @@ calc_mortality_probability(trees, mort_params = NULL)
 list(SPECIES = list(base = ..., size_effect = ..., dbh_coef = ...))
 Default parameters favor mortality of small trees:
 - PIED: base=0.05, size_effect=0.45, dbh_coef=0.08
-- JUMO: base=0.04, size_effect=0.40, dbh_coef=0.07  
+- JUMO: base=0.04, size_effect=0.40, dbh_coef=0.07
 - JUSO: base=0.04, size_effect=0.40, dbh_coef=0.07}
 }
 \value{

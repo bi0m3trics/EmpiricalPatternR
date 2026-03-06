@@ -32,7 +32,7 @@ Total energy (lower is better)
 All metrics are normalized to relative errors so weights range 0-100:
   0   = ignore this metric
   1-20  = low priority
-  20-50 = moderate priority  
+  20-50 = moderate priority
   50-80 = high priority
   80-100 = critical (will dominate optimization)
 }

@@ -9,7 +9,7 @@ calc_nurse_tree_energy(trees, nurse_distance = 3)
 \arguments{
 \item{trees}{Data.table with columns: x, y, Species}
 
-\item{nurse_distance}{Numeric. Target mean distance from PIED to nearest 
+\item{nurse_distance}{Numeric. Target mean distance from PIED to nearest
 juniper (m). Default 3.0m based on field observations.}
 }
 \value{

@@ -2,7 +2,7 @@
 title: "Configuration Guide"
 author: "Andrew Sánchez Meador"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Configuration Guide}
   %\VignetteEncoding{UTF-8}

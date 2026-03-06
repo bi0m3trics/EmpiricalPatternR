@@ -144,21 +144,27 @@ NumericVector calcHeightCpp(NumericVector dbh, IntegerVector species_idx,
     return height;
 }
 
-// Crown base height calculation (vectorized)
+// Crown base height calculation using Reese quadratic allometric (vectorized)
+// CBH = b0 + b1*H + b2*D + b3*H^2 + b4*D^2 + b5*(H*D)
+// H in meters, D in cm
 // [[Rcpp::export]]
 NumericVector calcCrownBaseHeightCpp(NumericVector dbh, NumericVector height,
                                     IntegerVector species_idx, NumericMatrix params) {
-    // params: matrix with columns [a, b] for crown_ratio = a - b * log(dbh)
+    // params: matrix with 6 columns [b0, b1, b2, b3, b4, b5], one row per species + default
     int n = dbh.size();
     NumericVector crown_base(n);
     
     for(int i = 0; i < n; i++) {
-        int sp = species_idx[i] - 1;
-        double a = params(sp, 0);
-        double b = params(sp, 1);
-        double dbh_safe = max(5.0, dbh[i]);
-        double crown_ratio = max(0.4, min(0.95, a - b * log(dbh_safe)));
-        crown_base[i] = max(0.5, height[i] * (1.0 - crown_ratio));
+        int sp = species_idx[i] - 1;  // R uses 1-based indexing
+        double b0 = params(sp, 0);
+        double b1 = params(sp, 1);
+        double b2 = params(sp, 2);
+        double b3 = params(sp, 3);
+        double b4 = params(sp, 4);
+        double b5 = params(sp, 5);
+        double H = height[i];
+        double D = dbh[i];  // cm
+        crown_base[i] = b0 + b1*H + b2*D + b3*H*H + b4*D*D + b5*(H*D);
     }
     
     return crown_base;

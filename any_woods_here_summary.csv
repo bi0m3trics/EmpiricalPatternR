@@ -1,0 +1,15 @@
+"Parameter","Target","Simulated"
+"Density_ha",787.95,34
+"Canopy_Cover_pct",40,2.245
+"CFL_kg_m2",1.1,0.282743329907122
+"Clark_Evans_R",1,0.212483851002893
+"Mean_DBH_cm",20.5,18.1678121174254
+"SD_DBH_cm",8.5,8.36208678606159
+"Mean_Height_m",6.5,7.48426186156839
+"SD_Height_m",2.5,2.02119074036673
+"PIED_pct",75.5,20.5882352941176
+"JUSO_pct",24.5,79.4117647058823
+"Total_Trees",NA,34
+"Live_Trees",NA,34
+"Dead_Trees",NA,0
+"Mortality_pct",15,0

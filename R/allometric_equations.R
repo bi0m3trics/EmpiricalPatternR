@@ -93,17 +93,18 @@ get_default_allometric_params <- function(use_reese_cbh = TRUE,
     params$cbh_method <- "reese_quadratic"
     # Reese equations: CBH = b0 + b1*H + b2*D + b3*H^2 + b4*D^2 + b5*(H*D)
     # Units: CBH and H in meters, D in cm
+    # (b2, b4, b5 rescaled from original dm publication: b2/10, b4/100, b5/10)
     params$cbh_reese <- list(
-      PIED = list(b0 = -0.068753, b1 = 0.082146, b2 = -0.000171,
-                  b3 = 0.024922, b4 = 0.000964, b5 = -0.009256),
-      JUMO = list(b0 = -0.012301, b1 = 0.036959, b2 = 0.000603,
-                  b3 = 0.005566, b4 = 0.000013, b5 = -0.000532),
-      JUOS = list(b0 = 0.030417, b1 = 0.014673, b2 = 0.004576,
-                  b3 = 0.010445, b4 = 0.000009, b5 = -0.000254),
-      JUSO = list(b0 = 0.030417, b1 = 0.014673, b2 = 0.004576,
-                  b3 = 0.010445, b4 = 0.000009, b5 = -0.000254),
-      default = list(b0 = -0.068753, b1 = 0.082146, b2 = -0.000171,
-                     b3 = 0.024922, b4 = 0.000964, b5 = -0.009256)
+      PIED = list(b0 = -0.068753, b1 = 0.082146, b2 = -0.0000171,
+                  b3 = 0.024922, b4 = 0.00000964, b5 = -0.0009256),
+      JUMO = list(b0 = -0.012301, b1 = 0.036959, b2 = 0.0000603,
+                  b3 = 0.005566, b4 = 0.00000013, b5 = -0.0000532),
+      JUOS = list(b0 = 0.030417, b1 = 0.014673, b2 = 0.0004576,
+                  b3 = 0.010445, b4 = 0.00000009, b5 = -0.0000254),
+      JUSO = list(b0 = 0.030417, b1 = 0.014673, b2 = 0.0004576,
+                  b3 = 0.010445, b4 = 0.00000009, b5 = -0.0000254),
+      default = list(b0 = -0.068753, b1 = 0.082146, b2 = -0.0000171,
+                     b3 = 0.024922, b4 = 0.00000964, b5 = -0.0009256)
     )
   } else {
     params$cbh_method <- "simple_ratio"
@@ -272,6 +273,7 @@ calc_height <- function(dbh, species,
 #' 
 #' **Reese quadratic method** (default, more realistic):
 #' CBH = b0 + b1*H + b2*D + b3*H^2 + b4*D^2 + b5*(H*D)
+#' where H is in meters and D is DBH in cm
 #' 
 #' **Simple ratio method**:
 #' crown_ratio = a - b * log(DBH)
@@ -305,18 +307,19 @@ calc_crown_base_height <- function(dbh, height, species,
   
   if (method == "reese_quadratic") {
     # Reese quadratic equations: CBH = b0 + b1*H + b2*D + b3*H^2 + b4*D^2 + b5*(H*D)
-    params <- allometric_params$cbh_reese
+    # H in meters, D in cm
+    reese <- allometric_params$cbh_reese
+    species_names <- names(reese)[names(reese) != "default"]
+    all_sp       <- c(species_names, "default")
+    n_default    <- length(all_sp)  # index of the default row
+    param_matrix <- do.call(rbind, lapply(all_sp, function(sp) {
+      p <- reese[[sp]]
+      c(p$b0, p$b1, p$b2, p$b3, p$b4, p$b5)
+    }))
+    species_idx <- match(species, species_names)
+    species_idx[is.na(species_idx)] <- n_default  # fall back to default row
     
-    cbh <- sapply(seq_along(dbh), function(i) {
-      sp <- species[i]
-      p <- if (sp %in% names(params)) params[[sp]] else params$default
-      
-      H <- height[i]
-      D <- dbh[i]
-      
-      # Apply quadratic equation
-      p$b0 + p$b1 * H + p$b2 * D + p$b3 * H^2 + p$b4 * D^2 + p$b5 * (H * D)
-    })
+    cbh <- calcCrownBaseHeightCpp(dbh, height, as.integer(species_idx), param_matrix)
     
     # Constrain: CBH must be >= 1.3m (breast height) and < 0.9*height
     cbh <- pmax(cbh, 1.3)

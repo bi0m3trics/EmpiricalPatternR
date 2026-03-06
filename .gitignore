@@ -17,4 +17,5 @@
 Thumbs.db
 
 # Simulation output files (not part of the package)
-*.csv
+pj_woodland_*.csv
+pj_woodland_*.pdf
